@@ -5,6 +5,33 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-            - 8000:80
+            - '8000:80'
         volumes:
             - .:/var/www/html
+        depends_on:
+            - db
+        env_file:
+            - .env
+        environment:
+            - DB_CONNECTION=mysql
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_DATABASE=${DB_DATABASE}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - REDIS_HOST=${REDIS_HOST}
+
+    db:
+        image: mysql
+        ports:
+            - '3307:${DB_PORT}'
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+        volumes:
+            - db_data:/var/lib/mysql
+        env_file:
+            - .env
+
+volumes:
+    db_data:
