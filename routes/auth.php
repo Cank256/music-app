@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('signup', [RegisteredUserController::class, 'create'])
-                ->name('register');
+                ->name('signup');
 
     Route::post('signup', [RegisteredUserController::class, 'store']);
 
@@ -34,6 +34,10 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
 
+    Route::get('auth/google', [AuthenticatedSessionController::class, 'signInwithGoogle'])
+                ->name('google.signin');
+
+    Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'callbackToGoogle']);
 });
 
 Route::middleware('auth')->group(function () {

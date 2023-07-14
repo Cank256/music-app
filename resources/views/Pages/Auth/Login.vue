@@ -7,7 +7,7 @@ import PrimaryButton from '../../Components/PrimaryButton.vue';
 import SecondaryButton from '../../Components/SecondaryButton.vue';
 import TextInput from '../../Components/TextInput.vue';
 import GoogleLogo from '../../Components/GoogleLogo.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     canResetPassword: {
@@ -41,12 +41,12 @@ const submit = () => {
         </div>
 
         <div class="flex justify-center mt-8 mb-10">
-            <Link href="/auth/google">
-                <SecondaryButton @click="googleSignIn" class="focus:ring-green-500 dark:focus:ring-green-600 dark:focus:ring-offset-gray-800">
+            <a href="/auth/google">
+                <SecondaryButton class="focus:ring-green-500 dark:focus:ring-green-600 dark:focus:ring-offset-gray-800">
                     <span><GoogleLogo class="w-8 h-8" /></span>
                     <span class="ml-6 font-extrabold">Continue With Google</span>
                 </SecondaryButton>
-            </Link>
+            </a>
         </div>
 
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">

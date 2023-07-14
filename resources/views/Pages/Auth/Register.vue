@@ -29,12 +29,12 @@ const submit = () => {
         <Head title="Signup" />
 
         <div class="flex justify-center mt-8 mb-10">
-            <Link href="/auth/google">
+            <a href="/auth/google">
                 <SecondaryButton class="focus:ring-green-500 dark:focus:ring-green-600 dark:focus:ring-offset-gray-800">
                     <span><GoogleLogo class="w-8 h-8" /></span>
                     <span class="ml-6 font-extrabold">Sign up With Google</span>
                 </SecondaryButton>
-            </Link>
+            </a>
         </div>
 
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
