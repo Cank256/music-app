@@ -29,10 +29,11 @@ This web application allows users to search and view information about music art
 #### 3. Configure environment variables:
 - Rename the `.env.example` file to `.env`.
 - Open the `.env` file and set the necessary configurations, such as database connection and Last.fm API credentials.
-#### 4. Run database migrations:
-    php artisan migrate
-#### 5. Start the development server:
-    php artisan serve
+#### 4. Build and run the application with Docker:
+- Build the Docker containers:
+    docker-compose build
+- Start the Docker containers:
+    docker-compose up -d
 #### 6. Access the application in your browser:
     http://localhost:8000
 
