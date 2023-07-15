@@ -108,6 +108,12 @@ const submit = () => {
                 </label>
             </div>
 
+            <div class="mt-4">
+                <span class="text-gray-400 text-xs">
+                    By clicking on sign-up, you agree to the <a href="#" class="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-gray-100">Music App Terms and Conditions</a> and <a href="#" class="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-gray-100">Privacy Policy</a>.
+                </span>
+            </div>
+
             <div class="flex justify-center mt-8 mb-8">
                 <PrimaryButton class="block w-full h-11 justify-center text-white bg-green-600 dark:bg-green-600 text-xl" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Sign Up
@@ -115,11 +121,12 @@ const submit = () => {
             </div>
 
             <div class="flex justify-center mb-6">
+                <span class="text-sm text-white mr-1">Have an Account?</span>
                 <Link
                     :href="route('login')"
                     class="underline text-sm text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                 >
-                    Have an Account?
+                    Log In
                 </Link>
             </div>
         </form>
