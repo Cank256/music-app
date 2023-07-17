@@ -4,11 +4,16 @@ import HomeCard from '../Components/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
-const props = defineProps(['topArtists']);
+const props = defineProps(['topArtists', 'topAlbums']);
 
 // Function to get the image URL of the artist from the "image" array.
 const getArtistImage = (artist) => {
     return artist.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
+};
+
+// Function to get the image URL of the artist from the "image" array.
+const getAlbumImage = (album) => {
+    return album.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
 };
 
 </script>
@@ -40,11 +45,9 @@ const getArtistImage = (artist) => {
                 <div class="py-1.5"></div>
 
                 <div class="flex items-center">
-                    <HomeCard image="https://picsum.photos/id/30/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard image="https://picsum.photos/id/45/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="md:block hidden" image="https://picsum.photos/id/65/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="lg:block hidden" image="https://picsum.photos/id/67/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="xl:block hidden" image="https://picsum.photos/id/100/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
+                    <div v-for="album in topAlbums">
+                        <HomeCard :image="getAlbumImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" />
+                    </div>
                 </div>
             </div>
 

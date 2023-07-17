@@ -18,9 +18,7 @@ class ArtistController extends Controller
             'limit' => 5,
         ]);
 
-        $topArtists = $response->json()['artists']['artist'] ?? [];
-
-        return Inertia::render('Welcome', ['topArtists' => $topArtists]);
+        return $response->json()['artists']['artist'] ?? [];
     }
 
     public function searchArtist($query)
