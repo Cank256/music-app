@@ -1,7 +1,15 @@
 <script setup>
 import GuestLayout from '../Layouts/GuestLayout.vue';
 import HomeCard from '../Components/HomeCard.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+
+const props = defineProps(['topArtists']);
+
+// Function to get the image URL of the artist from the "image" array.
+const getArtistImage = (artist) => {
+    return artist.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
+};
 
 </script>
 
@@ -18,11 +26,9 @@ import { Head, Link } from '@inertiajs/vue3';
                 <div class="py-1.5"></div>
 
                 <div class="flex items-center">
-                    <HomeCard image="https://picsum.photos/id/30/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard image="https://picsum.photos/id/45/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="md:block hidden" image="https://picsum.photos/id/65/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="lg:block hidden" image="https://picsum.photos/id/67/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
-                    <HomeCard class="xl:block hidden" image="https://picsum.photos/id/100/300/300" title="Title is here" subTitle="Subtitle is here" icon="eye" />
+                    <div v-for="artist in topArtists">
+                        <HomeCard :image="getArtistImage(artist)" :title="artist.name" subTitle="Subtitle is here" icon="eye" />
+                    </div>
                 </div>
             </div>
 

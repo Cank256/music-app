@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,19 +16,23 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::get('/', [ArtistController::class, 'getTopArtists'])->name('home');
+
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'artists' => ArtistController::getTopArtists()
+//     ]);
+// })->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//ARTIST ROUTES
+Route::get('/artists/top', [ArtistController::class, 'getTopArtists']);
+Route::get('/artists/search/{query}', [ArtistController::class, 'searchArtist']);
+
+//AUTHENTICATED USER ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

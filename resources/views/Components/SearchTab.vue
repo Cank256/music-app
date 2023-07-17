@@ -4,7 +4,7 @@
             <button @click="search" class="flex-1 bg-transparent border-0 cursor-pointer">
                 <i class="fas fa-search text-gray-600"></i>
             </button>
-            <input class="border-0 bg-transparent text-gray-400 focus:outline-none" type="text" v-model="searchQuery" @input="onInputChange" placeholder="What do you want to listen to?" style="width: 45vh;"/>
+            <input class="border-0 bg-transparent text-gray-400 focus:outline-none" type="text" v-model="searchQuery" @input="onInputChange" placeholder="Search for Artists, Albums ..." style="width: 45vh;"/>
         </div>
     </div>
   </template>
