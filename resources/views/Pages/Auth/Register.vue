@@ -1,6 +1,6 @@
 <script setup>
 import Checkbox from '../../Components/Checkbox.vue';
-import GuestLayout from '../../Layouts/GuestLayout.vue';
+import GuestAuthLayout from '../../Layouts/GuestAuthLayout.vue';
 import InputError from '../../Components/InputError.vue';
 import InputLabel from '../../Components/InputLabel.vue';
 import PrimaryButton from '../../Components/PrimaryButton.vue';
@@ -25,7 +25,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestAuthLayout>
         <Head title="Signup" />
 
         <div class="flex justify-center mt-8 mb-10">
@@ -130,5 +130,5 @@ const submit = () => {
                 </Link>
             </div>
         </form>
-    </GuestLayout>
+    </GuestAuthLayout>
 </template>
