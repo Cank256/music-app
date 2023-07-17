@@ -61,7 +61,7 @@ const submit = () => {
         <div class="flex justify-center mt-8 mb-6">
             <span class="ml-2 text-white">If you still need help, check out</span>
             <span class="ml-2 text-green-600">
-                <Link :href="route('login')" class="hover:text-white">Music App Support</Link>
+                <Link :href="route('home')" class="hover:text-white">Music App Support</Link>
             </span>
         </div>
 
