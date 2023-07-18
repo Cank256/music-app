@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
-import MenuItem from '../../MenuItem.vue';
+import MenuItem from '../MenuItem.vue';
 
 </script>
 
