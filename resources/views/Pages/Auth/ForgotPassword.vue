@@ -1,10 +1,10 @@
 <script setup>
-import GuestAuthLayout from '../../Layouts/GuestAuthLayout.vue';
-import InputError from '../../Components/InputError.vue';
-import InputLabel from '../..//Components/InputLabel.vue';
-import PrimaryButton from '../../Components/PrimaryButton.vue';
-import SecondaryButton from '../../Components/SecondaryButton.vue';
-import TextInput from '../../Components/TextInput.vue';
+import GuestAuthLayout from '../../Layouts/AuthLayout.vue';
+import InputError from '../../Components/Form/InputError.vue';
+import InputLabel from '../..//Components/Form/InputLabel.vue';
+import PrimaryButton from '../../Components/Button/PrimaryButton.vue';
+import SecondaryButton from '../../Components/Button/SecondaryButton.vue';
+import TextInput from '../../Components/Form/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({

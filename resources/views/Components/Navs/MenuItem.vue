@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRefs, watchEffect } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 const props = defineProps({
     iconString: String,
