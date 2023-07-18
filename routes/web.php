@@ -19,15 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'artists' => ArtistController::getTopArtists()
-//     ]);
-// })->name('home');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //ARTIST ROUTES
 Route::get('/artists/top', [ArtistController::class, 'getTopArtists']);

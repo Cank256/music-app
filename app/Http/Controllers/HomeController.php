@@ -21,4 +21,17 @@ class HomeController extends Controller
             'topSongs' => $topSongs
         ]);
     }
+
+    public function dashboard()
+    {
+        $topAlbums = AlbumController::getTopAlbums();
+        $topArtists = ArtistController::getTopArtists();
+        $topSongs = SongController::getTopSongs();
+
+        return Inertia::render('Dashboard', [
+            'topAlbums' => $topAlbums,
+            'topArtists' => $topArtists,
+            'topSongs' => $topSongs
+        ]);
+    }
 }
