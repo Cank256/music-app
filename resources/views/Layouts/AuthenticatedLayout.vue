@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import AuthenticatedTopNav from '../Components/Navs/TopNavs/AuthenticatedTopNav.vue'
+import TopNav from '../Components/Navs/TopNav.vue'
 import AuthenticatedSideNav from '../Components/Navs/SideNavs/AuthenticatedSideNav.vue'
 
 const showingNavigationDropdown = ref(false);
@@ -9,7 +9,7 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <AuthenticatedTopNav />
+            <TopNav />
             <AuthenticatedSideNav />
 
             <!-- Page Content -->

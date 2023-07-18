@@ -1,12 +1,12 @@
 <script setup>
-import GuestTopNav from '../Components/Navs/TopNavs/GuestTopNav.vue'
+import TopNav from '../Components/Navs/TopNav.vue'
 import GuestSideNav from '../Components/Navs/SideNavs/GuestSideNav.vue'
 </script>
 
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900 mt-1">
-            <GuestTopNav/>
+            <TopNav/>
             <GuestSideNav/>
 
             <!-- Page Content -->
