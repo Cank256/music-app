@@ -7,11 +7,11 @@ import MenuItem from '../../MenuItem.vue';
 
 <template>
     <nav class="h-[100%] inline-block align-baselin">
-        <div class="h-[170px] p-6 w-[335px] fixed z-50 left-2 top-2 bg-white dark:bg-gray-800 rounded-xl">
+        <div class="h-[170px] pl-7 pt-3 w-[335px] fixed z-50 left-2 top-2 bg-white dark:bg-gray-800 rounded-xl">
             <ul>
-                <MenuItem class="ml-[1px]" name="Home" iconString="house" pageUrl="login" />
-                <MenuItem class="ml-[1px]" name="Search" iconString="magnifying-glass" pageUrl="login" />
-                <MenuItem class="ml-[1px]" name="Library" iconString="book" pageUrl="login" />
+                <MenuItem class="mt-[1px]" name="Home" iconString="house" pageUrl="home" />
+                <MenuItem class="ml-[1px]" name="Search" iconString="magnifying-glass" pageUrl="search" />
+                <MenuItem class="ml-[1px]" name="Library" iconString="book" pageUrl="search" />
             </ul>
         </div>
 

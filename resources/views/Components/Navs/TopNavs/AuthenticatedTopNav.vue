@@ -1,13 +1,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
 import Dropdown from '../../Dropdown.vue';
 import DropdownLink from '../../DropdownLink.vue';
-import NavLink from '../..//NavLink.vue';
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue';
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
-import SearchTab from '../../SearchTab.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -24,8 +21,6 @@ const showingNavigationDropdown = ref(false);
                     <button type="button" class="rounded-full bg-gray-700 p-[1px] hover:bg-[#] ml-4 cursor-pointer">
                         <ChevronRight fillColor="#FFF" :size="30" />
                     </button>
-
-                    <SearchTab />
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ml-6">

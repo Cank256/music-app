@@ -1,5 +1,6 @@
 <script setup>
 import { ref, toRefs, watchEffect } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 const props = defineProps({
@@ -36,17 +37,19 @@ const isHover = () => {
 </script>
 
 <template>
-    <li
-        class="flex items-center justify-start pb-4 cursor-pointer"
-        @mouseenter="isHover()"
-        @mouseleave="isHover()"
-    >
-        <i :class="`fas fa-${iconString} text-black dark:text-white text-xl`"></i>
-        <div
-            :class="textIsHover ? 'text-white ' : 'text-gray-400'"
-            class="font-semibold text-lg ml-4 mt-0.5"
+    <Link :href="route(`${pageUrl}`)">
+        <li
+            class="flex items-center justify-start cursor-pointer"
+            @mouseenter="isHover()"
+            @mouseleave="isHover()"
         >
-            <span :class="route.path == pageUrl ? 'text-white' : ''">{{ name }}</span>
-        </div>
-    </li>
+            <i :class="`fas fa-${iconString} text-black dark:text-white text-xl`"></i>
+            <div
+                :class="textIsHover ? 'text-white ' : 'text-gray-400'"
+                class="font-semibold text-lg ml-4 mt-0.5"
+            >
+                <span :class="route.path == pageUrl ? 'text-white' : ''">{{ name }}</span>
+            </div>
+        </li>
+    </Link>
 </template>
