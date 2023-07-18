@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from '../Layouts/GuestLayout.vue';
+import MainLayout from '../Layouts/MainLayout.vue';
 import HomeCard from '../Components/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
@@ -15,7 +15,7 @@ const getImage = (data) => {
 
 <template>
     <Head title="Welcome" />
-    <GuestLayout>
+    <MainLayout>
 
         <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-700">
             <div class="pr-8 pl-8 pt-6">
@@ -61,5 +61,5 @@ const getImage = (data) => {
             </div>
         </div>
 
-    </GuestLayout>
+    </MainLayout>
 </template>

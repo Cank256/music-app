@@ -1,6 +1,6 @@
 <script setup>
 import SearchTab from '../Components/Search/SearchTab.vue';
-import GuestLayout from '../Layouts/GuestLayout.vue';
+import MainLayout from '../Layouts/MainLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
@@ -13,8 +13,8 @@ defineProps({
 
 <template>
     <Head title="Welcome" />
-    <GuestLayout>
+    <MainLayout>
 
-    </GuestLayout>
+    </MainLayout>
 
 </template>
