@@ -3,12 +3,17 @@ import { ref, computed } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import Dropdown from './Dropdown.vue';
 import DropdownLink from './DropdownLink.vue';
+import SearchTab from '../Search/SearchTab.vue';
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue';
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
 
 const page = usePage();
 
 const user = computed(() => page.props.auth.user);
+
+defineProps({
+    action: String
+})
 
 const showingNavigationDropdown = ref(false);
 
@@ -26,6 +31,11 @@ const showingNavigationDropdown = ref(false);
                     <button type="button" class="rounded-full bg-gray-700 p-[1px] hover:bg-[#] ml-4 cursor-pointer">
                         <ChevronRight fillColor="#FFF" :size="30" />
                     </button>
+
+                    <div v-if="action == 'search'">
+                        <SearchTab />
+                    </div>
+
                 </div>
 
                 <div v-if="!user" class="sm:flex sm:items-center sm:ml-6">

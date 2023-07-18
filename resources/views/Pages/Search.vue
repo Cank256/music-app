@@ -1,19 +1,18 @@
 <script setup>
-import SearchTab from '../Components/Search/SearchTab.vue';
 import MainLayout from '../Layouts/MainLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import SearchResults from '../Components/Search/SearchResults.vue';
+import { Head } from '@inertiajs/vue3';
 
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-});
+const props = defineProps(['action']);
 
 </script>
 
 <template>
     <Head title="Welcome" />
-    <MainLayout>
+    <MainLayout :action="action">
+        <div>
+            <SearchResults />
+        </div>
 
     </MainLayout>
 
