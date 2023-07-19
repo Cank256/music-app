@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue';
-import HomeCard from '../Components/HomeCard.vue';
+import HomeCard from '../Components/Cards/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
@@ -20,9 +20,9 @@ const getImage = (data) => {
 
         <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-700">
             <div class="pr-8 pl-8 pt-6">
-                <button type="button" class="pl-2 text-white text-2xl font-semibold hover:underline cursor-pointer">
+                <span class="pl-2 text-white text-2xl font-semibold">
                     Recommended Artists
-                </button>
+                </span>
 
                 <div class="py-1.5"></div>
 
@@ -34,9 +34,9 @@ const getImage = (data) => {
             </div>
 
             <div class="pr-8 pl-8 pt-6">
-                <button type="button" class="pl-2 text-white text-2xl font-semibold hover:underline cursor-pointer">
+                <span class="pl-2 text-white text-2xl font-semibold">
                     Recommended Albums
-                </button>
+                </span>
 
                 <div class="py-1.5"></div>
 
@@ -48,9 +48,9 @@ const getImage = (data) => {
             </div>
 
             <div class="pr-8 pl-8 pt-6">
-                <button type="button" class="pl-2 text-white text-2xl font-semibold hover:underline cursor-pointer">
+                <span class="pl-2 text-white text-2xl font-semibold">
                     Recommended Songs
-                </button>
+                </span>
 
                 <div class="py-1.5"></div>
 

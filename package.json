@@ -28,6 +28,7 @@
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@inertiajs/progress": "^0.2.7",
+        "uniqolor": "^1.1.0",
         "vue-material-design-icons": "^5.2.0",
         "vue-router": "^4.2.4",
         "vue-search-input": "^1.1.11"
