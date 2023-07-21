@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <nav class="w-[calc(100%-360px)] bg-opacity-50 fixed top-2 right-2 items-center justify-between bg-white dark:bg-gray-800 rounded-t-xl">
+    <nav class="w-[calc(100%-360px)] fixed top-2 right-2 items-center justify-between bg-white dark:bg-gray-800 rounded-t-xl">
         <!-- Primary Navigation Menu -->
         <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mr-20">
             <div class="flex justify-between h-16">

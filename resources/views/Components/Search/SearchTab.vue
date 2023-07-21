@@ -1,20 +1,23 @@
-<script>
-export default {
-    data() {
-        return {
-            searchQuery: '',
-        };
-    },
-    methods: {
-        search() {
-            // Perform the search operation with the searchQuery
-            // You can emit an event to the parent component with the searchQuery
-            this.$emit('search', this.searchQuery);
-        },
-        onInputChange() {
-            // Optional: You can add some validation or debounce the input change
-        },
-    },
+<script setup>
+import { ref } from 'vue';
+import { router } from '@inertiajs/vue3'
+
+const props = defineProps(['isSearching']);
+const searchQuery = ref('');
+const typing = ref(false);
+
+const handleInput = () => {
+    // router.visit(route('searching'));
+    // if (searchQuery.value.trim() !== '') {
+    //     router.visit(route('searching'));
+    // }else{
+    //     isSearching = false;
+    // }
+};
+
+const handleSearch = () => {
+  // Handle the search here, if needed
+  typing.value = false; // Reset typing status after the search
 };
 </script>
 <template>
@@ -23,7 +26,7 @@ export default {
             <button @click="search" class="flex-1 bg-transparent border-0 cursor-pointer">
                 <i class="fas fa-search text-gray-600"></i>
             </button>
-            <input class="border-0 bg-transparent text-gray-400 focus:outline-none" type="text" v-model="searchQuery" @keydown.enter="handleSearch" placeholder="Search for Artists, Albums ..." style="width: 45vh;"/>
+            <input class="border-0 bg-transparent text-gray-400 focus:outline-none" type="text" v-model="searchQuery" @focus="handleInput" placeholder="Search for Artists, Albums ..." style="width: 45vh;"/>
         </div>
     </div>
 </template>
