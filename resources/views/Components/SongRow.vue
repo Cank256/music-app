@@ -4,44 +4,31 @@ import { ref, toRefs } from 'vue';
 let isHover = ref(false)
 let isTrackTime = ref(null)
 
-// const props = defineProps({
-//     track: Object,
-//     artist: Object,
-//     index: Number,
-// })
+const props = defineProps({
+    track: Object,
+})
 
-// const { track, artist, index } = toRefs(props)
+const { track } = toRefs(props)
 
 </script>
 
 <template>
-    <li
-        class="flex items-center justify-between rounded-md hover:bg-[#2A2929]"
+    <li class="flex items-center justify-between h-[60px] rounded-md hover:bg-gray-600"
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
     >
-        <div class="flex items-center w-full py-1.5">
-
-                <span>
-                    1
-                </span>
-                <div
-                    class="text-white font-semibold"
-                >
-                    Sing It
-                </div>
-                <div class="text-sm font-semibold text-gray-400">Cank256</div>
+        <div class="flex items-center w-full py-1.5 px-5">
+            <div class="text-lg w-[6%] font-semibold text-gray-400">{{ track['@attr'].rank }}</div>
+            <div class="text-lg w-[50%] font-semibold text-gray-400">{{ track.name }}</div>
+            <div class="text-lg font-semibold text-gray-400">{{ track.listeners }}</div>
         </div>
         <div class="flex items-center">
-            <button type="button" v-if="isHover">
-                <i class="fas fa-heart text-[#1BD760]"></i>
-            </button>
-            <div
-                v-if="isTrackTime"
-                class="text-xs mx-5 text-gray-400"
-            >
-                1:02
+                <button type="button" v-if="isHover">
+                    <i class="fas fa-heart text-lg text-[#1BD760]"></i>
+                </button>
+                <div class="text-lg mx-8 text-gray-400">
+                    1:02
+                </div>
             </div>
-        </div>
     </li>
 </template>

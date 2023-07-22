@@ -28,7 +28,7 @@ const getImage = (data) => {
 
                 <div class="flex items-center">
                     <div v-for="artist in topArtists">
-                        <HomeCard :image="getImage(artist)" :title="artist.name" subTitle="Subtitle is here" icon="eye" />
+                        <HomeCard :image="getImage(artist)" :title="artist.name" subTitle="Subtitle is here" icon="eye" type="artist" :mbid="artist.mbid" />
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@ const getImage = (data) => {
 
                 <div class="flex items-center">
                     <div v-for="album in topAlbums">
-                        <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" />
+                        <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
                     </div>
                 </div>
             </div>

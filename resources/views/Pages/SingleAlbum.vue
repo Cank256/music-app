@@ -1,9 +1,14 @@
 <script setup>
-import SongRow from '../SongRow.vue'
+// import SongRow from '../SongRow.vue'
+import MainLayout from '../Layouts/MainLayout.vue'
+import { defineProps } from 'vue';
+
+const props = defineProps(['album']);
 
 </script>
 
 <template>
+    <MainLayout>
         <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-900">
             <div class="pr-8 pl-8 pt-6">
                 <div class="p-8 overflow-x-hidden">
@@ -17,7 +22,7 @@ import SongRow from '../SongRow.vue'
                             <div style="font-size: 33px;"
                                 class="text-white absolute w-full cursor-pointer top-0 font-bosemiboldld mb-2"
                             >
-                                Fire Fire
+                                {{ album.name }}
                             </div>
 
                             <div class="text-gray-300 text-[18px] flex mb-2">
@@ -63,6 +68,7 @@ import SongRow from '../SongRow.vue'
                 </div>
             </div>
         </div>
+    </MainLayout>
 </template>
 
 <style scoped>

@@ -4,6 +4,8 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,6 +26,9 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['aut
 
 //SEARCH ROUTES
 Route::get('/search', [SearchController::class, 'create'])->name('search');
+Route::get('/search/artist/{mbid}', [ArtistController::class, 'getArtist'])->name('search-artist');
+Route::get('/search/album/{artist}/{album}', [AlbumController::class, 'getAlbum'])->name('search-album');
+Route::get('/search/song/{mbid}', [SongController::class, 'getSong'])->name('search-song');
 
 //AUTHENTICATED USER ROUTES
 Route::middleware('auth')->group(function () {
