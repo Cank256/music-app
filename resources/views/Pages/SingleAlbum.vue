@@ -1,9 +1,14 @@
 <script setup>
-// import SongRow from '../SongRow.vue'
+import SongRow from '../Components/SongRow.vue'
+import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
 import { defineProps } from 'vue';
 
 const props = defineProps(['album']);
+
+const getImage = (data) => {
+    return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
+};
 
 </script>
 
@@ -15,7 +20,7 @@ const props = defineProps(['album']);
 
                     <div class="py-1.5"></div>
                     <div class="flex items-center w-full relative h-full">
-                        <img width="140" src="https://picsum.photos/id/30/300/300" class="rounded-lg">
+                        <img width="140" :src="getImage(album)" class="rounded-lg">
 
                         <div class="w-full ml-5">
 
@@ -25,23 +30,19 @@ const props = defineProps(['album']);
                                 {{ album.name }}
                             </div>
 
-                            <div class="text-gray-300 text-[18px] flex mb-2">
-                                <div class="flex">Cank256</div>
+                            <div class="text-gray-300 text-[18px] flex mt-12 mb-2">
+                                {{ album.artist }}
                             </div>
 
-                            <div class="text-gray-300 text-[13px] flex mb-2">
+                            <div class="text-gray-300 text-[16px] flex mb-4">
                                 <div class="flex">Album</div>
                                 <div class="ml-2 flex">
                                     <div class="circle mt-2 mr-2" />
-                                    <span class="-ml-0.5">2023</span>
-                                </div>
-                                <div class="ml-2 flex">
-                                    <div class="circle mt-2 mr-2" />
-                                    <span class="-ml-0.5">12 songs</span>
+                                    <span class="-ml-0.5">{{ album.tracks.track.length }} songs</span>
                                 </div>
                             </div>
 
-                            <div class="absolute flex gap-5 items-center justify-start bottom-0 mb-1.5">
+                            <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
                                 <button type="button">
                                     <i class="fas fa-heart text-[#1BD760] text-3xl"></i>
                                 </button>
@@ -52,19 +53,43 @@ const props = defineProps(['album']);
                         </div>
                     </div>
 
+                    <div class="text-gray-300 mt-6 leading-8">
+                        {{ album.wiki.summary }}
+                    </div>
+
                     <div class="mt-6"></div>
+                    <div>
+                        <div class="text-2xl mt-8 mb-6 text-gray-400 font-bold">Songs</div>
+                    </div>
                     <div class="flex items-center justify-between px-5 pt-2">
                         <div class="flex items-center justify-between text-gray-400">
-                            <div class="mr-7">#</div>
-                            <div class="text-sm">Title</div>
+                            <div class="mr-8">Rank</div>
+                            <div>Title</div>
                         </div>
                         <div><i class="fa fa-clock text-white"></i></div>
                     </div>
                     <div class="border-b border-b-[#2A2A2A] mt-2"></div>
                     <div class="mb-4"></div>
-                    <!-- <ul class="w-full" v-for="track, index in artist.tracks" :key="track">
-                        <SongRow :artist="artist" :track="track" :index="++index"/>
-                    </ul> -->
+                    <ul class="w-full" v-for="track in album.tracks.track">
+                        <SongRow :track="track"/>
+                    </ul>
+
+                    <!-- <div class="mt-6"></div>
+                    <div>
+                        <div class="text-2xl mt-12 mb-6 text-gray-400 font-bold">Popular Albums</div>
+                    </div>
+                    <div class="pr-8 pl-8 pt-6">
+                        <div class="flex items-center">
+                            <div v-for="album in topAlbums">
+                                <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="flex items-center">
+                        <div v-for="album in topAlbums">
+                            <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>

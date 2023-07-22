@@ -35,10 +35,10 @@ const getImage = (data) => {
                             </div>
 
                             <div class="text-gray-300 text-[16px] flex mb-4">
-                                <div class="flex">{{ 24 }} Albums</div>
+                                <div class="flex">{{ topAlbums.length }} Albums</div>
                                 <div class="ml-2 flex">
                                     <div class="circle mt-2 mr-2" />
-                                    <span class="-ml-0.5">{{ 24 }} songs</span>
+                                    <span class="-ml-0.5">{{ topTracks.length}} songs</span>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@ const getImage = (data) => {
                         </div>
                     </div>
 
-                    <div class="text-gray-300 mt-6">
+                    <div class="text-gray-300 mt-6 leading-8">
                         {{ artist.bio.summary }}
                     </div>
 
