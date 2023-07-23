@@ -3,7 +3,7 @@ import SongRow from '../Components/SongRow.vue'
 import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
 import { ref, defineProps } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps(['album']);
 
@@ -29,6 +29,7 @@ const showLessTracks = () => {
 </script>
 
 <template>
+    <Head :title="album.name" />
     <MainLayout>
         <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-900">
             <div class="pr-8 pl-8 pt-6">

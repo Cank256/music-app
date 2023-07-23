@@ -2,6 +2,7 @@
 import SongRow from '../Components/SongRow.vue'
 import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
+import { Head } from '@inertiajs/vue3';
 import { ref, defineProps } from 'vue';
 
 const props = defineProps(['artist', 'topTracks', 'topAlbums', 'similarArtists']);
@@ -51,6 +52,7 @@ const showLessSimilarArtists = () => {
 </script>
 
 <template>
+    <Head :title="artist.name" />
     <MainLayout>
         <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-900">
             <div class="pr-8 pl-8 pt-6">
@@ -74,19 +76,20 @@ const showLessSimilarArtists = () => {
 
                             <div class="text-gray-300 text-[16px] flex mb-4">
                                 <div class="flex">{{ topAlbums.length }} Albums</div>
-                                <div class="ml-2 flex">
+                                <!-- <div class="ml-2 flex">
                                     <div class="circle mt-2 mr-2" />
                                     <span class="-ml-0.5">{{ topTracks.length}} songs</span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
                                 <button type="button">
                                     <i class="fas fa-heart text-[#1BD760] text-3xl"></i>
                                 </button>
-                                <button type="button">
+                                <!-- <button type="button">
                                     <i class="fas fa-ellipsis text-[#1BD760] text-3xl"></i>
-                                </button>
+                                    {{ artist.stats.listeners }}
+                                </button> -->
                             </div>
                         </div>
                     </div>
