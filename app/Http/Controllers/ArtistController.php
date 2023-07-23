@@ -14,7 +14,6 @@ class ArtistController extends Controller
             'method' => 'chart.getTopArtists',
             'api_key' => env('LASTFM_API_KEY'),
             'format' => 'json',
-            'limit' => 5,
         ]);
 
         return $response->json()['artists']['artist'] ?? [];

@@ -15,7 +15,6 @@ class AlbumController extends Controller
             'api_key' => env('LASTFM_API_KEY'),
             'tag' => 'rnb',
             'format' => 'json',
-            'limit' => 5
         ]);
 
         return $response->json()['albums']['album'] ?? [];

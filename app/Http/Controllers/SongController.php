@@ -13,7 +13,6 @@ class SongController extends Controller
             'method' => 'chart.gettoptracks',
             'api_key' => env('LASTFM_API_KEY'),
             'format' => 'json',
-            'limit' => 5
         ]);
 
         return $response->json()['tracks']['track'] ?? [];

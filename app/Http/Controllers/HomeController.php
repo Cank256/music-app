@@ -15,7 +15,7 @@ class HomeController extends Controller
         $topArtists = ArtistController::getTopArtists();
         $topSongs = SongController::getTopSongs();
 
-        return Inertia::render('Welcome', [
+        return Inertia::render('Home', [
             'topAlbums' => $topAlbums,
             'topArtists' => $topArtists,
             'topSongs' => $topSongs
@@ -28,7 +28,7 @@ class HomeController extends Controller
         $topArtists = ArtistController::getTopArtists();
         $topSongs = SongController::getTopSongs();
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Home', [
             'topAlbums' => $topAlbums,
             'topArtists' => $topArtists,
             'topSongs' => $topSongs
