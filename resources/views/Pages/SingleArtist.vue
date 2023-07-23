@@ -7,8 +7,10 @@ import { ref, defineProps } from 'vue';
 const props = defineProps(['artist', 'topTracks', 'topAlbums']);
 
 const displayCount = ref(5);
-
 let showMore = ref(false);
+const albumsDisplayCount = ref(4);
+let albumsState = ref(false);
+
 
 const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
@@ -22,6 +24,16 @@ const showMoreTracks = () => {
 const showLessTracks = () => {
     displayCount.value -= 5;
     showMore = false;
+}
+
+const showMoreAlbums = () => {
+    albumsDisplayCount.value += 6;
+    albumsState = ref(true);
+}
+
+const showLessAlbums = () => {
+    albumsDisplayCount.value -= 6;
+    albumsState = ref(false);
 }
 
 </script>
@@ -93,12 +105,22 @@ const showLessTracks = () => {
                     <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
 
                     <div class="mt-6"></div>
-                    <div>
-                        <div class="text-2xl mt-12 mb-6 text-gray-400 font-bold">Popular Albums</div>
-                    </div>
-                    <div class="pr-8 pl-8 pt-6">
-                        <div class="flex items-center">
-                            <div v-for="album in topAlbums">
+
+                    <div class="pt-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-gray-400 text-2xl font-bold">
+                                Popular Albums
+                            </span>
+
+                            <button v-if="!albumsState" @click="showMoreAlbums" class="pr-6 text-white text-l font-semibold">
+                                Show More
+                            </button>
+                            <button v-if="albumsState" @click="showLessAlbums" class="pr-6 text-white text-l font-semibold">
+                                Show Less
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap items-center">
+                            <div v-for="album in topAlbums.slice(0, albumsDisplayCount)">
                                 <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
                             </div>
                         </div>

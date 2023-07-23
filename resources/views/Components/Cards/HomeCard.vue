@@ -30,9 +30,9 @@ function formatListeners(num) {
 
 <template>
     <Link :href="route(`search-${type}`, type === 'album' ? { artist: subTitle, album: title } : { mbid: mbid })">
-        <div class="bg-gray-800 p-4 rounded-md m-2 w-[230px] h-[300px] rounded-md  hover:bg-gray-600 cursor-pointer relative overflow-hidden">
+        <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[300px] rounded-md hover:bg-gray-600 cursor-pointer relative overflow-hidden">
             <div class="relative">
-                <img class="rounded-md" :src="image" alt="">
+                <img class="rounded" :src="image" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl absolute bottom-2 right-3 transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
             </div>
             <div class="text-white pt-4 font-semibold text-[14px]">{{ title }}</div>

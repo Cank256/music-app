@@ -3,6 +3,7 @@ import SongRow from '../Components/SongRow.vue'
 import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
 import { ref, defineProps } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps(['album']);
 
@@ -15,13 +16,13 @@ const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
 };
 
-const showMoreTracks = () => {
-    displayCount.value += 5;
+const showMoreTracks = (number) => {
+    displayCount.value = number;
     showMore = true;
 }
 
 const showLessTracks = () => {
-    displayCount.value -= 5;
+    displayCount.value = 5;
     showMore = false;
 }
 
@@ -46,7 +47,8 @@ const showLessTracks = () => {
                             </div>
 
                             <div class="text-gray-300 text-[18px] flex mt-12 mb-2">
-                                {{ album.artist }}
+                                <!-- <Link :href="route('search-artist', {mbid: artist.mbid})">{{ album.artist  }} </Link> -->
+                                {{ album.artist  }}
                             </div>
 
                             <div class="text-gray-300 text-[16px] flex mb-4">
@@ -89,7 +91,7 @@ const showLessTracks = () => {
                         <SongRow :track="track"/>
                     </ul>
 
-                    <button v-if="!showMore" @click="showMoreTracks" class="text-gray-300 font-bold mt-4">Show More</button>
+                    <button v-if="!showMore" @click="showMoreTracks(album.tracks.track.length)" class="text-gray-300 font-bold mt-4">Show More</button>
                     <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
 
                     <!-- <div class="mt-6"></div>
