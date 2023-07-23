@@ -29,7 +29,7 @@ function formatListeners(num) {
 </script>
 
 <template>
-    <Link :href="route(`search-${type}`, type === 'album' ? { artist: subTitle, album: title } : { mbid: mbid })">
+    <Link :href="route(`search-${type}`, type === 'album' ? { artist: subTitle, album: title } : (mbid ? { use: 'mbid', mbid } : { use: 'artist', artist: title }))">
         <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[300px] rounded-md hover:bg-gray-600 cursor-pointer relative overflow-hidden">
             <div class="relative">
                 <img class="rounded" :src="image" alt="">

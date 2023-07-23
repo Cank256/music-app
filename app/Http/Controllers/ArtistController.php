@@ -21,47 +21,82 @@ class ArtistController extends Controller
 
     public function getArtist()
     {
-        // Make a GET request to the Last.fm API to search for the artist
-        $artistsResponse = Http::get(env('LASTFM_HOST'), [
+        // Define the initial parameters
+        $parameters = [
             'method' => 'artist.getinfo',
-            'mbid' => request()->mbid,
             'api_key' => env('LASTFM_API_KEY'),
             'format' => 'json',
-        ]);
+        ];
+
+        // Check if 'use' query parameter is set to 'mbid' and 'mbid' query parameter is provided
+        if (request()->query('use') === 'mbid' && request()->query('mbid')) {
+            $parameters['mbid'] = request()->query('mbid');
+        }
+        else if (request()->query('artist')) { // Fallback to using artist name
+            $parameters['artist'] = request()->query('artist');
+        }
+
+        // Make a GET request to the Last.fm API to search for the artist
+        $artistsResponse = Http::get(env('LASTFM_HOST'), $parameters);
 
         // Process the response and extract the relevant data
         $artist = $artistsResponse->json('artist');
 
-        // Make a GET request to the Last.fm API to search for the artist top tracks
-        $tracksResponse = Http::get(env('LASTFM_HOST'), [
-            'method' => 'artist.gettoptracks',
-            'mbid' => request()->mbid,
-            'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 10,
-            'format' => 'json',
-        ]);
+        // Make the subsequent API requests using the artist's name
+        $artistName = $artist['name'];
 
-        // Process the response and extract the relevant data
-        $topTracks = $tracksResponse->json('toptracks.track');
-
-        // Make a GET request to the Last.fm API to search for the artist top albums
-        $albumsResponse = Http::get(env('LASTFM_HOST'), [
-            'method' => 'artist.gettopalbums',
-            'mbid' => request()->mbid,
-            'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 10,
-            'format' => 'json',
-        ]);
-
-        // Process the response and extract the relevant data
-        $topAlbums = $albumsResponse->json('topalbums.album');
+        $topTracks = $this->getTopTracks($artistName);
+        $topAlbums = $this->getTopAlbums($artistName);
+        $similarArtists = $this->getSimilarArtists($artistName);
 
         return Inertia::render('SingleArtist', [
             'artist' => $artist,
             'topTracks' => $topTracks,
             'topAlbums' => $topAlbums,
+            'similarArtists' => $similarArtists,
         ]);
     }
+
+    // Define the additional methods for the individual API requests
+    private function getTopTracks($artistName)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'artist.gettoptracks',
+            'artist' => $artistName,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('toptracks.track') : null;
+    }
+
+    private function getTopAlbums($artistName)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'artist.gettopalbums',
+            'artist' => $artistName,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('topalbums.album') : null;
+    }
+
+    private function getSimilarArtists($artistName)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'artist.getsimilar',
+            'artist' => $artistName,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('similarartists.artist') : null;
+    }
+
 
     public function searchArtist()
     {

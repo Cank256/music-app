@@ -26,7 +26,7 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['aut
 
 //SEARCH ROUTES
 Route::get('/search', [SearchController::class, 'create'])->name('search');
-Route::get('/search/artist/{mbid}', [ArtistController::class, 'getArtist'])->name('search-artist');
+Route::get('/search/artist', [ArtistController::class, 'getArtist'])->name('search-artist');
 Route::get('/search/album/{artist}/{album}', [AlbumController::class, 'getAlbum'])->name('search-album');
 Route::get('/search/song/{mbid}', [SongController::class, 'getSong'])->name('search-song');
 
