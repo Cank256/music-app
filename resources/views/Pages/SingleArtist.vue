@@ -2,13 +2,27 @@
 import SongRow from '../Components/SongRow.vue'
 import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
-import { defineProps } from 'vue';
+import { ref, defineProps } from 'vue';
 
 const props = defineProps(['artist', 'topTracks', 'topAlbums']);
+
+const displayCount = ref(5);
+
+let showMore = ref(false);
 
 const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
 };
+
+const showMoreTracks = () => {
+    displayCount.value += 5;
+    showMore = true;
+}
+
+const showLessTracks = () => {
+    displayCount.value -= 5;
+    showMore = false;
+}
 
 </script>
 
@@ -71,9 +85,12 @@ const getImage = (data) => {
                     </div>
                     <div class="border-b border-b-[#2A2A2A] mt-2"></div>
                     <div class="mb-4"></div>
-                    <ul class="w-full" v-for="track in topTracks">
+                    <ul class="w-full" v-for="track in topTracks.slice(0, displayCount)">
                         <SongRow :track="track"/>
                     </ul>
+
+                    <button v-if="!showMore" @click="showMoreTracks" class="text-gray-300 font-bold mt-4">Show More</button>
+                    <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
 
                     <div class="mt-6"></div>
                     <div>

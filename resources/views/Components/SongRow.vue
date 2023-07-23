@@ -2,7 +2,6 @@
 import { ref, toRefs } from 'vue';
 
 let isHover = ref(false)
-let isTrackTime = ref(null)
 
 const props = defineProps({
     track: Object,

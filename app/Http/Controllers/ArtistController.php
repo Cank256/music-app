@@ -38,7 +38,7 @@ class ArtistController extends Controller
             'method' => 'artist.gettoptracks',
             'mbid' => request()->mbid,
             'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 5,
+            'limit' => 10,
             'format' => 'json',
         ]);
 
@@ -50,7 +50,7 @@ class ArtistController extends Controller
             'method' => 'artist.gettopalbums',
             'mbid' => request()->mbid,
             'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 5,
+            'limit' => 10,
             'format' => 'json',
         ]);
 
