@@ -35,10 +35,12 @@ class AlbumController extends Controller
         $album = $response->json('album');
 
         $similarAlbums = $this->getSimilarAlbums($album['tags']['tag'][0]['name']);
+        $releaseDate = WebScrapingController::getReleaseDate($album['url']);
 
         return Inertia::render('SingleAlbum', [
             'album' => $album,
             'similarAlbums' => $similarAlbums,
+            'releaseDate' => $releaseDate
         ]);
     }
 

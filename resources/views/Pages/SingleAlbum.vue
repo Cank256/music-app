@@ -5,7 +5,7 @@ import MainLayout from '../Layouts/MainLayout.vue'
 import { ref, defineProps } from 'vue';
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps(['album', 'similarAlbums']);
+const props = defineProps(['album', 'similarAlbums', 'releaseDate']);
 
 const displayCount = ref(5);
 let showMore = ref(false);
@@ -69,6 +69,11 @@ const showLessSimilarAlbums = () => {
                                     <div class="circle mt-2 mr-2" />
                                     <span v-if="album.tracks" class="-ml-0.5">{{ album.tracks.track.length }} songs</span>
                                     <span v-else class="-ml-0.5">0 songs</span>
+                                </div>
+                                <div class="ml-2 flex">
+                                    <div class="circle mt-2 mr-2" />
+                                    <span>Released on</span>
+                                    <span class="ml-1 font-bold">{{ releaseDate.original['second_metadata_description'] }}</span>
                                 </div>
                             </div>
 

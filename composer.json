@@ -15,7 +15,8 @@
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.11",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "weidner/goutte": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
