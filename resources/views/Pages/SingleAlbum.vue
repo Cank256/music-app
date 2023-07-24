@@ -83,6 +83,10 @@ const showLessSimilarAlbums = () => {
                         </div>
                     </div>
 
+                    <div>
+                        <div class="text-2xl mt-8 mb-6 text-gray-400 font-bold">Info</div>
+                    </div>
+
                     <div v-if="album.wiki" class="text-gray-300 mt-6 leading-8">
                         {{ album.wiki.summary }}
                     </div>

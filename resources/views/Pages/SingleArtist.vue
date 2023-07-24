@@ -78,22 +78,18 @@ const showLessSimilarArtists = () => {
 
                             <div class="text-gray-300 text-[16px] flex mb-4">
                                 <div class="flex">{{ topAlbums.length }} Albums</div>
-                                <!-- <div class="ml-2 flex">
-                                    <div class="circle mt-2 mr-2" />
-                                    <span class="-ml-0.5">{{ topTracks.length}} songs</span>
-                                </div> -->
                             </div>
 
                             <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
                                 <button type="button">
                                     <i class="fas fa-heart text-[#1BD760] text-3xl"></i>
                                 </button>
-                                <!-- <button type="button">
-                                    <i class="fas fa-ellipsis text-[#1BD760] text-3xl"></i>
-                                    {{ artist.stats.listeners }}
-                                </button> -->
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl mt-8 mb-6 text-gray-400 font-bold">Info</div>
                     </div>
 
                     <div class="text-gray-300 mt-6 leading-8">
