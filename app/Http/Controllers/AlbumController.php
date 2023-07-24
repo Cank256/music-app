@@ -25,8 +25,8 @@ class AlbumController extends Controller
         // Make a GET request to the Last.fm API to search for the artist
         $response = Http::get(env('LASTFM_HOST'), [
             'method' => 'album.getinfo',
-            'album' => request()->album,
-            'artist' => request()->artist,
+            'album' => request()->query('album'),
+            'artist' => request()->query('artist'),
             'api_key' => env('LASTFM_API_KEY'),
             'format' => 'json',
         ]);
