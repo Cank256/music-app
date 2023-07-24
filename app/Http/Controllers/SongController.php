@@ -17,4 +17,17 @@ class SongController extends Controller
 
         return $response->json()['tracks']['track'] ?? [];
     }
+
+    public static function getArtistTopTracks($artistName)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'artist.gettoptracks',
+            'artist' => $artistName,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('toptracks.track') : null;
+    }
 }

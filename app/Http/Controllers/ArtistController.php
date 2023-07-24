@@ -45,8 +45,8 @@ class ArtistController extends Controller
         // Make the subsequent API requests using the artist's name
         $artistName = $artist['name'];
 
-        $topTracks = $this->getTopTracks($artistName);
-        $topAlbums = $this->getTopAlbums($artistName);
+        $topTracks = SongController::getArtistTopTracks($artistName);
+        $topAlbums = AlbumController::getArtistTopAlbums($artistName);
         $similarArtists = $this->getSimilarArtists($artistName);
 
         return Inertia::render('SingleArtist', [
@@ -55,33 +55,6 @@ class ArtistController extends Controller
             'topAlbums' => $topAlbums,
             'similarArtists' => $similarArtists,
         ]);
-    }
-
-    // Define the additional methods for the individual API requests
-    private function getTopTracks($artistName)
-    {
-        $response = Http::get(env('LASTFM_HOST'), [
-            'method' => 'artist.gettoptracks',
-            'artist' => $artistName,
-            'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 10,
-            'format' => 'json',
-        ]);
-
-        return $response->successful() ? $response->json('toptracks.track') : null;
-    }
-
-    private function getTopAlbums($artistName)
-    {
-        $response = Http::get(env('LASTFM_HOST'), [
-            'method' => 'artist.gettopalbums',
-            'artist' => $artistName,
-            'api_key' => env('LASTFM_API_KEY'),
-            'limit' => 10,
-            'format' => 'json',
-        ]);
-
-        return $response->successful() ? $response->json('topalbums.album') : null;
     }
 
     private function getSimilarArtists($artistName)

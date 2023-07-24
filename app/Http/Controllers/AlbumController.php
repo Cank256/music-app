@@ -39,4 +39,17 @@ class AlbumController extends Controller
         ]);
     }
 
+    public static function getArtistTopAlbums($artistName)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'artist.gettopalbums',
+            'artist' => $artistName,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('topalbums.album') : null;
+    }
+
 }
