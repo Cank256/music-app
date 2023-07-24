@@ -9,8 +9,10 @@ const props = defineProps(['artist', 'topTracks', 'topAlbums', 'similarArtists']
 
 const displayCount = ref(5);
 let showMore = ref(false);
+
 const albumsDisplayCount = ref(4);
 let albumsState = ref(false);
+
 const similarArtistsDisplayCount = ref(4);
 let similarArtistsState = ref(false);
 
@@ -140,6 +142,8 @@ const showLessSimilarArtists = () => {
                             </div>
                         </div>
                     </div>
+
+                    <div class="mt-6"></div>
 
                     <div class="pt-6">
                         <div class="flex justify-between items-center mb-6">

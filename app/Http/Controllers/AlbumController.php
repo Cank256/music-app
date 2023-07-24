@@ -34,8 +34,11 @@ class AlbumController extends Controller
         // Process the response and extract the relevant data
         $album = $response->json('album');
 
+        $similarAlbums = $this->getSimilarAlbums($album['tags']['tag'][0]['name']);
+
         return Inertia::render('SingleAlbum', [
             'album' => $album,
+            'similarAlbums' => $similarAlbums,
         ]);
     }
 
@@ -50,6 +53,19 @@ class AlbumController extends Controller
         ]);
 
         return $response->successful() ? $response->json('topalbums.album') : null;
+    }
+
+    public function getSimilarAlbums($tag)
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'tag.gettopalbums',
+            'tag' => $tag,
+            'api_key' => env('LASTFM_API_KEY'),
+            'limit' => 10,
+            'format' => 'json',
+        ]);
+
+        return $response->successful() ? $response->json('albums.album') : null;
     }
 
 }

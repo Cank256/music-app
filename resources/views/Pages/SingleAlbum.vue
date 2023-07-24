@@ -5,12 +5,13 @@ import MainLayout from '../Layouts/MainLayout.vue'
 import { ref, defineProps } from 'vue';
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps(['album']);
+const props = defineProps(['album', 'similarAlbums']);
 
 const displayCount = ref(5);
-
 let showMore = ref(false);
 
+const similarAlbumsDisplayCount = ref(4);
+let similarAlbumsState = true;
 
 const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
@@ -24,6 +25,16 @@ const showMoreTracks = (number) => {
 const showLessTracks = () => {
     displayCount.value = 5;
     showMore = false;
+}
+
+const showMoreSimilarAlbums = () => {
+    similarAlbumsDisplayCount.value += 6;
+    similarAlbumsState = ref(true);
+}
+
+const showLessSimilarAlbums = () => {
+    similarAlbumsDisplayCount.value -= 6;
+    similarAlbumsState = ref(false);
 }
 
 </script>
@@ -95,22 +106,27 @@ const showLessTracks = () => {
                     <button v-if="!showMore" @click="showMoreTracks(album.tracks.track.length)" class="text-gray-300 font-bold mt-4">Show More</button>
                     <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
 
-                    <!-- <div class="mt-6"></div>
-                    <div>
-                        <div class="text-2xl mt-12 mb-6 text-gray-400 font-bold">Popular Albums</div>
-                    </div>
-                    <div class="pr-8 pl-8 pt-6">
-                        <div class="flex items-center">
-                            <div v-for="album in topAlbums">
-                                <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
+                    <div class="mt-6"></div>
+
+                    <div class="pt-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-gray-400 text-2xl font-bold">
+                                Similar Albums
+                            </span>
+
+                            <button v-if="!similarAlbumsState" @click="showMoreSimilarAlbums" class="pr-6 text-white text-l font-semibold">
+                                Show More
+                            </button>
+                            <button v-if="similarAlbumsState" @click="showLessSimilarAlbums" class="pr-6 text-white text-l font-semibold">
+                                Show Less
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap items-center">
+                            <div v-for="similarAlbum in similarAlbums.slice(0, similarAlbumsDisplayCount)">
+                                <HomeCard :image="getImage(similarAlbum)" :title="similarAlbum.name" :subTitle="similarAlbum.artist.name" icon="eye" type="album"/>
                             </div>
                         </div>
-                    </div> -->
-                    <!-- <div class="flex items-center">
-                        <div v-for="album in topAlbums">
-                            <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
-                        </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
