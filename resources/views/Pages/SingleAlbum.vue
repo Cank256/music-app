@@ -67,7 +67,8 @@ const showLessSimilarAlbums = () => {
                                 <div class="flex">Album</div>
                                 <div class="ml-2 flex">
                                     <div class="circle mt-2 mr-2" />
-                                    <span class="-ml-0.5">{{ album.tracks.track.length }} songs</span>
+                                    <span v-if="album.tracks" class="-ml-0.5">{{ album.tracks.track.length }} songs</span>
+                                    <span v-else class="-ml-0.5">0 songs</span>
                                 </div>
                             </div>
 
@@ -82,7 +83,7 @@ const showLessSimilarAlbums = () => {
                         </div>
                     </div>
 
-                    <div class="text-gray-300 mt-6 leading-8">
+                    <div v-if="album.wiki" class="text-gray-300 mt-6 leading-8">
                         {{ album.wiki.summary }}
                     </div>
 
@@ -90,21 +91,27 @@ const showLessSimilarAlbums = () => {
                     <div>
                         <div class="text-2xl mt-8 mb-6 text-gray-400 font-bold">Songs</div>
                     </div>
-                    <div class="flex items-center justify-between px-5 pt-2">
-                        <div class="flex items-center justify-between text-gray-400">
-                            <div class="mr-8">Rank</div>
-                            <div>Title</div>
+                    <div v-if="album.tracks">
+                        <div class="flex items-center justify-between px-5 pt-2">
+                            <div class="flex items-center justify-between text-gray-400">
+                                <div class="mr-8">Rank</div>
+                                <div>Title</div>
+                            </div>
+                            <div><i class="fa fa-clock text-white"></i></div>
                         </div>
-                        <div><i class="fa fa-clock text-white"></i></div>
-                    </div>
-                    <div class="border-b border-b-[#2A2A2A] mt-2"></div>
-                    <div class="mb-4"></div>
-                    <ul class="w-full" v-for="track in album.tracks.track.slice(0, displayCount)">
-                        <SongRow :track="track"/>
-                    </ul>
+                        <div class="border-b border-b-[#2A2A2A] mt-2"></div>
+                        <div class="mb-4"></div>
+                        <ul class="w-full" v-for="track in album.tracks.track.slice(0, displayCount)">
+                            <SongRow :track="track"/>
+                        </ul>
 
-                    <button v-if="!showMore" @click="showMoreTracks(album.tracks.track.length)" class="text-gray-300 font-bold mt-4">Show More</button>
-                    <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
+                        <button v-if="!showMore" @click="showMoreTracks(album.tracks.track.length)" class="text-gray-300 font-bold mt-4">Show More</button>
+                        <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
+                    </div>
+
+                    <div v-else class="text-gray-400">
+                        No songs
+                    </div>
 
                     <div class="mt-6"></div>
 
