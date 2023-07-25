@@ -21,7 +21,7 @@ let capitalizedTitle = computed(() => {
 </script>
 
 <template>
-    <Link href="#">
+    <Link :href="route('get-tag', { tag: title })">
         <div v-if="randColor.color" :style="`background-color: ${randColor.color};`" class="bg-gray-800 p-6 mt-4 w-[190px] h-[190px] rounded-md m-2 hover:bg-gray-600 cursor-pointer relative overflow-hidden">
             <div class="text-white font-semibold text-[1.3rem]">{{ capitalizedTitle }}</div>
             <i :class="`fas fa-${image} text-8xl absolute contrast-[0.8] -right-5 bottom-3 rotate-[30deg] text-white opacity-[0.4]`"></i>
