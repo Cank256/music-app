@@ -9,15 +9,13 @@ defineProps({
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <TopNav :action="action" />
-            <SideNav />
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <TopNav />
+        <SideNav />
 
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
-        </div>
+        <!-- Page Content -->
+        <main>
+            <slot />
+        </main>
     </div>
 </template>

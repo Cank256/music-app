@@ -29,11 +29,6 @@ defineProps({
                     <button type="button" class="rounded-full bg-gray-700 p-[1px] hover:bg-[#] ml-4 cursor-pointer">
                         <ChevronRight fillColor="#FFF" :size="30" />
                     </button>
-
-                    <!-- <div v-if="action == 'search'">
-                        <SearchTab />
-                    </div> -->
-
                 </div>
 
                 <div v-if="!user" class="sm:flex sm:items-center sm:ml-6">
