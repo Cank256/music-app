@@ -58,62 +58,64 @@ const getImage = (data) => {
 <template>
     <Head title="Search" />
     <MainLayout>
-        <div class="w-[calc(100%-360px)] h-[91vh] overflow-x-hidden rounded-b-xl fixed mt-11 right-2 items-center justify-between bg-white dark:bg-gray-800">
 
-            <div class="search-tab mt-12 justify-center">
-                <div class="search-input flex items-center border rounded-full px-6 focus-within:ring focus-within:ring-gray-400">
-                    <input class="border-0 bg-transparent text-gray-400 rounded-full text-lg focus:outline-none focus:ring-0" type="text" v-model="searchQuery" @input="handleInput" placeholder="Search for Artists, Albums ..." style="width: 70vh; height: 7vh;"/>
-                    <button @click="search" class="flex-1 bg-transparent border-0 cursor-pointer">
-                        <i class="fas fa-search text-xl text-gray-600"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="scrollable-content pr-8 pl-8 pt-12 mt-[100px]">
-                <div v-if="results.artists">
-                    <div class="flex justify-between items-center mb-6">
-
-                        <span class="text-gray-400 text-2xl font-bold">Artists</span>
-
-                        <div v-if="!loading">
-                            <button v-if="!artistsState" @click="showMoreArtists" class="pr-6 text-white text-l font-semibold">
-                                Show More
-                            </button>
-                            <button v-if="artistsState" @click="showLessArtists" class="pr-6 text-white text-l font-semibold">
-                                Show Less
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="py-1.5"></div>
-
-                    <div class="flex flex-wrap items-center gap-1">
-                        <div v-for="artist in results.artists.slice(0, artistsDisplayCount)">
-                            <LoadingSearchCard :image="getImage(artist)" :title="artist.name" :listeners="Number(artist.listeners)" icon="eye" type="artist" :mbid="artist.mbid" :isLoading="loading"/>
-                        </div>
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
+            <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
+                <div class="search-tab mt-12 justify-center">
+                    <div class="search-input flex items-center border rounded-full px-6 focus-within:ring focus-within:ring-gray-400">
+                        <input class="border-0 bg-transparent text-gray-400 rounded-full text-lg focus:outline-none focus:ring-0" type="text" v-model="searchQuery" @input="handleInput" placeholder="Search for Artists, Albums ..." style="width: 70vh; height: 7vh;"/>
+                        <button @click="search" class="flex-1 bg-transparent border-0 cursor-pointer">
+                            <i class="fas fa-search text-xl text-gray-600"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="scrollable-content pr-8 pl-8 pt-12 mt-[100px]">
+                    <div v-if="results.artists">
+                        <div class="flex justify-between items-center mb-6">
 
-                <div v-if="results.albums">
-                    <div class="py-1.5 mt-6 mb-6"></div>
+                            <span class="text-gray-400 text-2xl font-bold">Artists</span>
 
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="text-gray-400 text-2xl font-bold">Albums</span>
+                            <div v-if="!loading">
+                                <button v-if="!artistsState" @click="showMoreArtists" class="pr-6 text-white text-l font-semibold">
+                                    Show More
+                                </button>
+                                <button v-if="artistsState" @click="showLessArtists" class="pr-6 text-white text-l font-semibold">
+                                    Show Less
+                                </button>
+                            </div>
+                        </div>
 
-                        <div v-if="!loading">
-                            <button v-if="!albumsState" @click="showMoreAlbums" class="pr-6 text-white text-l font-semibold">
-                                Show More
-                            </button>
-                            <button v-if="albumsState" @click="showLessAlbums" class="pr-6 text-white text-l font-semibold">
-                                Show Less
-                            </button>
+                        <div class="py-1.5"></div>
+
+                        <div class="flex flex-wrap items-center gap-1">
+                            <div v-for="artist in results.artists.slice(0, artistsDisplayCount)">
+                                <LoadingSearchCard :image="getImage(artist)" :title="artist.name" :listeners="Number(artist.listeners)" icon="eye" type="artist" :mbid="artist.mbid" :isLoading="loading"/>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="py-1.5"></div>
+                    <div v-if="results.albums">
+                        <div class="py-1.5 mt-6 mb-6"></div>
 
-                    <div class="flex flex-wrap items-center gap-1">
-                        <div v-for="album in results.albums.slice(0, albumsDisplayCount)">
-                            <LoadingSearchCard :image="getImage(album)" :title="album.name"  :subTitle="album.artist.name" icon="eye" type="album" :isLoading="loading"/>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-gray-400 text-2xl font-bold">Albums</span>
+
+                            <div v-if="!loading">
+                                <button v-if="!albumsState" @click="showMoreAlbums" class="pr-6 text-white text-l font-semibold">
+                                    Show More
+                                </button>
+                                <button v-if="albumsState" @click="showLessAlbums" class="pr-6 text-white text-l font-semibold">
+                                    Show Less
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="py-1.5"></div>
+
+                        <div class="flex flex-wrap items-center gap-1">
+                            <div v-for="album in results.albums.slice(0, albumsDisplayCount)">
+                                <LoadingSearchCard :image="getImage(album)" :title="album.name"  :subTitle="album.artist.name" icon="eye" type="album" :isLoading="loading"/>
+                            </div>
                         </div>
                     </div>
                 </div>

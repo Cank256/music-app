@@ -2,10 +2,6 @@
 import TopNav from '../Components/Navs/TopNav.vue'
 import SideNav from '../Components/Navs/SideNav.vue'
 
-defineProps({
-    action: String
-})
-
 </script>
 
 <template>

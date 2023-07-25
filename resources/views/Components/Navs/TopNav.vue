@@ -10,10 +10,6 @@ const page = usePage();
 const user = computed(() => page.props.auth.user);
 const showingNavigationDropdown = ref(false);
 
-defineProps({
-    action: String
-})
-
 </script>
 
 <template>

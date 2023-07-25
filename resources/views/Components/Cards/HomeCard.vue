@@ -1,5 +1,5 @@
 <script setup>
-import { toRefs } from 'vue';
+import { toRefs, computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -26,6 +26,11 @@ function formatListeners(num) {
     return num.toString();
 }
 
+let capitalizedTitle = computed(() => {
+    if (!title.value) return '';
+    return title.value.replace(/\b\w/g, function (l) { return l.toUpperCase() });
+});
+
 </script>
 
 <template>
@@ -35,7 +40,7 @@ function formatListeners(num) {
                 <img class="rounded" :src="image ? image : $inertia.page.props.publicPath + '/images/album.png'" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl absolute bottom-2 right-3 transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
             </div>
-            <div class="text-white pt-4 font-semibold text-[14px]">{{ title }}</div>
+            <div class="text-white pt-4 font-semibold text-[14px]">{{ capitalizedTitle}}</div>
             <div v-if="!listeners" class="text-gray-400 pt-1 pb-3 text-[14px]">{{ subTitle }}</div>
             <div v-else class="text-gray-400 pt-1 pb-3 text-[14px]">{{ formatListeners(listeners) }} Listeners</div>
         </div>

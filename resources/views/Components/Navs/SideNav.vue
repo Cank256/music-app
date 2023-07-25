@@ -1,5 +1,6 @@
 <script setup>
 import MenuItem from './MenuItem.vue';
+import { Link } from '@inertiajs/vue3';
 
 </script>
 
@@ -25,9 +26,11 @@ import MenuItem from './MenuItem.vue';
 
             <div class="mt-6 p-5 mx-2 bg-gray-600 rounded-xl shadow-lg flex items-center space-x-4">
                 <div>
-                    <div class="text-l text-bolder font-medium text-black dark:text-white">Songs to brighten up your day</div>
+                    <div class="text-l text-bolder font-medium text-black dark:text-white">Stars to brighten up your day</div>
                     <p class="mt-2 text-xs text-slate-500 text-black dark:text-white">We got you!</p>
-                    <button class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">Browse Artists</button>
+                    <Link :href="route('browse')">
+                        <button class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">Browse Artists</button>
+                    </Link>
                 </div>
             </div>
 
@@ -35,7 +38,9 @@ import MenuItem from './MenuItem.vue';
                 <div>
                     <div class="text-l text-bolder font-medium text-black dark:text-white">Let's find you great Albums</div>
                     <p class="mt-2 text-xs text-slate-500 text-black dark:text-white">We keep updating them just for you</p>
-                    <button class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">Browse Albums</button>
+                    <Link :href="route('browse')">
+                        <button class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">Browse Albums</button>
+                    </Link>
                 </div>
             </div>
         </div>
