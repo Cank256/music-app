@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\SongController;
@@ -17,6 +18,8 @@ class SearchController extends Controller
         $topArtists = ArtistController::getTopArtists();
         $topSongs = SongController::getTopSongs();
 
+        session()->forget('isSearching');
+
         return Inertia::render('Search', [
             'action' => 'search',
             'topAlbums' => $topAlbums,
@@ -27,22 +30,25 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
+        $apiKey = env('LASTFM_API_KEY');
+        $searchQuery = $request->get('searchQuery');
+        $artistUrl = env('LASTFM_HOST')."?method=artist.search&artist={$searchQuery}&api_key={$apiKey}&format=json";
+        $albumUrl = env('LASTFM_HOST')."?method=album.search&album={$searchQuery}&api_key={$apiKey}&format=json";
 
-        // Implement your search logic here, searching for artists and albums with the same characters as the query
+        $artistResponse = Http::get($artistUrl);
+        $albumResponse = Http::get($albumUrl);
 
-        // For demo purposes, let's return some dummy data
-        $results = [
-            'artists' => [
-                ['name' => 'The Weeknd', 'image' => 'https://example.com/weeknd.jpg'],
-                ['name' => 'Taylor Swift', 'image' => 'https://example.com/taylor.jpg'],
-            ],
-            'albums' => [
-                ['name' => 'Album 1', 'image' => 'https://example.com/album1.jpg'],
-                ['name' => 'Album 2', 'image' => 'https://example.com/album2.jpg'],
-            ],
-        ];
+        // Store isSearching status in session
+        $request->session()->put('isSearching', true);
 
-        return response()->json($results);
+        return Inertia::render('SearchResults', [
+            'artists' => $artistResponse->json('results.artistmatches.artist'),
+            'albums' => $artistResponse->json('results.albummatches.album'),
+        ]);
+    }
+
+    public function notSearching(Request $request)
+    {
+        return $request->session()->forget('isSearching');
     }
 }

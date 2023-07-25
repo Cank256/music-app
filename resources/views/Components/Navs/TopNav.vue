@@ -8,14 +8,12 @@ import ChevronRight from 'vue-material-design-icons/ChevronRight.vue';
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
 
 const page = usePage();
-
 const user = computed(() => page.props.auth.user);
+const showingNavigationDropdown = ref(false);
 
 defineProps({
     action: String
 })
-
-const showingNavigationDropdown = ref(false);
 
 </script>
 

@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +26,14 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['aut
 
 //SEARCH ROUTES
 Route::get('/search', [SearchController::class, 'create'])->name('search');
+Route::get('/searching', [SearchController::class, 'search'])->name('searching');
+Route::get('/not-searching', [SearchController::class, 'notSearching'])->name('not-searching');
 Route::get('/search/artist', [ArtistController::class, 'getArtist'])->name('search-artist');
 Route::get('/search/album', [AlbumController::class, 'getAlbum'])->name('search-album');
 Route::get('/search/song/{mbid}', [SongController::class, 'getSong'])->name('search-song');
+
+//BROWSE ROUTES
+Route::get('/browse', [BrowseController::class, 'index'])->name('browse');
 
 //AUTHENTICATED USER ROUTES
 Route::middleware('auth')->group(function () {

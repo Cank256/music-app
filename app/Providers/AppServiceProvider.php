@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -20,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Inertia::share('publicPath', fn () => asset('/assets/'));
+        Inertia::share([
+            'publicPath' => function () {
+                asset('/assets/');
+            },
+            'isSearching' => function () {
+                return Session::get('isSearching', false);  // Default to an empty array if not set
+            },
+        ]);
     }
 }

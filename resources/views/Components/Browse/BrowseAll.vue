@@ -1,6 +1,10 @@
 <script setup>
 import BrowseCard from '../Cards/BrowseCard.vue';
 
+defineProps({
+    tags: Object
+});
+
 </script>
 <template>
 
@@ -18,29 +22,11 @@ import BrowseCard from '../Cards/BrowseCard.vue';
                 <BrowseCard image="star" title="Made For You" tag="recommend" />
                 <BrowseCard image="circle-play" title="New Releases" tag="new" />
                 <BrowseCard image="lightbulb" title="Discover" tag="discover" />
-                <BrowseCard image="bolt" title="Live Events" tag="seen live" />
-                <BrowseCard image="earth-africa" title="Afro" tag="afro" />
 
-                <BrowseCard image="hand-spock" title="Rock" tag="rock" />
-                <BrowseCard image="guitar" title="Pop" tag="pop" />
-                <BrowseCard image="meteor" title="Hip-Hop" tag="Hip-Hop" />
-                <BrowseCard image="dice" title="RnB" tag="rnb" />
-                <BrowseCard image="cross" title="Christian" tag="christian" />
-                <BrowseCard image="atom" title="Electronic" tag="electronic" />
+                <div v-for="tag in tags">
+                    <BrowseCard image="compact-disc" :title="tag.name" />
+                </div>
 
-                <BrowseCard image="hat-cowboy" title="Country" tag="country" />
-                <BrowseCard image="music" title="Jazz" tag="jazz" />
-                <BrowseCard image="microphone-lines" title="Classic" tag="classic" />
-                <BrowseCard image="drum" title="Funk" tag="funk" />
-                <BrowseCard image="glasses" title="Blues" tag="blues" />
-                <BrowseCard image="headphones" title="K-Pop" tag="k-pop" />
-
-                <!-- <BrowseCard image="getImage(artist)" title="Indie" tag="indie" />
-                <BrowseCard image="getImage(artist)" title="Metal" tag="metal" /> -->
-                <!-- <BrowseCard image="getImage(artist)" title="Folk" tag="folk" />
-                <BrowseCard image="getImage(artist)" title="Ambient" tag="ambient" />
-                <BrowseCard image="getImage(artist)" title="Punk" tag="punk" />
-                <BrowseCard image="getImage(artist)" title="Dance" tag="dance" /> -->
             </div>
         </div>
     </div>

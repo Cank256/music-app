@@ -43,7 +43,7 @@ const isHover = () => {
             @mouseenter="isHover()"
             @mouseleave="isHover()"
         >
-            <i :class="`fas fa-${iconString} text-black dark:text-white text-xl`"></i>
+            <i :class="['fas', `fa-${iconString}`, 'text-xl', {'text-white': textIsHover, 'text-gray-400': !textIsHover, 'text-black': !textIsHover}]"></i>
             <div
                 :class="textIsHover ? 'text-white ' : 'text-gray-400'"
                 class="font-semibold text-lg ml-4 mt-0.5"

@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
 import MenuItem from './MenuItem.vue';
 
 </script>
@@ -11,7 +9,7 @@ import MenuItem from './MenuItem.vue';
             <ul>
                 <MenuItem class="mt-[1px]" name="Home" iconString="house" pageUrl="home" />
                 <MenuItem class="ml-[1px]" name="Search" iconString="magnifying-glass" pageUrl="search" />
-                <MenuItem class="ml-[1px]" name="Library" iconString="book" pageUrl="search" />
+                <MenuItem class="ml-[1px]" name="Browse" iconString="dharmachakra" pageUrl="browse" />
             </ul>
         </div>
 
