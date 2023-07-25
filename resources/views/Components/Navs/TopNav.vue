@@ -30,9 +30,9 @@ defineProps({
                         <ChevronRight fillColor="#FFF" :size="30" />
                     </button>
 
-                    <div v-if="action == 'search'">
+                    <!-- <div v-if="action == 'search'">
                         <SearchTab />
-                    </div>
+                    </div> -->
 
                 </div>
 
