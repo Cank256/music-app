@@ -88,7 +88,7 @@ const getImage = (data) => {
 
                     <div class="flex flex-wrap items-center gap-1">
                         <div v-for="artist in results.artists.slice(0, artistsDisplayCount)">
-                            <LoadingSearchCard :image="getImage(artist)" :title="artist.name" :isLoading="loading"/>
+                            <LoadingSearchCard :image="getImage(artist)" :title="artist.name" :listeners="Number(artist.listeners)" icon="eye" type="artist" :mbid="artist.mbid" :isLoading="loading"/>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ const getImage = (data) => {
 
                     <div class="flex flex-wrap items-center gap-1">
                         <div v-for="album in results.albums.slice(0, albumsDisplayCount)">
-                            <LoadingSearchCard :image="getImage(album)" :title="album.name" :isLoading="loading"/>
+                            <LoadingSearchCard :image="getImage(album)" :title="album.name"  :subTitle="album.artist.name" icon="eye" type="album" :isLoading="loading"/>
                         </div>
                     </div>
                 </div>
