@@ -25,16 +25,6 @@ const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
 };
 
-const showMoreTracks = () => {
-    displayCount.value += 5;
-    showMore = true;
-}
-
-const showLessTracks = () => {
-    displayCount.value -= 5;
-    showMore = false;
-}
-
 const showMoreAlbums = () => {
     albumsDisplayCount.value += 6;
     albumsState = ref(true);

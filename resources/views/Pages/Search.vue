@@ -8,6 +8,7 @@ const props = defineProps(['action']);
 
 let searchQuery = ref(''); // Initialize search query
 let loading = ref(false); // Initialize loading state
+let typing = ref(false);
 let results = ref([]);
 
 const artistsDisplayCount = ref(4);
@@ -44,8 +45,10 @@ const handleInput = () => {
                 loading.value = false; // Stop the loading animation once results have been obtained
             });
         loading.value = true;
+        typing.value = true;
     } else {
         loading.value = false;
+        typing.value = false;
     }
 }
 
@@ -69,7 +72,15 @@ const getImage = (data) => {
                         </button>
                     </div>
                 </div>
-                <div class="scrollable-content pr-8 pl-8 pt-12 mt-[100px]">
+                <div v-if="!typing" class="pr-8 pl-8 pt-12 mt-[100px] opacity-[.1]">
+                    <center>
+                        <i class="fa fa-search font-bold text-gray-700 text-9xl"></i>
+                    </center>
+                    <center>
+                        <span class="font-bold text-gray-700 text-9xl">Search</span>
+                    </center>
+                </div>
+                <div v-if="typing" class="scrollable-content pr-8 pl-8 pt-12 mt-[100px]">
                     <div v-if="results.artists">
                         <div class="flex justify-between items-center mb-6">
 
