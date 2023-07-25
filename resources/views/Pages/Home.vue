@@ -4,15 +4,15 @@ import HomeCard from '../Components/Cards/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, defineProps } from 'vue';
 
-const props = defineProps(['topArtists', 'topAlbums', 'topSongs']);
+const props = defineProps(['topArtists', 'topAlbums']);
 
 const artistsDisplayCount = ref(5);
 const albumsDisplayCount = ref(5);
-const songsDisplayCount = ref(5);
+// const songsDisplayCount = ref(5);
 
 let artistsState = ref(false);
 let albumsState = ref(false);
-let songsState = ref(false);
+// let songsState = ref(false);
 
 // Function to get the image URL of the artist from the "image" array.
 const getImage = (data) => {
@@ -28,10 +28,10 @@ const showMoreAlbums = () => {
     albumsDisplayCount.value += 5;
     albumsState = ref(true);
 }
-const showMoreSongs = () => {
-    songsDisplayCount.value += 5;
-    songsState = ref(true);
-}
+// const showMoreSongs = () => {
+//     songsDisplayCount.value += 5;
+//     songsState = ref(true);
+// }
 
 // Functions to reduce the display counts
 const showLessArtists = () => {
@@ -44,10 +44,10 @@ const showLessAlbums = () => {
     albumsState = ref(false);
 }
 
-const showLessSongs = () => {
-    songsDisplayCount.value -= 5;
-    songsState = ref(false);
-}
+// const showLessSongs = () => {
+//     songsDisplayCount.value -= 5;
+//     songsState = ref(false);
+// }
 
 </script>
 
@@ -101,7 +101,7 @@ const showLessSongs = () => {
                 </div>
             </div>
 
-            <div class="pr-8 pl-8 pt-6">
+            <!-- <div class="pr-8 pl-8 pt-6">
                 <div class="flex justify-between items-center">
                     <span class="pl-2 text-white text-2xl font-semibold">
                         Recommended Songs
@@ -122,7 +122,7 @@ const showLessSongs = () => {
                         <HomeCard :image="getImage(song)" :title="song.name" :subTitle="song.artist.name" icon="eye" type="song" :mbid="song.mbid" />
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </MainLayout>
