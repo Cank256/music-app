@@ -32,23 +32,15 @@ class SearchController extends Controller
     {
         $apiKey = env('LASTFM_API_KEY');
         $searchQuery = $request->get('searchQuery');
-        $artistUrl = env('LASTFM_HOST')."?method=artist.search&artist={$searchQuery}&api_key={$apiKey}&format=json";
-        $albumUrl = env('LASTFM_HOST')."?method=album.search&album={$searchQuery}&api_key={$apiKey}&format=json";
+        $artistUrl = env('LASTFM_HOST')."?method=artist.search&artist={$searchQuery}&api_key={$apiKey}&limit=10&format=json";
+        $albumUrl = env('LASTFM_HOST')."?method=album.search&album={$searchQuery}&api_key={$apiKey}&limit=10&format=json";
 
         $artistResponse = Http::get($artistUrl);
         $albumResponse = Http::get($albumUrl);
 
-        // Store isSearching status in session
-        $request->session()->put('isSearching', true);
-
-        return Inertia::render('SearchResults', [
+        return response()->json([
             'artists' => $artistResponse->json('results.artistmatches.artist'),
-            'albums' => $artistResponse->json('results.albummatches.album'),
+            'albums' => $albumResponse->json('results.albummatches.album'),
         ]);
-    }
-
-    public function notSearching(Request $request)
-    {
-        return $request->session()->forget('isSearching');
     }
 }
