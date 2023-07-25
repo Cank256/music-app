@@ -30,7 +30,7 @@ function formatListeners(num) {
 
 <template>
     <Link :href="route(`search-${type}`, type === 'album' ? { artist: subTitle, album: title } : type === 'artist' ? mbid ? { use: 'mbid', mbid } : { use: 'name', artist: title } : { mbid })">
-        <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[300px] rounded-md hover:bg-gray-600 cursor-pointer relative overflow-hidden">
+        <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[320px] rounded-md hover:bg-gray-600 cursor-pointer relative overflow-hidden">
             <div class="relative">
                 <img class="rounded" :src="image ? image : $inertia.page.props.publicPath + '/images/album.png'" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl absolute bottom-2 right-3 transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
