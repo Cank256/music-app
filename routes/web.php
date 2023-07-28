@@ -36,6 +36,9 @@ Route::get('/search/song/{mbid}', [SongController::class, 'getSong'])->name('sea
 Route::get('/browse', [BrowseController::class, 'index'])->name('browse');
 Route::get('/tag', [BrowseController::class, 'getTag'])->name('get-tag');
 
+//TRACK/SONG ROUTES
+Route::get('/track-duration', [SongController::class, 'getTrackDuration'])->name('track-duration');
+
 //AUTHENTICATED USER ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

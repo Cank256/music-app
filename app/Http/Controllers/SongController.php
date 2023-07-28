@@ -30,4 +30,16 @@ class SongController extends Controller
 
         return $response->successful() ? $response->json('toptracks.track') : null;
     }
+
+    public static function getTrackDuration()
+    {
+        $response = Http::get(env('LASTFM_HOST'), [
+            'method' => 'track.getInfo',
+            'mbid' => request()->get('mbid'),
+            'api_key' => env('LASTFM_API_KEY'),
+            'format' => 'json',
+        ]);
+
+        return $response->json('track.duration');
+    }
 }

@@ -120,12 +120,12 @@ const showLessSimilarArtists = () => {
                                 <div>Title</div>
                             </div>
                             <div class="text-gray-400">Listeners</div>
-                            <div><i class="fa fa-clock text-white"></i></div>
+                            <div><i class="fa fa-clock text-transparent"></i></div>
                         </div>
                         <div class="border-b border-b-[#2A2A2A] mt-2"></div>
                         <div class="mb-4"></div>
                         <ul class="w-full" v-for="track in topTracks.slice(0, displayCount)">
-                            <SongRow :track="track"/>
+                            <SongRow :track="track" forWho="artist" :mbid="track.mbid"/>
                         </ul>
 
                         <button v-if="!showMore" @click="showMoreTracks" class="text-gray-300 font-bold mt-4">Show More</button>
