@@ -16,7 +16,7 @@ let albumsState = ref(false);
 const similarArtistsDisplayCount = ref(4);
 let similarArtistsState = ref(false);
 
-let isHovered = ref(false);
+// let isHovered = ref(false);
 
 const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
@@ -84,24 +84,20 @@ const showLessSimilarArtists = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link v-if="!isFavorite" :href="route('add-favorite', {type: 'artist', identifier: 'name', content: artist.name})">
+                                    <Link :href="route('add-favorite', {type: 'artist', identifier: 'name', content: artist.name})">
                                         <i
-                                            :class="{ 'fas': isHovered, 'fa-regular': !isHovered }"
+                                            :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
-                                            @mouseenter="isHovered = true"
-                                            @mouseleave="isHovered = false"
                                             >
                                         </i>
                                     </Link>
-                                    <Link v-else :href="route('add-favorite', {type: 'artist', identifier: 'name', content: artist.name})">
+                                    <!-- <Link v-else :href="route('add-favorite', {type: 'artist', identifier: 'name', content: artist.name})">
                                         <i
-                                            :class="{ 'fas': isHovered, 'fa-regular': !isHovered }"
+                                            :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite}"
                                             class="fa-heart text-[#1BD760] text-3xl"
-                                            @mouseenter="isHovered = false"
-                                            @mouseleave="isHovered = true"
                                             >
                                         </i>
-                                    </Link>
+                                    </Link> -->
                                 </div>
                             </div>
                         </div>
