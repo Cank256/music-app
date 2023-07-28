@@ -13,7 +13,6 @@ let showMore = ref(false);
 const similarAlbumsDisplayCount = ref(4);
 let similarAlbumsState = true;
 
-// let markFavorite = ref(false);
 let isHovered = ref(false);
 
 const getImage = (data) => {
@@ -101,9 +100,6 @@ const showLessSimilarAlbums = () => {
                                             >
                                         </i>
                                     </Link>
-                                    <!-- <button type="button">
-                                        <i class="fas fa-ellipsis text-[#1BD760] text-3xl"></i>
-                                    </button> -->
                                 </div>
                             </div>
                         </div>

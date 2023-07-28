@@ -38,12 +38,4 @@ class FavoriteController extends Controller
 
         return redirect()->back();
     }
-
-    public function destroy(Favorite $favorite)
-    {
-        // delete the favorite
-        $favorite->delete();
-
-        return response()->json(null, 204);
-    }
 }

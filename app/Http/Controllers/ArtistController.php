@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
@@ -48,12 +49,14 @@ class ArtistController extends Controller
         $topTracks = SongController::getArtistTopTracks($artistName);
         $topAlbums = AlbumController::getArtistTopAlbums($artistName);
         $similarArtists = $this->getSimilarArtists($artistName);
+        $favorite = Favorite::where('content', $artistName)->exists();
 
         return Inertia::render('SingleArtist', [
             'artist' => $artist,
             'topTracks' => $topTracks,
             'topAlbums' => $topAlbums,
             'similarArtists' => $similarArtists,
+            'isFavorite' => $favorite ? true : false
         ]);
     }
 
