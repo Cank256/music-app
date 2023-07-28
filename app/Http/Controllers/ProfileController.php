@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Favorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,9 +19,18 @@ class ProfileController extends Controller
      */
     public function index(Request $request): Response
     {
+        $favoriteAlbums = Favorite::where('user_id', auth()->id())
+                                    ->where('type', 'album')
+                                    ->get();
+        $favoriteArtists = Favorite::where('user_id', auth()->id())
+                                    ->where('type', 'artist')
+                                    ->get();
+
         return Inertia::render('Profile/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'favoriteAlbums' => $favoriteAlbums,
+            'favoriteArtists' => $favoriteArtists,
         ]);
     }
 

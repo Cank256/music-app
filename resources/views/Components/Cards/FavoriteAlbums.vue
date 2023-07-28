@@ -1,11 +1,28 @@
 <script setup>
-import { toRefs } from 'vue';
+import { toRefs, computed } from 'vue';
 
+const props = defineProps({
+    albums: Object
+})
+
+const { albums } = toRefs(props)
+
+const hasAlbums = computed(() => {
+    return albums.value && Object.keys(albums.value).length > 0
+})
 
 </script>
 
 <template>
     <div class="bg-gray-800 p-2 rounded-md m-2 h-[320px] rounded-md">
         <span class="text-gray-400 font-bold text-xl">Saved Albums</span>
+
+        <div v-if="hasAlbums" class="mt-4">
+            <!-- Display album data here -->
+        </div>
+
+        <div v-else class="mt-4">
+            <span class="text-gray-400">No Favorite Albums yet</span>
+        </div>
     </div>
 </template>
