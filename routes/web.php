@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -41,6 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile-edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //FAVORITES ROUTES
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+    Route::get('/favorite/add', [FavoriteController::class, 'add'])->name('add-favorite');
+    Route::get('/favorite/delete/${id}', [FavoriteController::class, 'delete'])->name('delete-favorite');
 });
 
 require __DIR__.'/auth.php';

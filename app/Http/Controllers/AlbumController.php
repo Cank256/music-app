@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
@@ -36,11 +37,13 @@ class AlbumController extends Controller
 
         $similarAlbums = $this->getSimilarAlbums($album['tags']['tag'][0]['name']);
         $releaseDate = WebScrapingController::getReleaseDate($album['url']);
+        $favorite = Favorite::where('content', $album['name'].'_'.$album['artist'])->exists();
 
         return Inertia::render('SingleAlbum', [
             'album' => $album,
             'similarAlbums' => $similarAlbums,
-            'releaseDate' => $releaseDate
+            'releaseDate' => $releaseDate,
+            'isFavorite' => $favorite ? true : false
         ]);
     }
 

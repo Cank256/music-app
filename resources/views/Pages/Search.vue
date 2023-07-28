@@ -40,7 +40,6 @@ const handleInput = () => {
     if (searchQuery.value.trim() !== '') {
         axios.get(`/searching?searchQuery=${searchQuery.value}`)
             .then(response => {
-                console.log(response.data);
                 results.value = response.data; // Assuming the data you want is in response.data
                 loading.value = false; // Stop the loading animation once results have been obtained
             });

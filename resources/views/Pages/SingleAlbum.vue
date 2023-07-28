@@ -3,15 +3,18 @@ import SongRow from '../Components/SongRow.vue'
 import HomeCard from '../Components/Cards/HomeCard.vue'
 import MainLayout from '../Layouts/MainLayout.vue'
 import { ref, defineProps } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
-const props = defineProps(['album', 'similarAlbums', 'releaseDate']);
+const props = defineProps(['album', 'similarAlbums', 'releaseDate', 'isFavorite']);
 
 const displayCount = ref(5);
 let showMore = ref(false);
 
 const similarAlbumsDisplayCount = ref(4);
 let similarAlbumsState = true;
+
+// let markFavorite = ref(false);
+let isHovered = ref(false);
 
 const getImage = (data) => {
     return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
@@ -80,12 +83,27 @@ const showLessSimilarAlbums = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <button type="button">
-                                        <i class="fas fa-heart text-[#1BD760] text-3xl"></i>
-                                    </button>
-                                    <button type="button">
+                                    <Link v-if="!isFavorite" :href="route('add-favorite', {type: 'album', identifier: 'name', content: album.name+'_'+album.artist})">
+                                        <i
+                                            :class="{ 'fas': isHovered, 'fa-regular': !isHovered }"
+                                            class="fa-heart text-[#1BD760] text-3xl"
+                                            @mouseenter="isHovered = true"
+                                            @mouseleave="isHovered = false"
+                                            >
+                                        </i>
+                                    </Link>
+                                    <Link v-else :href="route('add-favorite', {type: 'album', identifier: 'name', content: album.name+'_'+album.artist})">
+                                        <i
+                                            :class="{ 'fas': isHovered, 'fa-regular': !isHovered }"
+                                            class="fa-heart text-[#1BD760] text-3xl"
+                                            @mouseenter="isHovered = false"
+                                            @mouseleave="isHovered = true"
+                                            >
+                                        </i>
+                                    </Link>
+                                    <!-- <button type="button">
                                         <i class="fas fa-ellipsis text-[#1BD760] text-3xl"></i>
-                                    </button>
+                                    </button> -->
                                 </div>
                             </div>
                         </div>
