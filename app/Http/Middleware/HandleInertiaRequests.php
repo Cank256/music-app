@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Favorite;
+use Auth;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,6 +36,22 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'favorites' => function () {
+                // check if user is authenticated
+                if (Auth::user()) {
+                    // Get the favorites records for this user
+                    return [
+                        'artists' => Favorite::where('user_id', Auth::user()->id)
+                                            ->where('type', 'artist')
+                                            ->get(),
+                        'albums' => Favorite::where('user_id', Auth::user()->id)
+                                            ->where('type', 'album')
+                                            ->get(),
+                    ];
+                }
+
+                return null;
+            },
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
