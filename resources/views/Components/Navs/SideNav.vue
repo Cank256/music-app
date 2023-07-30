@@ -93,7 +93,7 @@ const albumsDisplayCount = ref(3)
                 <div>
                     <div class="text-l text-bolder font-medium text-black dark:text-white">Let's find you great Albums</div>
                     <p class="mt-2 text-xs text-slate-500 text-black dark:text-white">We keep updating them just for you</p>
-                    <Link :href="route('browse')" class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">
+                    <Link :href="route('browse')" as="button" class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">
                         Browse Albums
                     </Link>
                 </div>
