@@ -22,7 +22,6 @@ const getTrackDuration = () => {
     axios.get(`/track-duration?mbid=${duration}`)
             .then(response => {
                 // trackDuration.value = response.data;
-                console.log(response.data)
             });
 }
 

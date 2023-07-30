@@ -5,8 +5,6 @@ import { Head } from '@inertiajs/vue3';
 
 const props = defineProps(['topTags']);
 
-console.log(props.topTags);
-
 </script>
 
 <template>
