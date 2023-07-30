@@ -22,8 +22,8 @@ const hasArtists = computed(() => {
 
         <div v-if="hasArtists" class="mt-4">
             <ol>
-                <div v-for="artist in artists.slice(0, aartistsDisplayCount)" class="flex">
-                    <li class="text-gray-400">
+                <div v-for="artist in artists.slice(0, artistsDisplayCount)" class="flex">
+                    <li class="text-gray-400 mb-6 hover:text-white">
                         <Link :href="route('search-artist', {artist: artist.artist_name})">
                             {{ artist.artist_name }}
                         </Link>
