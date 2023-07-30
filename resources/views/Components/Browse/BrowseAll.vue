@@ -18,8 +18,8 @@ defineProps({
 
                 <div class="flex flex-wrap items-center gap-1">
                 <!-- <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5"> -->
-                    <BrowseCard image="heart" title="Your Favorites" tag="favorites" />
-                    <BrowseCard image="star" title="Made For You" tag="recommend" />
+                    <BrowseCard image="heart" type="system" title="Your Favorites" tag="library" />
+                    <BrowseCard image="star" type="system" title="Made For You" tag="home" />
                     <BrowseCard image="circle-play" title="New Releases" tag="new" />
                     <BrowseCard image="lightbulb" title="Discover" tag="discover" />
 
