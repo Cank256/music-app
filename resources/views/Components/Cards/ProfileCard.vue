@@ -1,5 +1,5 @@
 <script setup>
-import { toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -7,10 +7,23 @@ const props = defineProps({
     email: String,
     image: String,
     type: String,
+    joined: String,
 })
 
-const { name, email, image, type } = toRefs(props)
+const { name, email, image, type, joined } = toRefs(props)
 
+const formatDate = computed(() => {
+  const date = new Date(joined.value);
+
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  // getMonth returns a zero-based index, so we use an array to get the month name
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "No", "Dec"];
+  const month = monthNames[date.getMonth()];
+
+  return `${day}-${month}-${year}`;
+});
 
 </script>
 
@@ -22,7 +35,7 @@ const { name, email, image, type } = toRefs(props)
         <div class="text-white pt-6 font-semibold text-[22px]">{{ name }}</div>
         <div class="text-gray-400 pt-1 text-[18px]">{{ email }}</div>
         <div class="text-gray-400 pt-1 text-[18px]">{{ type }}</div>
-        <div class="text-gray-400 pt-1 text-[18px]">Joined: {{ joined }}</div>
+        <div class="text-gray-400 pt-1 text-[18px]">Joined: {{ formatDate }}</div>
         <Link class="mt-4 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded" :href="route('profile.edit')" as="button">Edit</Link>
     </div>
 </template>
