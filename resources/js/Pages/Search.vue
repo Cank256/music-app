@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import MainLayout from '../Layouts/MainLayout.vue';
-import LoadingSearchCard from '../Components/Cards/LoadingSearchCard.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
+import LoadingSearchCard from '@/Components/Cards/LoadingSearchCard.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps(['action']);

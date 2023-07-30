@@ -1,5 +1,5 @@
 <script setup>
-import MainLayout from '../../Layouts/MainLayout.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';

@@ -1,6 +1,6 @@
 <script setup>
-import TopNav from '../Components/Navs/TopNav.vue'
-import SideNav from '../Components/Navs/SideNav.vue'
+import TopNav from '@/Components/Navs/TopNav.vue'
+import SideNav from '@/Components/Navs/SideNav.vue'
 
 </script>
 

@@ -1,9 +1,9 @@
 <script setup>
-import MainLayout from '../../Layouts/MainLayout.vue'
-import ProfileCard from '../../Components/Cards/ProfileCard.vue'
+import MainLayout from '@/Layouts/MainLayout.vue'
+import ProfileCard from '@/Components/Cards/ProfileCard.vue'
 import { Head, usePage } from '@inertiajs/vue3';
-import FavoriteAlbums from '../../Components/Cards/FavoriteAlbums.vue';
-import FavoriteArtists from '../../Components/Cards/FavoriteArtists.vue';
+import FavoriteAlbums from '@/Components/Cards/FavoriteAlbums.vue';
+import FavoriteArtists from '@/Components/Cards/FavoriteArtists.vue';
 
 const user = usePage().props.auth.user;
 

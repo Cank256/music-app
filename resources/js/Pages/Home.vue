@@ -1,6 +1,6 @@
 <script setup>
-import MainLayout from '../Layouts/MainLayout.vue';
-import HomeCard from '../Components/Cards/HomeCard.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
+import HomeCard from '@/Components/Cards/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, defineProps } from 'vue';
 

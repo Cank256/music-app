@@ -1,7 +1,7 @@
 <script setup>
-import SongRow from '../Components/SongRow.vue'
-import HomeCard from '../Components/Cards/HomeCard.vue'
-import MainLayout from '../Layouts/MainLayout.vue'
+import SongRow from '@/Components/SongRow.vue'
+import HomeCard from '@/Components/Cards/HomeCard.vue'
+import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head, Link } from '@inertiajs/vue3';
 import { ref, defineProps } from 'vue';
 
