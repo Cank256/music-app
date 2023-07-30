@@ -75,24 +75,4 @@ class ArtistController extends Controller
         return $response->successful() ? $response->json('similarartists.artist') : null;
     }
 
-
-    public function searchArtist()
-    {
-        // Make a GET request to the Last.fm API to search for the artist
-        $response = Http::get(env('LASTFM_HOST'), [
-            'method' => 'artist.search',
-            'artist' => request()->artist,
-            'api_key' => env('LASTFM_API_KEY'),
-            'format' => 'json',
-        ]);
-
-        // Process the response and extract the relevant data
-        $artist = $response->json('results.artistmatches.artist');
-
-        return Inertia::render('SingleArtist', [
-            'artist' => $artist,
-        ]);
-    }
-
-
 }

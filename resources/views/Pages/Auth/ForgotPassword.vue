@@ -2,8 +2,8 @@
 import GuestAuthLayout from '../../Layouts/AuthLayout.vue';
 import InputError from '../../Components/Form/InputError.vue';
 import InputLabel from '../..//Components/Form/InputLabel.vue';
-import PrimaryButton from '../../Components/Button/PrimaryButton.vue';
-import SecondaryButton from '../../Components/Button/SecondaryButton.vue';
+import PrimaryButton from '../../Components/Buttons/PrimaryButton.vue';
+import SecondaryButton from '../../Components/Buttons/SecondaryButton.vue';
 import TextInput from '../../Components/Form/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
