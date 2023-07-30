@@ -11,7 +11,7 @@ const displayCount = ref(5);
 let showMore = ref(false);
 
 const similarAlbumsDisplayCount = ref(4);
-let similarAlbumsState = true;
+let similarAlbumsState = false;
 
 // let isHovered = ref(false);
 

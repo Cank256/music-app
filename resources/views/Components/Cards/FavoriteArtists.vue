@@ -1,5 +1,5 @@
 <script setup>
-import { toRefs, computed } from 'vue';
+import { ref, toRefs, computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -7,6 +7,8 @@ const props = defineProps({
 })
 
 const { artists } = toRefs(props)
+
+const artistsDisplayCount = ref(10);
 
 const hasArtists = computed(() => {
     return artists.value && Object.keys(artists.value).length > 0
@@ -20,13 +22,14 @@ const hasArtists = computed(() => {
 
         <div v-if="hasArtists" class="mt-4">
             <ol>
-                <div v-for="artist in artists" class="flex">
+                <div v-for="artist in artists.slice(0, aartistsDisplayCount)" class="flex">
                     <li class="text-gray-400">
                         <Link :href="route('search-artist', {artist: artist.artist_name})">
                             {{ artist.artist_name }}
                         </Link>
                     </li>
                 </div>
+                <Link v-if="artists.length > 10" class="pr-6 text-green-400 text-l font-semibold">See More Artists</Link>
             </ol>
         </div>
 
