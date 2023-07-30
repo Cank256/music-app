@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
             <ul>
                 <MenuItem class="mt-[1px]" name="Home" iconString="house" pageUrl="home" />
                 <MenuItem class="ml-[1px]" name="Search" iconString="magnifying-glass" pageUrl="search" />
-                <MenuItem class="ml-[1px]" name="Library" iconString="book" pageUrl="browse" />
+                <MenuItem class="ml-[1px]" name="Library" iconString="book" pageUrl="library" />
                 <MenuItem class="ml-[1px]" name="Browse" iconString="dharmachakra" pageUrl="browse" />
             </ul>
         </div>
@@ -19,10 +19,10 @@ import { Link } from '@inertiajs/vue3';
 
             <div class="p-5 mx-2 mt-5 bg-gray-600 rounded-xl shadow-lg flex items-center space-x-4">
                 <div>
-                    <div class="text-l text-bolder font-medium text-black dark:text-white">Create your first playlist</div>
-                    <p class="mt-2 text-xs text-slate-500 text-black dark:text-white">Let's guide you through</p>
+                    <div class="text-l text-bolder font-medium text-black dark:text-white">Create your Library</div>
+                    <p class="mt-2 text-xs text-slate-500 text-black dark:text-white">For Albums and Artists</p>
                     <Link :href="route('browse')" as="button" class="mt-5 rounded-full dark:bg-white py-1 px-4 text-sm font-medium">
-                        Create Library
+                        Add Favorites
                     </Link>
                 </div>
             </div>

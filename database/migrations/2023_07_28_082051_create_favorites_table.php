@@ -14,6 +14,9 @@ class CreateFavoritesTable extends Migration
             $table->string('type'); // artist or album
             $table->string('artist_name');
             $table->string('album_name')->nullable();
+            $table->string('mbid')->nullable();
+            $table->string('image')->nullable();
+            $table->string('listeners')->nullable();
             $table->timestamps();
         });
     }

@@ -14,5 +14,8 @@ class Favorite extends Model
         'type',
         'artist_name',
         'album_name',
+        'mbid',
+        'image',
+        'listeners',
     ];
 }

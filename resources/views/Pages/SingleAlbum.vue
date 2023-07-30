@@ -82,7 +82,7 @@ const showLessSimilarAlbums = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link :href="route('add-favorite', {type: 'album', artist: album.artist, album: album.name})">
+                                    <Link :href="route('add-favorite', {type: 'album', artist: album.artist, album: album.name, image: getImage(album), listeners: album.listeners })">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
