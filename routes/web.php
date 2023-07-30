@@ -49,7 +49,6 @@ Route::middleware('auth')->group(function () {
     //FAVORITES ROUTES
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
     Route::get('/favorite/add', [FavoriteController::class, 'add'])->name('add-favorite');
-    Route::get('/favorite/delete/${id}', [FavoriteController::class, 'delete'])->name('delete-favorite');
 });
 
 require __DIR__.'/auth.php';

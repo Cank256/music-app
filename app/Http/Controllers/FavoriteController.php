@@ -17,8 +17,8 @@ class FavoriteController extends Controller
     {
         $favorite = Favorite::where('user_id', auth()->id())
                         ->where('type', $request->get('type'))
-                        ->where('identifier', $request->get('identifier'))
-                        ->where('content', $request->get('content'))
+                        ->where('artist_name', $request->get('artist'))
+                        ->where('album_name', $request->get('album'))
                         ->first();
 
         if ($favorite)
@@ -31,8 +31,8 @@ class FavoriteController extends Controller
             $favorite = Favorite::create([
                 'user_id' => auth()->id(),
                 'type' => $request->get('type'),
-                'identifier' => $request->get('identifier'),
-                'content' => $request->get('content'),
+                'artist_name' => $request->get('artist'),
+                'album_name' => $request->get('album') ? $request->get('album') : null,
             ]);
         }
 

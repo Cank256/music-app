@@ -49,7 +49,9 @@ class ArtistController extends Controller
         $topTracks = SongController::getArtistTopTracks($artistName);
         $topAlbums = AlbumController::getArtistTopAlbums($artistName);
         $similarArtists = $this->getSimilarArtists($artistName);
-        $favorite = Favorite::where('content', $artistName)->exists();
+        $favorite = Favorite::where('user_id', auth()->id())
+                            ->where('artist_name', $artistName)
+                            ->exists();
 
         return Inertia::render('SingleArtist', [
             'artist' => $artist,

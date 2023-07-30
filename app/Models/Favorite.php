@@ -12,7 +12,7 @@ class Favorite extends Model
     protected $fillable = [
         'user_id',
         'type',
-        'identifier',
-        'content',
+        'artist_name',
+        'album_name',
     ];
 }

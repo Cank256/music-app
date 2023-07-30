@@ -11,9 +11,9 @@ class CreateFavoritesTable extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('type');
-            $table->string('identifier');
-            $table->string('content');
+            $table->string('type'); // artist or album
+            $table->string('artist_name');
+            $table->string('album_name')->nullable();
             $table->timestamps();
         });
     }

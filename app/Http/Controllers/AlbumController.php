@@ -37,7 +37,10 @@ class AlbumController extends Controller
 
         $similarAlbums = $this->getSimilarAlbums($album['tags']['tag'][0]['name']);
         $releaseDate = WebScrapingController::getReleaseDate($album['url']);
-        $favorite = Favorite::where('content', $album['name'].'_'.$album['artist'])->exists();
+        $favorite = Favorite::where('user_id', auth()->id())
+                            ->where('artist_name', $album['artist'])
+                            ->where('album_name', $album['name'])
+                            ->exists();
 
         return Inertia::render('SingleAlbum', [
             'album' => $album,
