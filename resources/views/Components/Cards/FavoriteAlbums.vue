@@ -18,7 +18,7 @@ const hasAlbums = computed(() => {
 
 <template>
     <div class="bg-gray-800 p-2 rounded-md m-2 h-[320px] rounded-md">
-        <span class="text-gray-400 font-bold text-xl">Saved Albums</span>
+        <span class="text-gray-400 font-bold text-xl">Saved Albums ({{ albums.length }})</span>
 
         <div v-if="hasAlbums" class="mt-4">
             <ol>

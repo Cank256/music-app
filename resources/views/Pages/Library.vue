@@ -49,7 +49,7 @@ const showLessAlbums = () => {
                     <div class="pr-8 pl-8 pt-12">
                         <div class="flex justify-between items-center">
                             <span class="pl-2 text-white text-3xl font-semibold">
-                                Favorite Albums
+                                Favorite Albums ({{ favoriteAlbums.length }})
                             </span>
 
                             <div v-if="favoriteAlbums.length > 5">
@@ -75,7 +75,7 @@ const showLessAlbums = () => {
                     <div class="pr-8 pl-8 pt-12">
                         <div class="flex justify-between items-center">
                             <span class="pl-2 text-white text-3xl font-semibold">
-                                Favorite Artists
+                                Favorite Artists ({{ favoriteArtists.length }})
                             </span>
                             <div v-if="favoriteArtists.length > 5">
                                 <button v-if="!artistsState" @click="showMoreArtists" class="pr-6 text-white text-l font-semibold">
