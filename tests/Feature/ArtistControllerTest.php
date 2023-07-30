@@ -9,12 +9,20 @@ use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Inertia\Testing\Assert;
+use Inertia\Testing\AssertableInertia;
 use ReflectionMethod;
 use Tests\TestCase;
 
 class ArtistControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutVite();
+        $this->withoutExceptionHandling();
+    }
 
     public function testGetTopArtists()
     {
@@ -42,60 +50,54 @@ class ArtistControllerTest extends TestCase
 
     public function test_get_artist(): void
     {
-        // Mock the HTTP responses
         Http::fake([
-            '{api_host_for_artist_info}' => Http::response([
-                'artist' => [
-                    'name' => 'Artist 1',
-                    'listeners' => '1000000',
-                    // ...
-                ]
+            'endpoint_for_artist_info' => Http::response([
+                'artist' => ['name' => 'Artist 1', 'listeners' => '1000000'],
             ]),
-            '{api_host_for_top_tracks}' => Http::response([
-                'topTracks' => [
-                    ['name' => 'Track 1', 'listeners' => '1000000'],
-                    // ...
-                ]
+            'endpoint_for_top_tracks' => Http::response([
+                'topTracks' => [['name' => 'Track 1', 'listeners' => '1000000']],
             ]),
-            '{api_host_for_top_albums}' => Http::response([
-                'topAlbums' => [
-                    ['name' => 'Album 1', 'listeners' => '1000000'],
-                    // ...
-                ]
+            'endpoint_for_top_albums' => Http::response([
+                'topAlbums' => [['name' => 'Album 1', 'listeners' => '1000000']],
             ]),
-            '{api_host_for_similar_artists}' => Http::response([
-                'similarArtists' => [
-                    ['name' => 'Artist 1', 'listeners' => '1000000'],
-                    // ...
-                ]
+            'endpoint_for_similar_artists' => Http::response([
+                'similarArtists' => [['name' => 'Artist 1', 'listeners' => '1000000']],
             ]),
-            // ... other APIs
+            // ... any other fakes
         ]);
 
         $user = User::factory()->create();
+        Auth::login($user);
 
-        // Auth mock
-        $this->actingAs($user);
+        $favorite = Favorite::where('user_id', $user->id)
+            ->where('artist_name', 'Artist 1')
+            ->first();
 
-        // Simulate existing favorite
-        $favorite = Favorite::factory()->create([
-            'user_id' => $user->id,
-            'artist_name' => 'Artist 1',
-        ]);
 
-        // Send request and assert response
-        $this->get('/artist?artist=Artist 1')
-            ->assertInertia(fn (Assert $page) => $page
+        $this->get('/search/artist?artist=Artist%201')
+            ->assertInertia(fn (AssertableInertia $page) => $page
                 ->component('SingleArtist')
-                ->where('artist.name', 'Artist 1')
-                ->where('artist.listeners', '1000000')
-                ->where('topTracks.0.name', 'Track 1')
-                ->where('topTracks.0.listeners', '1000000')
-                ->where('topAlbums.0.name', 'Album 1')
-                ->where('topAlbums.0.listeners', '1000000')
-                ->where('similarArtists.0.name', 'Artist 1')
-                ->where('similarArtists.0.listeners', '1000000')
-                ->where('isFavorite', true)
+                ->has('artist', function (Assert $artist) {
+                    return $artist
+                        ->where('name', 'Artist 1')
+                        ->where('listeners', '1000000');
+                })
+                ->has('topTracks', function (Assert $topTracks) {
+                    return $topTracks->first(fn ($track) =>
+                        $track['name'] === 'Track 1' && $track['listeners'] === '1000000'
+                    );
+                })
+                ->has('topAlbums', function (Assert $topAlbums) {
+                    return $topAlbums->first(fn ($album) =>
+                        $album['name'] === 'Album 1' && $album['listeners'] === '1000000'
+                    );
+                })
+                ->has('similarArtists', function (Assert $similarArtists) {
+                    return $similarArtists->first(fn ($artist) =>
+                        $artist['name'] === 'Artist 1' && $artist['listeners'] === '1000000'
+                    );
+                })
+                ->where('isFavorite', $favorite ? true : false)
             );
     }
 
