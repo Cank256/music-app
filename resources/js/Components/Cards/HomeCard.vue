@@ -38,7 +38,7 @@ let capitalizedTitle = computed(() => {
         <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[320px] rounded-md hover:bg-gray-600 cursor-pointer overflow-hidden">
             <div class="">
                 <img class="rounded" :src="image ? image : $inertia.page.props.publicPath + '/images/album.png'" alt="">
-                <i :class="`fas fa-${icon} text-green-600 text-4xl absolute bottom-2 right-3 transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
+                <i :class="`fas fa-${icon} text-green-600 text-4xl relative bottom-[3rem] left-[10rem] transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
             </div>
             <div class="text-white pt-4 font-semibold text-[14px]">{{ capitalizedTitle}}</div>
             <div v-if="!listeners" class="text-gray-400 pt-1 pb-3 text-[14px]">{{ subTitle }}</div>
