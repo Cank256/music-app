@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed} from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import Dropdown from './Dropdown.vue';
 import DropdownLink from './DropdownLink.vue';
@@ -10,6 +10,14 @@ const page = usePage();
 const user = computed(() => page.props.auth.user);
 const showingNavigationDropdown = ref(false);
 
+function goBack() {
+    window.history.back();
+}
+
+function goForward() {
+    return history.forward();
+}
+
 </script>
 
 <template>
@@ -18,10 +26,10 @@ const showingNavigationDropdown = ref(false);
         <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mr-20">
             <div class="flex justify-between h-16">
                 <div class="flex items-center ml-2">
-                    <button type="button" class="rounded-full bg-gray-700 p-[1px] cursor-pointer">
+                    <button type="button" @click="goBack" class="rounded-full bg-gray-700 p-[1px] cursor-pointer">
                         <ChevronLeft fillColor="#FFF" :size="30" />
                     </button>
-                    <button type="button" class="rounded-full bg-gray-700 p-[1px] hover:bg-[#] ml-4 cursor-pointer">
+                    <button type="button" @click="goForward" class="rounded-full bg-gray-700 p-[1px] hover:bg-[#] ml-4 cursor-pointer">
                         <ChevronRight fillColor="#FFF" :size="30" />
                     </button>
                 </div>
