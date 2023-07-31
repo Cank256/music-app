@@ -20,10 +20,6 @@ let capitalizedName = computed(() => {
     return props.tag.name.replace(/\b\w/g, function (l) { return l.toUpperCase() });
 });
 
-const getImage = (data) => {
-    return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
-};
-
 const showMoreAlbums = () => {
     albumsDisplayCount.value += 6;
     albumsState = ref(true);
@@ -57,7 +53,7 @@ const showLessSimilarArtists = () => {
 
                         <div class="py-1.5"></div>
                         <div class="flex items-center w-full relative h-full">
-                            <img width="140" :src="tag.image ? tag.image : '/assets/images/album.png'" class="rounded-lg">
+                            <img width="140" src='/assets/images/album.png' class="rounded-lg">
 
                             <div class="w-full ml-5">
 
@@ -78,30 +74,9 @@ const showLessSimilarArtists = () => {
                         </div>
 
                         <div class="text-gray-300 mt-6 leading-8">
-                            {{ tag.wiki.summary }}
+                            {{ tag.summary }}
                         </div>
 
-                        <!-- <div class="mt-6"></div>
-                        <div>
-                            <div class="text-2xl mt-12 mb-6 text-gray-400 font-bold">Popular Songs</div>
-                        </div>
-                        <div class="flex items-center justify-between px-5 pt-2">
-                            <div class="flex items-center justify-between text-gray-400">
-                                <div class="mr-8">Rank</div>
-                                <div>Title</div>
-                            </div>
-                            <div class="text-gray-400">Listeners</div>
-                            <div><i class="fa fa-clock text-white"></i></div>
-                        </div>
-                        <div class="border-b border-b-[#2A2A2A] mt-2"></div>
-                        <div class="mb-4"></div>
-                        <ul class="w-full" v-for="track in topTracks.slice(0, displayCount)">
-                            <SongRow :track="track"/>
-                        </ul>
-
-                        <button v-if="!showMore" @click="showMoreTracks" class="text-gray-300 font-bold mt-4">Show More</button>
-                        <button v-if="showMore" @click="showLessTracks" class="text-gray-300 font-bold mt-4">Show Less</button>
-                        -->
                         <div class="mt-6"></div>
 
                         <div class="pt-6">
@@ -119,7 +94,7 @@ const showLessSimilarArtists = () => {
                             </div>
                             <div class="flex flex-wrap items-center">
                                 <div v-for="album in albums.slice(0, albumsDisplayCount)">
-                                    <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
+                                    <HomeCard :image="album.image" :title="album.name" :subTitle="album.artist" icon="eye" type="album"/>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +116,7 @@ const showLessSimilarArtists = () => {
                             </div>
                             <div class="flex flex-wrap items-center">
                                 <div v-for="artist in artists.slice(0, similarArtistsDisplayCount)">
-                                    <HomeCard :image="getImage(artist)" :title="artist.name" :listeners="Number(artist.listeners)" icon="eye" type="artist" :mbid="artist.mbid"/>
+                                    <HomeCard :image="artist.image" :title="artist.name" :listeners="Number(artist.listeners)" icon="eye" type="artist" :mbid="artist.mbid"/>
                                 </div>
                             </div>
                         </div>

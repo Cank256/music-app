@@ -33,6 +33,22 @@ class ResponseController extends Controller
         {
             return self::formatSimilarAlbumResponse($result);
         }
+        else if ($for == 'tags')
+        {
+            return self::formatTagsResponse($result);
+        }
+        else if ($for == 'tag')
+        {
+            return self::formatTagResponse($result);
+        }
+        else if ($for == 'tag-top-artists')
+        {
+            return self::formatTagTopArtistsResponse($result);
+        }
+        else if ($for == 'tag-top-albums')
+        {
+            return self::formatTagTopAlbumsResponse($result);
+        }
     }
 
     private static function formatArtistResponse($artistData)
@@ -108,6 +124,48 @@ class ResponseController extends Controller
                 'image' => self::extractImage($item['image']) ?? null,
                 'artist' => $item['artist']['name'] ?? null,
                 'rank' => $item['@attr']['rank'] ?? null
+            ];
+        });
+    }
+
+    private static function formatTagsResponse($tagsData)
+    {
+        return collect($tagsData)->map(function ($item) {
+            return [
+                'name' => $item['name'] ?? null
+            ];
+        });
+    }
+
+    private static function formatTagResponse($tagData)
+    {
+        $extractedData = [
+            'name' => $tagData['name'] ?? null,
+            'summary' => $tagData['wiki']['summary'] ?? null
+        ];
+
+        return response()->json($extractedData);
+    }
+
+    private static function formatTagTopArtistsResponse($artistsData)
+    {
+        return collect($artistsData)->map(function ($item) {
+            return [
+                'name' => $item['name'] ?? null,
+                'mbid' => $item['mbid'] ?? null,
+                'image' => self::extractImage($item['image'])[0] ?? null,
+                'rank' => $item['@attr']['rank'] ?? null,
+            ];
+        });
+    }
+
+    private static function formatTagTopAlbumsResponse($albumsData)
+    {
+        return collect($albumsData)->map(function ($item) {
+            return [
+                'name' => $item['name'] ?? null,
+                'image' => self::extractImage($item['image'])[0] ?? null,
+                'rank' => $item['@attr']['rank'] ?? null,
             ];
         });
     }

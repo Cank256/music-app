@@ -15,7 +15,7 @@ class BrowseController extends Controller
             'format' => 'json',
         ]);
 
-        $topTags = $response->json('toptags.tag');
+        $topTags = ResponseController::formatResponse('tags', $response->json('toptags.tag'));
 
         return Inertia::render('Browse', [
             'topTags' => $topTags,
@@ -25,13 +25,15 @@ class BrowseController extends Controller
     public function getTag()
     {
         $info = Http::get(env('LASTFM_HOST')."?method=tag.getInfo&tag=".request()->query('tag')."&api_key=".env('LASTFM_API_KEY')."&format=json");
-        $tagInfo = $info->json('tag');
+        $tagInfo = ResponseController::formatResponse('tag', $info->json('tag'))->getData();
 
         $artists = Http::get(env('LASTFM_HOST')."?method=tag.gettopartists&tag=".request()->query('tag')."&api_key=".env('LASTFM_API_KEY')."&limit=10&format=json");
-        $topArtists = $artists->json('topartists.artist');
+        $topArtists = ResponseController::formatResponse('tag-top-artists', $artists->json('topartists.artist'));
 
         $albums = Http::get(env('LASTFM_HOST')."?method=tag.gettopalbums&tag=".request()->query('tag')."&api_key=".env('LASTFM_API_KEY')."&limit=10&format=json");
-        $topAlbums = $albums->json('albums.album');
+        $topAlbums = ResponseController::formatResponse('tag-top-albums', $albums->json('albums.album'));
+
+        // return $tagInfo;
 
         return Inertia::render('Tag', [
             'tag' => $tagInfo,
