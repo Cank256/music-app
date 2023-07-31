@@ -33,15 +33,16 @@ class AlbumController extends Controller
         ]);
 
         // Process the response and extract the relevant data
-        $album = $response->json('album');
+        $album = ResponseController::formatResponse('album', $response->json('album'))->getData();
 
-        $similarAlbums = $this->getSimilarAlbums($album['tags']['tag'][0]['name']);
-        $releaseDate = WebScrapingController::getReleaseDate($album['url']);
+        $similarAlbums = $this->getSimilarAlbums($album->tags[0]);
+        $releaseDate = WebScrapingController::getReleaseDate($album->url);
         $favorite = Favorite::where('user_id', auth()->id())
-                            ->where('artist_name', $album['artist'])
-                            ->where('album_name', $album['name'])
+                            ->where('artist_name', $album->artist)
+                            ->where('album_name', $album->name)
                             ->exists();
 
+        // return $album;
         return Inertia::render('SingleAlbum', [
             'album' => $album,
             'similarAlbums' => $similarAlbums,
@@ -73,7 +74,7 @@ class AlbumController extends Controller
             'format' => 'json',
         ]);
 
-        return $response->successful() ? $response->json('albums.album') : null;
+        return $response->successful() ? ResponseController::formatResponse('similar-albums', $response->json('albums.album')) : null;
     }
 
 }

@@ -24,7 +24,7 @@ class WebScrapingController extends Controller
         }
 
         return response()->json([
-            'second_metadata_description' => $secondMetadataDescription,
+            'release_date' => $secondMetadataDescription,
         ]);
     }
 }

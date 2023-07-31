@@ -15,10 +15,6 @@ let similarAlbumsState = false;
 
 // let isHovered = ref(false);
 
-const getImage = (data) => {
-    return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
-};
-
 const showMoreTracks = (number) => {
     displayCount.value = number;
     showMore = true;
@@ -52,7 +48,7 @@ const showLessSimilarAlbums = () => {
 
                         <div class="py-1.5"></div>
                         <div class="flex items-center w-full relative h-full">
-                            <img width="140" :src="getImage(album)" class="rounded-lg">
+                            <img width="140" :src="album.image" class="rounded-lg">
 
                             <div class="w-full ml-5">
 
@@ -63,7 +59,6 @@ const showLessSimilarAlbums = () => {
                                 </div>
 
                                 <div class="text-gray-300 text-[18px] flex mt-12 mb-2">
-                                    <!-- <Link :href="route('search-artist', {mbid: artist.mbid})">{{ album.artist  }} </Link> -->
                                     {{ album.artist  }}
                                 </div>
 
@@ -71,18 +66,18 @@ const showLessSimilarAlbums = () => {
                                     <div class="flex">Album</div>
                                     <div class="ml-2 flex">
                                         <div class="circle mt-2 mr-2" />
-                                        <span v-if="album.tracks" class="-ml-0.5">{{ album.tracks.track.length }} songs</span>
+                                        <span v-if="album.tracks" class="-ml-0.5">{{ album.tracks.length }} songs</span>
                                         <span v-else class="-ml-0.5">0 songs</span>
                                     </div>
                                     <div class="ml-2 flex">
                                         <div class="circle mt-2 mr-2" />
                                         <span>Released on</span>
-                                        <span class="ml-1 font-bold">{{ releaseDate.original['second_metadata_description'] }}</span>
+                                        <span class="ml-1 font-bold">{{ releaseDate.original['release_date'] }}</span>
                                     </div>
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link :href="route('add-favorite', {type: 'album', artist: album.artist, album: album.name, image: getImage(album), listeners: album.listeners })">
+                                    <Link :href="route('add-favorite', {type: 'album', artist: album.artist, album: album.name, image: album.image, listeners: album.listeners })">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
@@ -106,8 +101,8 @@ const showLessSimilarAlbums = () => {
                             <div class="text-2xl mt-8 mb-6 text-gray-400 font-bold">Info</div>
                         </div>
 
-                        <div v-if="album.wiki" class="text-gray-300 mt-6 leading-8">
-                            {{ album.wiki.summary }}
+                        <div v-if="album.summary" class="text-gray-300 mt-6 leading-8">
+                            {{ album.summary }}
                         </div>
 
                         <div class="mt-6"></div>
@@ -124,7 +119,7 @@ const showLessSimilarAlbums = () => {
                             </div>
                             <div class="border-b border-b-[#2A2A2A] mt-2"></div>
                             <div class="mb-4"></div>
-                            <ul class="w-full" v-for="track in album.tracks.track.slice(0, displayCount)">
+                            <ul class="w-full" v-for="track in album.tracks.slice(0, displayCount)">
                                 <SongRow :track="track"/>
                             </ul>
 
@@ -153,7 +148,7 @@ const showLessSimilarAlbums = () => {
                             </div>
                             <div class="flex flex-wrap items-center">
                                 <div v-for="similarAlbum in similarAlbums.slice(0, similarAlbumsDisplayCount)">
-                                    <HomeCard :image="getImage(similarAlbum)" :title="similarAlbum.name" :subTitle="similarAlbum.artist.name" icon="eye" type="album"/>
+                                    <HomeCard :image="similarAlbum.image" :title="similarAlbum.name" :subTitle="similarAlbum.artist" icon="eye" type="album"/>
                                 </div>
                             </div>
                         </div>

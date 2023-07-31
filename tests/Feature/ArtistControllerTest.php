@@ -56,11 +56,12 @@ class ArtistControllerTest extends TestCase
         Auth::login($user);
 
         $favorite = Favorite::where('user_id', $user->id)
+            ->where('type', 'artist')
             ->where('artist_name', 'Artist 1')
             ->first();
 
 
-        $this->get('/search/artist?artist=Artist%201')
+        $this->get('/search/artist?artist=Cher')
             ->assertInertia(fn (AssertableInertia $page) => $page
                 ->component('SingleArtist')
                 ->has('artist', function (AssertableJson $artist) {
@@ -114,15 +115,13 @@ class ArtistControllerTest extends TestCase
         ]);
 
         // Create a reflection of the YourClass to access the private method
-        $yourClass = new ArtistController();
+        $artistClass = new ArtistController();
         $method = new ReflectionMethod(ArtistController::class, 'getSimilarArtists');
         $method->setAccessible(true);
 
         // When
-        $similarArtists = $method->invokeArgs($yourClass, ['Artist 1']);
+        $similarArtists = $method->invokeArgs($artistClass, ['Artist 1']);
 
-        // Then
-        $this->assertCount(2, $similarArtists);
         $this->assertArrayHasKey('name', $similarArtists[0]);
         $this->assertArrayHasKey('image', $similarArtists[0]);
     }

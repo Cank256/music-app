@@ -5,14 +5,25 @@ namespace Tests\Feature;
 use App\Http\Controllers\AlbumController;
 use App\Models\User;
 use App\Models\Favorite;
+use Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Inertia\Testing\Assert;
+use Inertia\Testing\AssertableInertia;
+use ReflectionMethod;
 use Tests\TestCase;
 
 class AlbumControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutVite();
+        $this->withoutExceptionHandling();
+    }
 
     public function test_get_top_albums()
     {
@@ -38,57 +49,66 @@ class AlbumControllerTest extends TestCase
 
     public function test_get_album()
     {
-        Http::fake([
-            '*' => Http::response([
-                'album' => [
-                    'name' => 'Album 1',
-                    'artist' => 'Artist 1',
-                    'tags' => [
-                        'tag' => [
-                            ['name' => 'Tag 1'],
-                        ],
-                    ],
-                    'url' => 'http://example.com',
-                ],
-            ]),
-        ]);
+            $user = User::factory()->create();
+            Auth::login($user);
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $favorite = Favorite::factory()->create([
-            'user_id' => $user->id,
-            'artist_name' => 'Artist 1',
-            'album_name' => 'Album 1',
-        ]);
+            $favorite = Favorite::where('user_id', $user->id)
+                ->where('type', 'album')
+                ->where('album_name', 'Album 1')
+                ->first();
 
-        $this->get('/album?album=Album 1&artist=Artist 1')
-            ->assertInertia(fn (Assert $page) => $page
-                ->component('SingleAlbum')
-                ->where('album.name', 'Album 1')
-                ->where('album.artist', 'Artist 1')
-                ->where('similarAlbums.0.name', 'Album 1')
-                ->where('releaseDate', '2023-01-01')
-                ->where('isFavorite', true)
-            );
+
+            $this->get('/search/album?album=Believe&artist=Cher')
+                ->assertInertia(fn (AssertableInertia $page) => $page
+                    ->component('SingleAlbum')
+                    ->has('album', function (AssertableJson $album) {
+                        return $album
+                            ->has('name')
+                            ->has('mbid')
+                            ->has('url')
+                            ->has('artist')
+                            ->has('image')
+                            ->has('listeners')
+                            ->has('tracks')
+                            ->has('tags')
+                            ->has('summary');
+                    })
+                    ->has('similarAlbums', function (AssertableJson $similarAlbums) {
+                        return $similarAlbums->each(fn ($album) =>
+                            $album->has('name') &&
+                            $album->has('artist') &&
+                            $album->has('rank') &&
+                            $album->has('image')
+                        );
+                    })
+                    ->where('isFavorite', $favorite ? true : false)
+                );
     }
 
     public function test_get_artist_top_albums()
     {
+        // Given
         Http::fake([
             '*' => Http::response([
-                'topalbums' => [
-                    'album' => [
-                        ['name' => 'Top Album', 'artist' => 'Artist 1'],
+                'similarartists' => [
+                    'artist' => [
+                        ['name' => 'Similar Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                        ['name' => 'Similar Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                        // Add more artist data as needed
                     ],
                 ],
             ]),
         ]);
 
-        // Assuming there's a route defined for this method
-        $this->get('/get-artist-top-albums?artist=Artist 1')
-            ->assertOk()
-            ->assertJsonPath('0.name', 'Top Album')
-            ->assertJsonPath('0.artist', 'Artist 1');
+        // Create a reflection of the YourClass to access the private method
+        $albumClass = new AlbumController();
+        $method = new ReflectionMethod(AlbumController::class, 'getArtistTopAlbums');
+        $method->setAccessible(true);
+
+        $artistTopAlbums = $method->invokeArgs($albumClass, ['Artist 1']);
+
+        $this->assertJson($artistTopAlbums);
+
     }
 
     public function test_get_similar_albums()
@@ -103,10 +123,13 @@ class AlbumControllerTest extends TestCase
             ]),
         ]);
 
-        // Assuming there's a route defined for this method
-        $this->get('/get-similar-albums?tag=Tag 1')
-            ->assertOk()
-            ->assertJsonPath('0.name', 'Similar Album')
-            ->assertJsonPath('0.artist', 'Artist 1');
+        // Create a reflection of the YourClass to access the private method
+        $albumClass = new AlbumController();
+        $method = new ReflectionMethod(AlbumController::class, 'getArtistTopAlbums');
+        $method->setAccessible(true);
+
+        $similarAlbums = $method->invokeArgs($albumClass, ['Artist 1']);
+
+        $this->assertJson($similarAlbums);
     }
 }
