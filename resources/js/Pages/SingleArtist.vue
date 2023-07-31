@@ -18,10 +18,6 @@ let similarArtistsState = ref(false);
 
 // let isHovered = ref(false);
 
-const getImage = (data) => {
-    return data.image.find((img) => img.size === 'extralarge')?.['#text'] || '';
-};
-
 const showMoreTracks = () => {
     displayCount.value += 5;
     showMore = true;
@@ -65,7 +61,7 @@ const showLessSimilarArtists = () => {
 
                         <div class="py-1.5"></div>
                         <div class="flex items-center w-full relative h-full">
-                            <img width="140" :src="getImage(artist)" class="rounded-lg">
+                            <img width="140" :src="artist.image" class="rounded-lg">
 
                             <div class="w-full ml-5">
 
@@ -84,7 +80,7 @@ const showLessSimilarArtists = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link :href="route('add-favorite', {type: 'artist', artist: artist.name, mbid: artist.mbid, image: getImage(artist), listeners: artist.stats.listeners })">
+                                    <Link :href="route('add-favorite', {type: 'artist', artist: artist.name, mbid: artist.mbid, image: artist.image, listeners: artist.listeners })">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
@@ -107,7 +103,7 @@ const showLessSimilarArtists = () => {
                         </div>
 
                         <div class="text-gray-300 mt-6 leading-8">
-                            {{ artist.bio.summary }}
+                            {{ artist.summary }}
                         </div>
 
                         <div class="mt-6"></div>
@@ -148,7 +144,7 @@ const showLessSimilarArtists = () => {
                             </div>
                             <div class="flex flex-wrap items-center">
                                 <div v-for="album in topAlbums.slice(0, albumsDisplayCount)">
-                                    <HomeCard :image="getImage(album)" :title="album.name" :subTitle="album.artist.name" icon="eye" type="album"/>
+                                    <HomeCard :image="album.image" :title="album.name" :subTitle="album.artist" icon="eye" type="album"/>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +166,7 @@ const showLessSimilarArtists = () => {
                             </div>
                             <div class="flex flex-wrap items-center">
                                 <div v-for="similarArtist in similarArtists.slice(0, similarArtistsDisplayCount)">
-                                    <HomeCard :image="getImage(similarArtist)" :title="similarArtist.name" :listeners="Number(similarArtist.listeners)" icon="eye" type="artist" :mbid="similarArtist.mbid"/>
+                                    <HomeCard :image="similarArtist.image" :title="similarArtist.name" icon="eye" type="artist" :mbid="similarArtist.mbid"/>
                                 </div>
                             </div>
                         </div>

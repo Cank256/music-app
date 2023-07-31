@@ -60,7 +60,7 @@ class AlbumController extends Controller
             'format' => 'json',
         ]);
 
-        return $response->successful() ? $response->json('topalbums.album') : null;
+        return $response->successful() ? ResponseController::formatResponse('artist-to-albums', $response->json('topalbums.album')) : null;
     }
 
     public function getSimilarAlbums($tag)

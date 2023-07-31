@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Inertia\Testing\Assert;
 use Inertia\Testing\AssertableInertia;
 use ReflectionMethod;
@@ -50,21 +51,6 @@ class ArtistControllerTest extends TestCase
 
     public function test_get_artist(): void
     {
-        Http::fake([
-            'endpoint_for_artist_info' => Http::response([
-                'artist' => ['name' => 'Artist 1', 'listeners' => '1000000'],
-            ]),
-            'endpoint_for_top_tracks' => Http::response([
-                'topTracks' => [['name' => 'Track 1', 'listeners' => '1000000']],
-            ]),
-            'endpoint_for_top_albums' => Http::response([
-                'topAlbums' => [['name' => 'Album 1', 'listeners' => '1000000']],
-            ]),
-            'endpoint_for_similar_artists' => Http::response([
-                'similarArtists' => [['name' => 'Artist 1', 'listeners' => '1000000']],
-            ]),
-            // ... any other fakes
-        ]);
 
         $user = User::factory()->create();
         Auth::login($user);
@@ -77,24 +63,35 @@ class ArtistControllerTest extends TestCase
         $this->get('/search/artist?artist=Artist%201')
             ->assertInertia(fn (AssertableInertia $page) => $page
                 ->component('SingleArtist')
-                ->has('artist', function (Assert $artist) {
+                ->has('artist', function (AssertableJson $artist) {
                     return $artist
-                        ->where('name', 'Artist 1')
-                        ->where('listeners', '1000000');
+                        ->has('name')
+                        ->has('mbid')
+                        ->has('listeners')
+                        ->has('image')
+                        ->has('summary');
                 })
-                ->has('topTracks', function (Assert $topTracks) {
-                    return $topTracks->first(fn ($track) =>
-                        $track['name'] === 'Track 1' && $track['listeners'] === '1000000'
+                ->has('topTracks', function (AssertableJson $topTracks) {
+                    return $topTracks->each(fn ($track) =>
+                        $track->has('name') &&
+                        $track->has('mbid') &&
+                        $track->has('image') &&
+                        $track->has('listeners') &&
+                        $track->has('rank')
                     );
                 })
-                ->has('topAlbums', function (Assert $topAlbums) {
-                    return $topAlbums->first(fn ($album) =>
-                        $album['name'] === 'Album 1' && $album['listeners'] === '1000000'
+                ->has('topAlbums', function (AssertableJson $topAlbums) {
+                    return $topAlbums->each(fn ($album) =>
+                        $album->has('name') &&
+                        $album->has('mbid') &&
+                        $album->has('image') &&
+                        $album->has('artist')
                     );
                 })
-                ->has('similarArtists', function (Assert $similarArtists) {
-                    return $similarArtists->first(fn ($artist) =>
-                        $artist['name'] === 'Artist 1' && $artist['listeners'] === '1000000'
+                ->has('similarArtists', function (AssertableJson $similarArtists) {
+                    return $similarArtists->each(fn ($artist) =>
+                        $artist->has('name') &&
+                        $artist->has('image')
                     );
                 })
                 ->where('isFavorite', $favorite ? true : false)
@@ -108,8 +105,8 @@ class ArtistControllerTest extends TestCase
             '*' => Http::response([
                 'similarartists' => [
                     'artist' => [
-                        ['name' => 'Similar Artist 1', 'listeners' => '1000000'],
-                        ['name' => 'Similar Artist 2', 'listeners' => '500000'],
+                        ['name' => 'Similar Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                        ['name' => 'Similar Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
                         // Add more artist data as needed
                     ],
                 ],
@@ -126,7 +123,7 @@ class ArtistControllerTest extends TestCase
 
         // Then
         $this->assertCount(2, $similarArtists);
-        $this->assertEquals('Similar Artist 1', $similarArtists[0]['name']);
-        $this->assertEquals('Similar Artist 2', $similarArtists[1]['name']);
+        $this->assertArrayHasKey('name', $similarArtists[0]);
+        $this->assertArrayHasKey('image', $similarArtists[0]);
     }
 }

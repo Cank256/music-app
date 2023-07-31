@@ -35,7 +35,7 @@ onMounted(getTrackDuration);
         @mouseleave="isHover = false"
     >
         <div class="flex items-center w-full py-1.5 px-5">
-            <div class="text-lg w-[6%] font-semibold text-gray-400">{{ track['@attr'].rank }}</div>
+            <div class="text-lg w-[6%] font-semibold text-gray-400">{{ track.rank }}</div>
             <div class="text-lg w-[50%] font-semibold text-gray-400">{{ track.name }}</div>
             <div class="text-lg font-semibold text-gray-400">{{ track.listeners }}</div>
         </div>

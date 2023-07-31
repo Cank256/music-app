@@ -28,7 +28,7 @@ class SongController extends Controller
             'format' => 'json',
         ]);
 
-        return $response->successful() ? $response->json('toptracks.track') : null;
+        return $response->successful() ? ResponseController::formatResponse('artist-top-tracks', $response->json('toptracks.track')) : null;
     }
 
     public static function getTrackDuration()

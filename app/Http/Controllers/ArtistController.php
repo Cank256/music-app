@@ -41,10 +41,10 @@ class ArtistController extends Controller
         $artistsResponse = Http::get(env('LASTFM_HOST'), $parameters);
 
         // Process the response and extract the relevant data
-        $artist = $artistsResponse->json('artist');
+        $artist = ResponseController::formatResponse('artist', $artistsResponse->json('artist'))->getData();
 
         // Make the subsequent API requests using the artist's name
-        $artistName = $artist['name'];
+        $artistName = $artist->name;
 
         $topTracks = SongController::getArtistTopTracks($artistName);
         $topAlbums = AlbumController::getArtistTopAlbums($artistName);
@@ -53,6 +53,7 @@ class ArtistController extends Controller
                             ->where('artist_name', $artistName)
                             ->exists();
 
+        // return $similarArtists;
         return Inertia::render('SingleArtist', [
             'artist' => $artist,
             'topTracks' => $topTracks,
@@ -62,7 +63,7 @@ class ArtistController extends Controller
         ]);
     }
 
-    private function getSimilarArtists($artistName)
+    private static function getSimilarArtists($artistName)
     {
         $response = Http::get(env('LASTFM_HOST'), [
             'method' => 'artist.getsimilar',
@@ -72,7 +73,7 @@ class ArtistController extends Controller
             'format' => 'json',
         ]);
 
-        return $response->successful() ? $response->json('similarartists.artist') : null;
+        return $response->successful() ? ResponseController::formatResponse('similar-artists', $response->json('similarartists.artist')) : null;
     }
 
 }
