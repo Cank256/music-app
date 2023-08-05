@@ -1,6 +1,7 @@
 <script setup>
 import TopNav from '@/Components/Navs/TopNav.vue'
 import SideNav from '@/Components/Navs/SideNav.vue'
+import BottomnNav from '@/Components/Navs/BottomNav.vue'
 
 </script>
 
@@ -13,5 +14,7 @@ import SideNav from '@/Components/Navs/SideNav.vue'
         <main>
             <slot />
         </main>
+
+        <BottomnNav />
     </div>
 </template>
