@@ -2,7 +2,7 @@
 import SongRow from '@/Components/SongRow.vue'
 import HomeCard from '@/Components/Cards/HomeCard.vue'
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link} from '@inertiajs/vue3';
 import { ref, defineProps } from 'vue';
 
 const props = defineProps(['artist', 'topTracks', 'topAlbums', 'similarArtists', 'isFavorite']);
@@ -80,7 +80,7 @@ const showLessSimilarArtists = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link :href="route('add-favorite', {type: 'artist', artist: artist.name, mbid: artist.mbid, image: artist.image, listeners: artist.listeners })">
+                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'artist', artist: artist.name, mbid: artist.mbid, image: artist.image[0], listeners: artist.listeners })">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
