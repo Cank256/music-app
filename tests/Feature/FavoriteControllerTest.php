@@ -63,7 +63,7 @@ class FavoriteControllerTest extends TestCase
         $this->actingAs($this->user);
 
         $requestData = [
-            'type' => 'artist',
+            'type' => 'album',
             'artist' => 'Test Artist',
             'album' => 'Test Album',
             'mbid' => '123456789',
@@ -89,6 +89,45 @@ class FavoriteControllerTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals(url()->previous(), $response->headers->get('Location'));
 
+    }
+
+    public function testRemoveFavorite()
+    {
+        $this->actingAs($this->user);
+
+        $favorite = Favorite::factory()->create([
+            'user_id' => $this->user->id,
+            'type' => 'album',
+            'artist_name' => 'Test Artist',
+            'album_name' => 'Test Album',
+            'mbid' => '123456789',
+            'image' => 'https://example.com/image.jpg',
+            'listeners' => '10000',
+        ]);
+
+        $requestData = [
+            'user_id' => $this->user->id,
+            'type' => 'song',
+            'artist' => 'Test Artist',
+            'album' => 'Test Album',
+            'mbid' => '123456789',
+        ];
+
+        $request = Request::create('/favorite/remove', 'POST', $requestData);
+
+        $controller = new FavoriteController();
+        $response = $controller->remove($request);
+
+        $this->assertDatabaseMissing('favorites', [
+            'user_id' => $this->user->id,
+            'type' => $requestData['type'],
+            'artist_name' => $requestData['artist'],
+            'album_name' => $requestData['album'],
+            'mbid' => $requestData['mbid'],
+        ]);
+
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals(url()->previous(), $response->headers->get('Location'));
     }
 
 }

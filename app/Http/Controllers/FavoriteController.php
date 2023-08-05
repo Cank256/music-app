@@ -50,7 +50,9 @@ class FavoriteController extends Controller
                         ->where('mbid', $request->get('mbid'))
                         ->first();
 
-        $favorite->delete();
+        if ($favorite) {
+            $favorite->delete();
+        }
 
         return redirect()->back();
 
