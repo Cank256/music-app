@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\FavoriteController;
 use App\Models\Favorite;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Request;
 use Inertia\Testing\Assert;
 use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
@@ -60,27 +62,32 @@ class FavoriteControllerTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $request = [
-            'type' => 'album',
+        $requestData = [
+            'type' => 'artist',
             'artist' => 'Test Artist',
             'album' => 'Test Album',
-            'mbid' => '70b1e42a-3751-3f29-8c12-0010c9cd847c',
-            'image' => 'Test Image',
-            'listeners' => 100
+            'mbid' => '123456789',
+            'image' => 'https://example.com/image.jpg',
+            'listeners' => '10000',
         ];
 
-        $response = $this->get('/favorite/add', $request);  // Make sure this is a POST request and the route is correct
+        $request = Request::create('/favorite/add', 'POST', $requestData);
 
-        $response->assertRedirect();
+        $controller = new FavoriteController();
+        $response = $controller->add($request);
 
-        // Check that a favorite was created
         $this->assertDatabaseHas('favorites', [
             'user_id' => $this->user->id,
-            'type' => $request['type'],
-            'artist_name' => $request['artist'],
-            'album_name' => $request['album'],
-            'mbid' => $request['mbid']
+            'type' => $requestData['type'],
+            'artist_name' => $requestData['artist'],
+            'album_name' => $requestData['album'],
+            'mbid' => $requestData['mbid'],
+            'image' => $requestData['image'],
+            'listeners' => $requestData['listeners'],
         ]);
+
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals(url()->previous(), $response->headers->get('Location'));
 
     }
 
