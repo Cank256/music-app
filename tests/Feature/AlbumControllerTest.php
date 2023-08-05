@@ -90,10 +90,10 @@ class AlbumControllerTest extends TestCase
         // Given
         Http::fake([
             '*' => Http::response([
-                'similarartists' => [
-                    'artist' => [
-                        ['name' => 'Similar Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
-                        ['name' => 'Similar Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                'topalbums' => [
+                    'album' => [
+                        ['name' => 'Top Album 1', 'artist' => 'Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                        ['name' => 'Top Album 2', 'artist' => 'Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
                         // Add more artist data as needed
                     ],
                 ],
