@@ -40,7 +40,7 @@ let capitalizedTitle = computed(() => {
                 <img class="rounded" :src="image ? image : $inertia.page.props.publicPath + '/images/album.png'" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl relative bottom-[3rem] left-[10rem] transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
             </div>
-            <div class="text-white pt-4 font-semibold text-[14px]">{{ capitalizedTitle}}</div>
+            <div class="text-white mt-[-20px] font-semibold text-[15px]">{{ capitalizedTitle}}</div>
             <div v-if="!listeners" class="text-gray-400 pt-1 pb-3 text-[14px]">{{ subTitle }}</div>
             <div v-else class="text-gray-400 pt-1 pb-3 text-[14px]">{{ formatListeners(listeners) }} Listeners</div>
         </div>

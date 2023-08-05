@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ResponseController extends Controller
 {
-    public static function formatResponse($for = '', $result)
+    public static function formatResponse($for, $result)
     {
         if ($for == 'artist')
         {
@@ -48,6 +48,10 @@ class ResponseController extends Controller
         else if ($for == 'tag-top-albums')
         {
             return self::formatTagTopAlbumsResponse($result);
+        }
+        else
+        {
+            return $result;
         }
     }
 
