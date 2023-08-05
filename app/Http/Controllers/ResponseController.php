@@ -13,7 +13,7 @@ class ResponseController extends Controller
         {
             return self::formatArtistResponse($result);
         }
-        else if ($for == 'artist-to-albums')
+        else if ($for == 'artist-top-albums')
         {
             return self::formatArtistTopAlbumsResponse($result);
         }
