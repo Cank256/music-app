@@ -2,7 +2,7 @@
 import MainLayout from '@/Layouts/MainLayout.vue';
 import HomeCard from '@/Components/Cards/HomeCard.vue';
 import { Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 
 const props = defineProps(['topArtists', 'topAlbums']);
 
@@ -13,6 +13,9 @@ const albumsDisplayCount = ref(5);
 let artistsState = ref(false);
 let albumsState = ref(false);
 // let songsState = ref(false);
+
+// ref for window width
+const windowWidth = ref(window.innerWidth);
 
 // Function to get the image URL of the artist from the "image" array.
 const getImage = (data) => {
@@ -44,23 +47,47 @@ const showLessAlbums = () => {
     albumsState = ref(false);
 }
 
+// Update window width ref on window resize
+const updateWindowWidth = () => {
+    windowWidth.value = window.innerWidth;
+};
+
+// Watch window width and adjust display count
+watch(windowWidth, (newWidth) => {
+    if (newWidth <= 640) {
+        artistsDisplayCount.value = 4;
+        albumsDisplayCount.value = 4;
+    } else {
+        artistsDisplayCount.value = 5;
+        albumsDisplayCount.value = 5;
+    }
+});
+
+onMounted(() => {
+    window.addEventListener('resize', updateWindowWidth);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('resize', updateWindowWidth);
+});
+
 </script>
 
 <template>
     <Head title="Home" />
     <MainLayout>
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
-                <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-700">
-                    <div class="pr-8 pl-8 pt-6">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
+                <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-700">
+                    <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-6">
                         <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-2xl font-semibold">
+                            <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
                                 Recommended Albums
                             </span>
 
-                            <button v-if="!albumsState" @click="showMoreAlbums" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="!albumsState" @click="showMoreAlbums" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show More
                             </button>
-                            <button v-if="albumsState" @click="showLessAlbums" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="albumsState" @click="showLessAlbums" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show Less
                             </button>
                         </div>
@@ -74,15 +101,15 @@ const showLessAlbums = () => {
                         </div>
                     </div>
 
-                    <div class="pr-8 pl-8 pt-6">
+                    <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-6">
                         <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-2xl font-semibold">
+                            <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
                                 Recommended Artists
                             </span>
-                            <button v-if="!artistsState" @click="showMoreArtists" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="!artistsState" @click="showMoreArtists" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show More
                             </button>
-                            <button v-if="artistsState" @click="showLessArtists" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="artistsState" @click="showLessArtists" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show Less
                             </button>
                         </div>
@@ -96,16 +123,16 @@ const showLessAlbums = () => {
                         </div>
                     </div>
 
-                    <!-- <div class="pr-8 pl-8 pt-6">
+                    <!-- <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-6">
                         <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-2xl font-semibold">
+                            <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
                                 Recommended Songs
                             </span>
 
-                            <button v-if="!songsState" @click="showMoreSongs" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="!songsState" @click="showMoreSongs" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show More
                             </button>
-                            <button v-if="songsState" @click="showLessSongs" class="pr-6 text-white text-l font-semibold">
+                            <button v-if="songsState" @click="showLessSongs" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
                                 Show Less
                             </button>
                         </div>

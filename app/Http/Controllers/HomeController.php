@@ -13,12 +13,12 @@ class HomeController extends Controller
     {
         $topAlbums = AlbumController::getTopAlbums();
         $topArtists = ArtistController::getTopArtists();
-        $topSongs = SongController::getTopSongs();
+        // $topSongs = SongController::getTopSongs();
 
         return Inertia::render('Home', [
             'topAlbums' => $topAlbums,
             'topArtists' => $topArtists,
-            'topSongs' => $topSongs
+            // 'topSongs' => $topSongs
         ]);
     }
 
@@ -26,12 +26,12 @@ class HomeController extends Controller
     {
         $topAlbums = AlbumController::getTopAlbums();
         $topArtists = ArtistController::getTopArtists();
-        $topSongs = SongController::getTopSongs();
+        // $topSongs = SongController::getTopSongs();
 
         return Inertia::render('Home', [
             'topAlbums' => $topAlbums,
             'topArtists' => $topArtists,
-            'topSongs' => $topSongs
+            // 'topSongs' => $topSongs
         ]);
     }
 }
