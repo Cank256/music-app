@@ -21,11 +21,11 @@ function goForward() {
 </script>
 
 <template>
-    <nav class="w-[calc(100%-360px)] fixed top-2 right-2 items-center justify-between bg-white dark:bg-gray-800 rounded-t-xl">
+    <nav class="w-[calc(100%-360px)] fixed top-2 right-2 items-center justify-between bg-white dark:bg-gray-800 rounded-t-xl max-sm:hidden">
         <!-- Primary Navigation Menu -->
-        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mr-20">
+        <div class="max-w-8xl mx-auto px-4 lg:px-8 mr-20">
             <div class="flex justify-between h-16">
-                <div class="flex items-center ml-2">
+                <div class="flex items-center ml-2 max-sm:hidden">
                     <button type="button" @click="goBack" class="rounded-full bg-gray-700 p-[1px] cursor-pointer">
                         <ChevronLeft fillColor="#FFF" :size="30" />
                     </button>

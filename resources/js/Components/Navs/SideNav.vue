@@ -14,7 +14,7 @@ const albumsDisplayCount = ref(3)
 </script>
 
 <template>
-    <nav class="h-[100%] inline-block align-baselin">
+    <nav class="h-[100%] inline-block align-baselin max-sm:hidden">
         <div class="h-[220px] pl-7 pt-3 w-[335px] fixed z-50 left-2 top-2 bg-white dark:bg-gray-800 rounded-xl">
             <ul>
                 <MenuItem class="mt-[1px]" name="Home" iconString="house" pageUrl="home" />
