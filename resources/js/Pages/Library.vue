@@ -44,11 +44,11 @@ const showLessAlbums = () => {
 <template>
     <Head title="Library" />
     <MainLayout>
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
-                <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-700">
-                    <div class="pr-8 pl-8 pt-12">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
+                <div class="w-[78.58vw] h-[91vh] overflow-x-hidden max-sm:w-[97.5vw] mt-12 ml-[7.5rem] max-sm:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-700">
+                    <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-12 max-sm:pt-6">
                         <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-3xl font-semibold">
+                            <span class="pl-2 text-white text-3xl max-sm:text-xl font-semibold">
                                 Favorite Albums ({{ favoriteAlbums.length }})
                             </span>
 
@@ -72,9 +72,9 @@ const showLessAlbums = () => {
                         </div>
                     </div>
 
-                    <div class="pr-8 pl-8 pt-12">
+                    <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-12 max-sm:pt-6">
                         <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-3xl font-semibold">
+                            <span class="pl-2 text-white text-3xl max-sm:text-xl font-semibold">
                                 Favorite Artists ({{ favoriteArtists.length }})
                             </span>
                             <div v-if="favoriteArtists.length > 5">
