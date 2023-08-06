@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --host=192.168.16.105",
         "build": "vite build && vite build --ssr"
     },
     "devDependencies": {

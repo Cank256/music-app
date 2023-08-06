@@ -7,10 +7,10 @@ defineProps({
 
 </script>
 <template>
-    <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
-        <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
-            <div class="pr-8 pl-8 pt-6">
-                <span class="pl-2 text-white text-2xl font-semibold">
+    <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
+        <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
+            <div class="pr-8 pl-8 pt-6 max-sm:pr-3 max-sm:pl-3">
+                <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
                     Browse All
                 </span>
 
