@@ -28,7 +28,7 @@ const formatDate = computed(() => {
 </script>
 
 <template>
-    <div class="bg-gray-800 p-2 rounded-md m-2 h-[320px] rounded-md">
+    <div class="bg-gray-800 p-2 rounded-md m-2 h-[320px] max-sm:h-[360px] rounded-md">
         <div class="relative">
             <img class="rounded-xl" :src="image ? image : '/assets/images/album.png'" alt="" width="150" height="150">
         </div>
