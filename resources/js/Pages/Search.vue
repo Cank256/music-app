@@ -12,9 +12,9 @@ let typing = ref(false);
 let results = ref([]);
 
 const artistsDisplayCount = ref(4);
-let artistsState = true;
+let artistsState = false;
 const albumsDisplayCount = ref(4);
-let albumsState = true;
+let albumsState = false;
 
 const showMoreArtists = () => {
     artistsDisplayCount.value += 6;
@@ -61,11 +61,11 @@ const getImage = (data) => {
     <Head title="Search" />
     <MainLayout>
 
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
-            <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
+            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 ml-[7.5rem]  max-sm:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
                 <div class="search-tab mt-12 justify-center">
                     <div class="search-input flex items-center border rounded-full px-6 focus-within:ring focus-within:ring-gray-400">
-                        <input class="border-0 bg-transparent text-gray-400 rounded-full text-lg focus:outline-none focus:ring-0" type="text" v-model="searchQuery" @input="handleInput" placeholder="Search for Artists, Albums ..." style="width: 70vh; height: 7vh;"/>
+                        <input class="search-input-field border-0 bg-transparent text-gray-400 rounded-full text-lg focus:outline-none focus:ring-0" type="text" v-model="searchQuery" @input="handleInput" placeholder="Search for Artists, Albums ..."/>
                         <button @click="search" class="flex-1 bg-transparent border-0 cursor-pointer">
                             <i class="fas fa-search text-xl text-gray-600"></i>
                         </button>
@@ -79,9 +79,9 @@ const getImage = (data) => {
                         <span class="font-bold text-gray-700 text-9xl">Search</span>
                     </center>
                 </div>
-                <div v-if="typing" class="scrollable-content pr-8 pl-8 pt-12 mt-[100px]">
+                <div v-if="typing" class="scrollable-content pr-8 pl-8 pt-12 max-sm:pr-3 max-sm:pl-3 max-sm:mt-[10px] max-sm:pt-[2rem]">
                     <div v-if="results.artists">
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-6 max-sm:mb-0">
 
                             <span class="text-gray-400 text-2xl font-bold">Artists</span>
 
@@ -141,16 +141,22 @@ const getImage = (data) => {
         align-items: center;
         z-index: 1000;
     }
-    /* .search-tab {
-        position: fixed;
-        top: 50px;
-        z-index: 1000;
-        align-items: center;
-    } */
+
+    .search-input-field {
+        width: 70vh;
+        height: 7vh;
+    }
 
     .scrollable-content {
         margin-top: 100px; /* Adjust as needed - this needs to be at least the height of .search-tab */
         overflow-y: scroll; /* Enable vertical scrolling */
         height: calc(100vh - 100px); /* Adjust as needed - this needs to be the viewport height minus .search-tab's height */
+    }
+
+    @media not all and (min-width: 640px) {
+        .search-input-field {
+            width: 40vh;
+            height: 7vh;
+        }
     }
 </style>
