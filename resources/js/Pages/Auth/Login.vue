@@ -36,7 +36,7 @@ const submit = () => {
     <GuestAuthLayout>
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="mb-3 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
@@ -90,13 +90,13 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="flex justify-center mt-8 mb-8">
+            <div class="flex justify-center mt-8 mb-8 max-sm:mb-3">
                 <PrimaryButton class="block w-full h-11 justify-center text-white bg-green-600 dark:bg-green-600 text-xl" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Log in
                 </PrimaryButton>
             </div>
 
-            <div class="flex justify-center mb-6">
+            <div class="flex justify-center mb-3">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -105,6 +105,12 @@ const submit = () => {
                     Forgot your password?
                 </Link>
             </div>
+
+            <Link :href="route('signup')" class="flex justify-center mt-8 mb-8 max-sm:mt-3">
+                <PrimaryButton class="block w-full h-11 justify-center text-white dark:text-white bg-green-600 dark:bg-gray-600 text-xl" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Sign Up
+                </PrimaryButton>
+            </Link>
         </form>
     </GuestAuthLayout>
 </template>
