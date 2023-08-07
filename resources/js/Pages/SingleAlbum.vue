@@ -47,10 +47,10 @@ const showLessSimilarAlbums = () => {
                     <div class="p-8 max-sm:pl-3 max-sm:pr-2 overflow-x-hidden">
 
                         <div class="py-1.5"></div>
-                        <div class="flex items-center w-full max-sm:max-w-[40vw] max-sm:flex-row relative h-full">
+                        <div class="flex items-center w-full max-sm:max-w-[40vw] max-sm:flex-row max-sm:mt-6 relative h-full">
                             <img width="140" :src="album.image" class="rounded-lg flex-1">
 
-                            <div class="w-full ml-5 flex-2 max-sm:ml-2 flex-col">
+                            <div class="w-full ml-5 flex-2 max-sm:ml-2 flex-col max-sm:hidden">
 
                                 <div class="text-white absolute w-full cursor-pointer top-0 font-semibold mt-2 mb-2 max-sm:ml-3 text-4xl max-sm:text-lg">
                                     {{ album.name }}
@@ -86,6 +86,28 @@ const showLessSimilarAlbums = () => {
                                     </Link>
                                 </div>
                             </div>
+
+                            <div class="w-full ml-5 md:hidden">
+
+                                <div class="text-white absolute w-full h-full cursor-pointer font-semibold text-[18px] mb-8 mt-[-70px]">
+                                    {{ album.name }}
+                                </div>
+
+                                <div class="text-gray-300 absolute w-full text-[16px] mt-[5px] mb-">
+                                    {{ album.artist }}
+                                </div>
+
+                                <div class="absolute w-full bottom-0">
+                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image[0], listeners: album.listeners })" method="post">
+                                        <i
+                                            :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
+                                            class="fa-heart text-[#1BD760] text-3xl"
+                                            >
+                                        </i>
+                                    </Link>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="text-gray-300 text-[14px] mt-4 flex flex-wrap flex-row md:hidden">

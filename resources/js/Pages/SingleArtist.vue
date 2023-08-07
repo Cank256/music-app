@@ -65,7 +65,7 @@ const showLessSimilarArtists = () => {
 
                             <div class="w-full ml-5">
 
-                                <div class="text-white absolute w-full cursor-pointer top-0 font-bosemiboldld mb-2 text-4xl max-sm:text-2xl text-4xl mt-1 max-sm:mt-3 text-4xl">
+                                <div class="text-white absolute w-full cursor-pointer top-0 font-semibold mb-2 text-4xl max-sm:text-2xl text-4xl mt-1 max-sm:mt-3 text-4xl">
                                     {{ artist.name }}
                                 </div>
 
@@ -85,13 +85,6 @@ const showLessSimilarArtists = () => {
                                             >
                                         </i>
                                     </Link>
-                                    <!-- <Link v-else :href="route('add-favorite', {type: 'artist', identifier: 'name', content: artist.name})">
-                                        <i
-                                            :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite}"
-                                            class="fa-heart text-[#1BD760] text-3xl"
-                                            >
-                                        </i>
-                                    </Link> -->
                                 </div>
                             </div>
                         </div>
