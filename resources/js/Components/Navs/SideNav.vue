@@ -35,7 +35,7 @@ const albumsDisplayCount = ref(3)
                                 <ul>
                                     <div v-for="artist in artists.slice(0, artistsDisplayCount)">
                                         <li>
-                                            <Link :href="route('search-artist', {artist: artist.artist_name})">{{ artist.artist_name }}</Link>
+                                            <Link :href="route('get-artist', {artist: artist.artist_name})">{{ artist.artist_name }}</Link>
                                         </li>
                                     </div>
                                 </ul>
@@ -53,7 +53,7 @@ const albumsDisplayCount = ref(3)
                                 <ul>
                                     <div v-for="album in albums.slice(0, albumsDisplayCount)">
                                         <li>
-                                            <Link :href="route('search-album', {album: album.album_name, artist: album.artist_name})">{{ album.album_name }} ({{ album.artist_name }})</Link>
+                                            <Link :href="route('get-album', {album: album.album_name, artist: album.artist_name})">{{ album.album_name }} ({{ album.artist_name }})</Link>
                                         </li>
                                     </div>
                                 </ul>

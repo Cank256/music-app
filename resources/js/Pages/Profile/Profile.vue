@@ -20,7 +20,7 @@ const props = defineProps(['favoriteAlbums', 'favoriteArtists']);
                     <div class="mt-2 max-sm:mb-2 flex-1 max-w-[40vh] h-[50vh] max-sm:h-[80vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                         <ProfileCard :name="user.name" :email="user.email" :joined="user.created_at" type="Subscriber" class="max-w-xl" />
                     </div>
-                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 flex- max-w-[55vh] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 flex-1 max-w-[55vh] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                         <FavoriteAlbums class="max-w-xl" :albums="favoriteAlbums"/>
                     </div>
                     <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 flex-1 max-w-[55vw] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">

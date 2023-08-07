@@ -24,7 +24,7 @@ const hasAlbums = computed(() => {
             <ol>
                 <div v-for="album in albums.slice(0, albumsDisplayCount)">
                     <li class="text-gray-400 mb-6 hover:text-white">
-                        <Link :href="route('search-album', {album: album.album_name, artist: album.artist_name})">
+                        <Link :href="route('get-album', {album: album.album_name, artist: album.artist_name})">
                             {{ album.album_name }}
                             ({{ album.artist_name }})
                         </Link>

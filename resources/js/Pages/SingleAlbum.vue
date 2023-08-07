@@ -56,7 +56,7 @@ const showLessSimilarAlbums = () => {
                                     {{ album.name }}
                                 </div>
 
-                                <Link :href="route('search-artist', { use: 'name', artist: album.artist })" class="text-gray-300 text-[18px] max-sm:text-[16px] flex mt-12 mb-2 max-sm:mt-[90px] max-sm:ml-3">
+                                <Link :href="route('get-artist', { use: 'name', artist: album.artist })" class="text-gray-300 text-[18px] max-sm:text-[16px] flex mt-12 mb-2 max-sm:mt-[90px] max-sm:ml-3">
                                     {{ album.artist  }}
                                 </Link>
 
@@ -77,7 +77,7 @@ const showLessSimilarAlbums = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5 max-sm:ml-3">
-                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image[0], listeners: album.listeners })" method="post">
+                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image[0], listeners: album.listeners })" :method="isFavorite ? 'delete' : 'post'">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
@@ -93,7 +93,7 @@ const showLessSimilarAlbums = () => {
                                     {{ album.name }}
                                 </div>
 
-                                <Link :href="route('search-artist', { use: 'name', artist: album.artist })" class="text-gray-300 absolute w-full text-[16px] mt-[5px] mb-">
+                                <Link :href="route('get-artist', { use: 'name', artist: album.artist })" class="text-gray-300 absolute w-full text-[16px] mt-[5px] mb-">
                                     {{ album.artist }}
                                 </Link>
 

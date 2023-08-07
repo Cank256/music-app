@@ -78,7 +78,7 @@ const showLessSimilarArtists = () => {
                                 </div>
 
                                 <div class="flex gap-5 bottom-0 mt-2 mb-1.5">
-                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'artist', artist: artist.name, mbid: artist.mbid, image: artist.image[0], listeners: artist.listeners })" method="post">
+                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'artist', artist: artist.name, mbid: artist.mbid, image: artist.image[0], listeners: artist.listeners })" :method="isFavorite ? 'delete' : 'post'">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"

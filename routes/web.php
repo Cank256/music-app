@@ -26,9 +26,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //SEARCH ROUTES
 Route::get('/search', [SearchController::class, 'create'])->name('search');
 Route::get('/searching', [SearchController::class, 'search'])->name('searching');
-Route::get('/search/artist', [ArtistController::class, 'getArtist'])->name('search-artist');
-Route::get('/search/album', [AlbumController::class, 'getAlbum'])->name('search-album');
-Route::get('/search/song/{mbid}', [SongController::class, 'getSong'])->name('search-song');
+
+Route::get('/artist', [ArtistController::class, 'getArtist'])->name('get-artist');
+Route::get('/album', [AlbumController::class, 'getAlbum'])->name('get-album');
+Route::get('/song/{mbid}', [SongController::class, 'getSong'])->name('get-song');
 
 //BROWSE ROUTES
 Route::get('/browse', [BrowseController::class, 'index'])->name('browse');
@@ -50,8 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/library', [FavoriteController::class, 'index'])->name('library');
 
     //FAVORITES ROUTES
-    Route::post('/favorite/add', [FavoriteController::class, 'add'])->name('add-favorite');
-    Route::post('/favorite/remove', [FavoriteController::class, 'remove'])->name('remove-favorite');
+    Route::post('/favorite', [FavoriteController::class, 'add'])->name('add-favorite');
+    Route::delete('/favorite', [FavoriteController::class, 'remove'])->name('remove-favorite');
 });
 
 require __DIR__.'/auth.php';
