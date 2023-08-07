@@ -56,9 +56,9 @@ const showLessSimilarAlbums = () => {
                                     {{ album.name }}
                                 </div>
 
-                                <div class="text-gray-300 text-[18px] max-sm:text-[16px] flex mt-12 mb-2 max-sm:mt-[90px] max-sm:ml-3">
+                                <Link :href="route('search-artist', { use: 'name', artist: album.artist })" class="text-gray-300 text-[18px] max-sm:text-[16px] flex mt-12 mb-2 max-sm:mt-[90px] max-sm:ml-3">
                                     {{ album.artist  }}
-                                </div>
+                                </Link>
 
                                 <div class="text-gray-300 text-[16px] max-sm:text-[14px] flex max-sm:flex-col mb-4 max-sm:hidden">
                                     <div class="flex max-sm:flex max-sm:ml-3">
@@ -93,9 +93,9 @@ const showLessSimilarAlbums = () => {
                                     {{ album.name }}
                                 </div>
 
-                                <div class="text-gray-300 absolute w-full text-[16px] mt-[5px] mb-">
+                                <Link :href="route('search-artist', { use: 'name', artist: album.artist })" class="text-gray-300 absolute w-full text-[16px] mt-[5px] mb-">
                                     {{ album.artist }}
-                                </div>
+                                </Link>
 
                                 <div class="absolute w-full bottom-0">
                                     <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image[0], listeners: album.listeners })" method="post">
