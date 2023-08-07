@@ -73,10 +73,10 @@ const getImage = (data) => {
                 </div>
                 <div v-if="!typing" class="pr-8 pl-8 pt-12 mt-[100px] opacity-[.1]">
                     <center>
-                        <i class="fa fa-search font-bold text-gray-700 text-9xl"></i>
+                        <i class="fa fa-search font-bold text-gray-700 text-9xl max-sm:text-7xl"></i>
                     </center>
                     <center>
-                        <span class="font-bold text-gray-700 text-9xl">Search</span>
+                        <span class="font-bold text-gray-700 text-9xl max-sm:text-7xl">Search</span>
                     </center>
                 </div>
                 <div v-if="typing" class="scrollable-content pr-8 pl-8 pt-12 max-sm:pr-3 max-sm:pl-3 max-sm:mt-[10px] max-sm:pt-[2rem]">
@@ -155,7 +155,7 @@ const getImage = (data) => {
 
     @media not all and (min-width: 640px) {
         .search-input-field {
-            width: 40vh;
+            width: 35vh;
             height: 7vh;
         }
     }
