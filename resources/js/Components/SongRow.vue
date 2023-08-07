@@ -34,20 +34,20 @@ onMounted(getTrackDuration);
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
     >
-        <div class="flex items-center w-full py-1.5 px-5">
-            <div class="text-lg w-[6%] font-semibold text-gray-400">{{ track.rank }}</div>
-            <div class="text-lg w-[50%] font-semibold text-gray-400">{{ track.name }}</div>
-            <div class="text-lg font-semibold text-gray-400">{{ track.listeners }}</div>
+        <div class="flex items-center w-full py-1.5 px-5 max-sm:px-1">
+            <div class="text-lg w-[6%] font-semibold text-gray-400 max-sm:ml-6 max-sm:text-[16px]">{{ track.rank }}</div>
+            <div class="text-lg w-[50%] font-semibold text-gray-400 max-sm:ml-8 max-sm:text-[16px]">{{ track.name }}</div>
+            <div class="text-lg font-semibold text-gray-400 max-sm:text-[16px]">{{ track.listeners }}</div>
         </div>
         <div class="flex items-center">
                 <!-- <button type="button" v-if="isHover">
                     <i class="fas fa-heart text-lg text-[#1BD760]"></i>
                 </button> -->
-                <div v-if="!forWho" class="text-lg mx-8 text-gray-400">
+                <div v-if="!forWho" class="text-lg mx-8 text-gray-400 max-sm:text-[16px] max-sm:mx-0 max-sm:mr-5">
                     {{ formatDuration(track.duration) }}
                 </div>
 
-                <div v-if="forWho" class="text-lg mx-8 text-gray-400">
+                <div v-if="forWho" class="text-lg mx-8 text-gray-400 max-sm:text-[16px] max-sm:mx-0 max-sm:mr-5">
                     {{ trackDuration.duration }}
                 </div>
             </div>
