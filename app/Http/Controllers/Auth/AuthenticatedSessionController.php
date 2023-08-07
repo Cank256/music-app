@@ -19,73 +19,90 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
+     *
+     * @return Response The login page rendered by Inertia.
      */
     public function create(): Response
     {
         return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
+            'canResetPassword' => Route::has('password.request'),  // Check if password reset route is available
+            'status' => session('status'),                         // Get the current session status
         ]);
     }
 
     /**
      * Handle an incoming authentication request.
+     *
+     * @param LoginRequest $request The incoming login request.
+     * @return RedirectResponse Redirects to the intended route or home page after successful authentication.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate();          // Authenticate the user
 
-        $request->session()->regenerate();
+        $request->session()->regenerate(); // Regenerate the session to prevent session fixation attacks
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME); // Redirect to intended route or home page
     }
 
     /**
      * Destroy an authenticated session.
+     *
+     * @param Request $request The incoming request.
+     * @return RedirectResponse Redirects to the homepage after logout.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('web')->logout();           // Logout the authenticated user
 
-        $request->session()->invalidate();
+        $request->session()->invalidate();      // Invalidate the current session
 
-        $request->session()->regenerateToken();
+        $request->session()->regenerateToken(); // Regenerate the CSRF token
 
-        return redirect('/');
+        return redirect('/');                   // Redirect to the homepage
     }
 
+    /**
+     * Redirect the user to Google for authentication.
+     *
+     * @return mixed Redirects the user to Google's authentication page.
+     */
     public function signInwithGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
+
+    /**
+     * Handle Google authentication callback.
+     *
+     * @return RedirectResponse Redirects to the dashboard after successful authentication or creation of a new user.
+     */
     public function callbackToGoogle()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->user();          // Get user details from Google
 
-            $finduser = User::where('gauth_id', $user->id)->first();
+            $finduser = User::where('gauth_id', $user->id)->first(); // Check if the user already exists in the database
 
             if($finduser){
-
-                Auth::login($finduser);
-
+                Auth::login($finduser);                            // Login the existing user
                 return redirect('/dashboard');
-
-            }else{
+            } else {
+                // Create a new user from the details fetched from Google
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'gauth_id'=> $user->id,
                     'gauth_type'=> 'google',
-                    'password' => encrypt('admin@123')
+                    'password' => encrypt('admin@123')   // Use a default password (not recommended for production!)
                 ]);
 
-                Auth::login($newUser);
+                Auth::login($newUser); // Login the newly created user
 
                 return redirect('/dashboard');
             }
-
         } catch (Exception $e) {
+            // Dump and die in case of an error (may need to remove it as it is not recommended for production!)
             dd($e->getMessage());
         }
     }

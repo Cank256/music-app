@@ -18,35 +18,44 @@ class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
+     *
+     * @return Response The registration page rendered by Inertia.
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register'); // Render the registration view
     }
 
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request The incoming request containing registration information.
+     * @return RedirectResponse Redirects to the home page after successful registration and login.
+     * @throws \Illuminate\Validation\ValidationException Thrown if validation fails.
      */
     public function store(Request $request): RedirectResponse
     {
+        // Validate the registration request
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Create the user using the validated data
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
+        // Fire a registered event for the newly created user
         event(new Registered($user));
 
+        // Log the user in
         Auth::login($user);
 
+        // Redirect to the home page
         return redirect(RouteServiceProvider::HOME);
     }
 }
