@@ -54,20 +54,18 @@ const showLessSimilarArtists = () => {
     <Head :title="artist.name" />
     <MainLayout>
 
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6">
-            <div class="w-[78.58vw] h-[91vh] overflow-x-hidden mt-12 ml-[7.5rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
-                <div class="pr-8 pl-8 pt-6 border-2 border-t-0 border-gray-800">
-                    <div class="p-8 overflow-x-hidden">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-40px]">
+            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 max-sm:mt-0 ml-[7.5rem] max-sm:ml-0 shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
+                <div class="pr-8 pl-8 pt-6 max-sm:pr-0 max-sm:pl-0 pt-6 max-sm:pt-1 border-2 border-t-0 border-gray-800 max-sm:border-transparent">
+                    <div class="p-8 max-sm:pl-3 max-sm:pr-2 overflow-x-hidden">
 
                         <div class="py-1.5"></div>
-                        <div class="flex items-center w-full relative h-full">
+                        <div class="flex items-center w-full relative h-full max-sm:mt-4">
                             <img width="140" :src="artist.image" class="rounded-lg">
 
                             <div class="w-full ml-5">
 
-                                <div style="font-size: 33px;"
-                                    class="text-white absolute w-full cursor-pointer top-0 font-bosemiboldld mb-2"
-                                >
+                                <div class="text-white absolute w-full cursor-pointer top-0 font-bosemiboldld mb-2 text-4xl max-sm:text-2xl text-4xl mt-1 max-sm:mt-3 text-4xl">
                                     {{ artist.name }}
                                 </div>
 
