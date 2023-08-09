@@ -55,7 +55,7 @@ const showLessSimilarArtists = () => {
     <MainLayout>
 
         <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-lg:mt-[-40px]">
-            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] md:w-[98.8vw] overflow-x-hidden mt-12 max-sm:mt-0 ml-[7.5rem] max-sm:ml-0 md:ml-0 shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
+            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] max-md:w-[98.8vw] overflow-x-hidden mt-12 max-sm:mt-0 ml-[7.5rem] max-sm:ml-0 max-md:ml-0 shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
                 <div class="pr-8 pl-8 pt-6 max-sm:pr-0 max-sm:pl-0 pt-6 max-sm:pt-1 border-2 border-t-0 border-gray-800 max-sm:border-transparent">
                     <div class="p-8 max-sm:pl-3 max-sm:pr-2 overflow-x-hidden">
 
@@ -133,7 +133,7 @@ const showLessSimilarArtists = () => {
                                     Show Less
                                 </button>
                             </div>
-                            <div class="flex flex-wrap items-center md:ml-[-20px]">
+                            <div class="flex flex-wrap items-center max-md:ml-[-20px]">
                                 <div v-for="album in topAlbums.slice(0, albumsDisplayCount)">
                                     <HomeCard :image="album.image" :title="album.name" :subTitle="album.artist" icon="eye" type="album"/>
                                 </div>
@@ -155,7 +155,7 @@ const showLessSimilarArtists = () => {
                                     Show Less
                                 </button>
                             </div>
-                            <div class="flex flex-wrap items-center md:ml-[-20px]">
+                            <div class="flex flex-wrap items-center max-md:ml-[-20px]">
                                 <div v-for="similarArtist in similarArtists.slice(0, similarArtistsDisplayCount)">
                                     <HomeCard :image="similarArtist.image" :title="similarArtist.name" icon="eye" type="artist" :mbid="similarArtist.mbid"/>
                                 </div>
