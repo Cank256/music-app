@@ -12,6 +12,14 @@ use App\Http\Controllers\SongController;
 
 class SearchController extends Controller
 {
+    /**
+     * Creates and returns the initial search page.
+     *
+     * This method retrieves the top albums, artists, and songs, and sends them to the 'Search' view
+     * via Inertia. It also ensures that the 'isSearching' session variable is forgotten.
+     *
+     * @return \Inertia\Response The Inertia response containing the view and data.
+     */
     public function create(): Response
     {
         $topAlbums = AlbumController::getTopAlbums();
@@ -28,6 +36,15 @@ class SearchController extends Controller
         ]);
     }
 
+    /**
+     * Performs a search for artists and albums based on a user's query.
+     *
+     * This method takes a search query from the request, constructs URLs to perform searches
+     * for artists and albums using the Last.fm API, and sends back a JSON response with the results.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing the search query.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the search results for artists and albums.
+     */
     public function search(Request $request)
     {
         $apiKey = env('LASTFM_API_KEY');

@@ -8,6 +8,15 @@ use Inertia\Inertia;
 
 class ArtistController extends Controller
 {
+    /**
+     * Retrieves the top artists from Last.fm's API.
+     *
+     * Initiates a GET request to Last.fm using the 'chart.getTopArtists' method, using the host and API key defined in the environment variables.
+     * The response is expected in JSON format, and the method extracts and returns the array of top artists.
+     * If the 'artists' array is not found in the response, an empty array is returned, ensuring graceful handling of unexpected response formats.
+     *
+     * @return array An array containing the details of the top artists or an empty array if not found.
+     */
     public static function getTopArtists()
     {
         // Make a GET request to the Last.fm API to get the top artists
@@ -20,6 +29,17 @@ class ArtistController extends Controller
         return $response->json()['artists']['artist'] ?? [];
     }
 
+    /**
+     * Retrieves detailed information about a specific artist including top tracks, top albums, similart artists, and favorite status.
+     *
+     * The method initiates a GET request to Last.fm's API using the 'artist.getinfo' method, passing the album and artist names obtained from the request query.
+     * It then processes the response and extracts relevant album data, formats the response through ResponseController, and gets similar albums using a private method.
+     * The release date is retrieved through web scraping using the WebScrapingController.
+     * It also checks if the album is marked as a favorite by the authenticated user.
+     * Finally, it renders the 'SingleAlbum' view, passing along all the retrieved information.
+     *
+     * @return \Inertia\Response An Inertia response containing the artist details, artist's top tracks, artist's top albums, similar artists, and and favorite status.
+     */
     public function getArtist()
     {
         // Define the initial parameters
@@ -63,6 +83,18 @@ class ArtistController extends Controller
         ]);
     }
 
+    /**
+     * Retrieves similar artists to a specified artist from Last.fm's API.
+     *
+     * Initiates a GET request to Last.fm using the 'artist.getsimilar' method, passing the artist name, and limiting the result to 10 similar artists.
+     * If the request is successful, the response is formatted using the ResponseController, and the array of similar artists is returned.
+     * If the request fails, null is returned, allowing for graceful failure handling.
+     *
+     * Note: As this is a private method, it is intended for internal use within the class.
+     *
+     * @param string $artistName The name of the artist for whom similar artists are to be retrieved.
+     * @return mixed An array containing the details of similar artists to the specified artist or null if the request fails.
+     */
     private static function getSimilarArtists($artistName)
     {
         $response = Http::get(env('LASTFM_HOST'), [

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class ResponseController extends Controller
 {
+    /**
+     * Formats a given response based on a specified context.
+     *
+     * Depending on the value of the `$for` parameter, it delegates the formatting to one of several specialized
+     * methods and returns the result.
+     *
+     * @param string $for     The context for which the result should be formatted.
+     * @param mixed  $result  The data to be formatted.
+     * @return mixed          The formatted response, as determined by the specified context.
+     */
     public static function formatResponse($for, $result)
     {
         if ($for == 'artist')
@@ -55,6 +65,12 @@ class ResponseController extends Controller
         }
     }
 
+    /**
+     * Formats the artist data for a JSON response.
+     *
+     * @param array $artistData The raw artist data.
+     * @return \Illuminate\Http\JsonResponse The formatted JSON response.
+     */
     private static function formatArtistResponse($artistData)
     {
         $extractedData = [
@@ -68,6 +84,12 @@ class ResponseController extends Controller
         return response()->json($extractedData);
     }
 
+    /**
+     * Formats the top albums of an artist.
+     *
+     * @param array $topAlbums The raw top albums data.
+     * @return \Illuminate\Support\Collection The formatted top albums collection.
+     */
     private static function formatArtistTopAlbumsResponse($topAlbums)
     {
         return collect($topAlbums)->map(function ($item) {
@@ -80,6 +102,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the top tracks of an artist.
+     *
+     * @param array $topTracks The raw top tracks data.
+     * @return \Illuminate\Support\Collection The formatted top tracks collection.
+     */
     private static function formatArtistTopTracksResponse($topTracks)
     {
         return collect($topTracks)->map(function ($item) {
@@ -93,6 +121,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the similar artists data.
+     *
+     * @param array $similarArtists The raw similar artists data.
+     * @return \Illuminate\Support\Collection The formatted similar artists collection.
+     */
     private static function formatSimilarArtistResponse($similarArtists)
     {
         return collect($similarArtists)->map(function ($item) {
@@ -103,6 +137,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the album data for a JSON response.
+     *
+     * @param array $albumData The raw album data.
+     * @return \Illuminate\Http\JsonResponse The formatted JSON response.
+     */
     private static function formatAlbumResponse($albumData)
     {
         $extractedData = [
@@ -120,6 +160,12 @@ class ResponseController extends Controller
         return response()->json($extractedData);
     }
 
+    /**
+     * Formats the similar albums data.
+     *
+     * @param array $similarAlbums The raw similar albums data.
+     * @return \Illuminate\Support\Collection The formatted similar albums collection.
+     */
     private static function formatSimilarAlbumResponse($similarAlbums)
     {
         return collect($similarAlbums)->map(function ($item) {
@@ -132,6 +178,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the tags data.
+     *
+     * @param array $tagsData The raw tags data.
+     * @return \Illuminate\Support\Collection The formatted tags collection.
+     */
     private static function formatTagsResponse($tagsData)
     {
         return collect($tagsData)->map(function ($item) {
@@ -141,6 +193,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the tag data for a JSON response.
+     *
+     * @param array $tagData The raw tag data.
+     * @return \Illuminate\Http\JsonResponse The formatted JSON response.
+     */
     private static function formatTagResponse($tagData)
     {
         $extractedData = [
@@ -151,6 +209,12 @@ class ResponseController extends Controller
         return response()->json($extractedData);
     }
 
+    /**
+     * Formats the top artists data for a given tag.
+     *
+     * @param array $artistsData The raw artists data.
+     * @return \Illuminate\Support\Collection The formatted top artists collection.
+     */
     private static function formatTagTopArtistsResponse($artistsData)
     {
         return collect($artistsData)->map(function ($item) {
@@ -163,6 +227,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Formats the top albums data for a given tag.
+     *
+     * @param array $albumsData The raw albums data.
+     * @return \Illuminate\Support\Collection The formatted top albums collection.
+     */
     private static function formatTagTopAlbumsResponse($albumsData)
     {
         return collect($albumsData)->map(function ($item) {
@@ -174,12 +244,24 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Extracts the extralarge image from an array of image data.
+     *
+     * @param array $imageData The raw image data.
+     * @return string|null The extracted extralarge image or null if not found.
+     */
     private static function extractImage($imageData)
     {
         $image = collect($imageData)->where('size', 'extralarge')->pluck('#text');
         return $image ? $image : null;
     }
 
+    /**
+     * Extracts the tracks data from an album.
+     *
+     * @param array $trackData The raw track data.
+     * @return \Illuminate\Support\Collection The formatted tracks collection.
+     */
     private static function extractAlbumTracks($trackData)
     {
         return collect($trackData)->map(function ($item) {
@@ -191,6 +273,12 @@ class ResponseController extends Controller
         });
     }
 
+    /**
+     * Extracts the tags data from an album.
+     *
+     * @param array $tagData The raw tag data.
+     * @return \Illuminate\Support\Collection|null The formatted tags collection or null if not found.
+     */
     private static function extractAlbumTags($tagData)
     {
         $tag = collect($tagData)->pluck('name');

@@ -8,6 +8,14 @@ use Inertia\Inertia;
 
 class FavoriteController extends Controller
 {
+    /**
+     * Renders the user's library, displaying their favorite albums and artists.
+     *
+     * Retrieves the favorite albums and artists associated with the authenticated user from the Favorite model.
+     * Renders the 'Library' view, passing the favorite albums and artists for display.
+     *
+     * @return \Inertia\Response An Inertia response containing the favorite albums and artists to be displayed in the 'Library' view.
+     */
     public function index()
     {
 
@@ -25,6 +33,15 @@ class FavoriteController extends Controller
         ]);
     }
 
+    /**
+     * Adds a new favorite artist or album for the authenticated user.
+     *
+     * Receives the details of the favorite item (artist or album) via the request object and creates a new record in the Favorite model.
+     * Redirects back to the previous page once the item is successfully added to the favorites.
+     *
+     * @param \Illuminate\Http\Request $request The request object containing the details of the favorite item to be added.
+     * @return \Illuminate\Http\RedirectResponse A redirect response to the previous page.
+     */
     public function add(Request $request)
     {
 
@@ -41,6 +58,15 @@ class FavoriteController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Removes a favorite artist or album for the authenticated user.
+     *
+     * Identifies the favorite item (artist or album) via the request object and deletes the corresponding record from the Favorite model.
+     * Redirects back to the previous page once the item is successfully removed from the favorites.
+     *
+     * @param \Illuminate\Http\Request $request The request object containing the details of the favorite item to be removed.
+     * @return \Illuminate\Http\RedirectResponse A redirect response to the previous page.
+     */
     public function remove(Request $request)
     {
         $favorite = Favorite::where('user_id', auth()->id())
