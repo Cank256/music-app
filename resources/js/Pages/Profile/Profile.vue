@@ -14,16 +14,16 @@ const props = defineProps(['favoriteAlbums', 'favoriteArtists']);
 <template>
     <Head title="Profile" />
     <MainLayout>
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
-            <div class="w-[80.5vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.7rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
-                <div class="pr-8 max-sm:pr-3 flex max-sm:flex-wrap max-sm:flex-col">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-lg:mt-[-43px]">
+            <div class="w-[80.5vw] h-[91vh] max-sm:w-[97.5vw] md:w-[98.8vw] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.7rem] md:ml-[.7rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-900">
+                <div class="pr-8 max-sm:pr-3 flex max-sm:flex-wrap md:flex-wrap max-sm:flex-col md:flex-col">
                     <div class="mt-2 max-sm:mb-2 flex-1 max-w-[40vh] h-[50vh] max-sm:h-[80vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                         <ProfileCard :name="user.name" :email="user.email" :joined="user.created_at" type="Subscriber" class="max-w-xl" />
                     </div>
-                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 flex-1 max-w-[55vh] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 md:ml-[0] flex-1 max-w-[55vh] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                         <FavoriteAlbums class="max-w-xl" :albums="favoriteAlbums"/>
                     </div>
-                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 flex-1 max-w-[55vw] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div class="mt-2 max-sm:mb-2 ml-4 max-sm:ml-0 md:ml-0 flex-1 max-w-[55vw] h-[70vh] max-sm:h-[60vh] max-sm:max-w-[100vw] md:max-w-[55vh] p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                         <FavoriteArtists class="max-w-xl" :artists="favoriteArtists"/>
                     </div>
                 </div>
