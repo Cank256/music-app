@@ -61,8 +61,8 @@ const getImage = (data) => {
     <Head title="Search" />
     <MainLayout>
 
-        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-sm:mt-[-43px]">
-            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] overflow-x-hidden mt-12 ml-[7.5rem]  max-sm:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-lg:mt-[-43px]">
+            <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] md:w-[98.5vw] overflow-x-hidden mt-12 ml-[7.5rem] max-lg:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
                 <div class="search-tab mt-12 justify-center">
                     <div class="search-input flex items-center border rounded-full px-6 focus-within:ring focus-within:ring-gray-400">
                         <input class="search-input-field border-0 bg-transparent text-gray-400 rounded-full text-lg focus:outline-none focus:ring-0" type="text" v-model="searchQuery" @input="handleInput" placeholder="Search for Artists, Albums ..."/>
@@ -105,7 +105,7 @@ const getImage = (data) => {
                     </div>
 
                     <div v-if="results.albums">
-                        <div class="py-1.5 mt-6 mb-6"></div>
+                        <div class="py-1.5 mt-6 mb-6 md:mt-1"></div>
 
                         <div class="flex justify-between items-center mb-6">
                             <span class="text-gray-400 text-2xl font-bold">Albums</span>
@@ -156,6 +156,13 @@ const getImage = (data) => {
     @media not all and (min-width: 640px) {
         .search-input-field {
             width: 35vh;
+            height: 7vh;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .search-input-field {
+            width: 50vh;
             height: 7vh;
         }
     }
