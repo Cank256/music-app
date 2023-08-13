@@ -152,8 +152,8 @@ class ResponseController extends Controller
             'artist' => $albumData['artist'] ?? null,
             'image' => self::extractImage($albumData['image']) ?? [],
             'listeners' => $albumData['listeners'] ?? null,
-            'tracks' => self::extractAlbumTracks($albumData['tracks']['track']) ?? [],
-            'tags' => self::extractAlbumTags($albumData['tags']['tag']) ?? [],
+            'tracks' => self::extractAlbumTracks($albumData['tracks']??['track']) ?? [],
+            'tags' => self::extractAlbumTags($albumData['tags']??['tag']) ?? [],
             'summary' => $albumData['wiki']['summary'] ?? null,
         ];
 
