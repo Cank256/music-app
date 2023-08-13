@@ -8,7 +8,7 @@ defineProps({
 </script>
 <template>
     <div class="max-w-7xl mx-auto lg:px-8 space-y-6 max-lg:mt-[-43px]">
-        <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] max-md:w-[98.8vw] max-md:h-[94vh] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.3rem] max-md:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
+        <div class="w-[78.58vw] h-[91vh] max-sm:w-[97.5vw] md:max-lg:w-[98.8vw] md:max-lg:h-[94vh] overflow-x-hidden mt-12 ml-[7.5rem] max-sm:ml-[.3rem] md:max-lg:ml-[.3rem] shadow rounded-b-xl items-center justify-between bg-white dark:bg-gray-800">
             <div class="pr-8 pl-8 pt-6 max-sm:pr-3 max-sm:pl-3">
                 <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
                     Browse All
