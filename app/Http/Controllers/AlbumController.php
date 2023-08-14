@@ -54,7 +54,7 @@ class AlbumController extends Controller
 
         // Process the response and extract the relevant data
         $album = ResponseController::formatResponse('album', $response->json('album'))->getData();
-        $similarAlbums = $this->getSimilarAlbums($album->tags[0]);
+        $similarAlbums = $this->getSimilarAlbums($album->tags ? $album->tags[0] : '');
         $releaseDate = WebScrapingController::getReleaseDate($album->url);
         $favorite = Favorite::where('user_id', auth()->id())
                             ->where('artist_name', $album->artist)
