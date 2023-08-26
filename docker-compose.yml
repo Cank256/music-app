@@ -7,11 +7,11 @@ services:
             dockerfile: Dockerfile
         container_name: music_app
         ports:
-            - "8030:8030"
+            - "8000:8000"
         volumes:
             - .:/var/www
             - ./docker/.env:/var/www/.env
-        command: php artisan serve --host 0.0.0.0 --port=8030
+        command: php artisan serve
         environment:
             DB_HOST: db  # Use the service name as the host
             DB_PORT: 3306

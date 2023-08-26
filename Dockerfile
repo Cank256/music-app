@@ -31,7 +31,7 @@ COPY . .
 RUN composer dump-autoload --optimize
 
 # Expose port
-EXPOSE 8030
+EXPOSE 8000
 
 # Start PHP-FPM server
 CMD ["php-fpm"]
