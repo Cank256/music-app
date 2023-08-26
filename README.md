@@ -21,12 +21,12 @@ This web application allows users to search and view information about music art
 ## Setup and Installation
 
 #### 1. Clone the repository:
-    `git clone https://github.com/Cank256/music-app.git`
+    git clone https://github.com/Cank256/music-app.git
 
 #### 2. Install dependencies:
-    `cd music-app`
-    `composer install`
-    `npm i`
+    cd music-app
+    composer install
+    npm i
 #### 3. Configure environment variables:
 - Rename the `.env.example` file to `.env`.
 - Open the `.env` file and set the necessary configurations, such as database connection and Last.fm API credentials.
