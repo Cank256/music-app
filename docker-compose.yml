@@ -10,7 +10,7 @@ services:
             - "8030:8030"
         volumes:
             - .:/var/www
-            - .env.docker:/var/www/.env
+            - ./docker/.env:/var/www/.env
         command: php artisan serve --host 0.0.0.0 --port=8030
         environment:
             DB_HOST: db  # Use the service name as the host
