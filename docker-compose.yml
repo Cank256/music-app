@@ -1,37 +1,52 @@
-version: '3'
+version: '3.8'
+
 services:
     app:
         build:
             context: .
             dockerfile: Dockerfile
+        container_name: music_app
         ports:
-            - '8000:80'
+            - "8030:8030"
         volumes:
-            - .:/var/www/html
-        depends_on:
-            - db
-        env_file:
-            - .env
+            - .:/var/www
+            - .env.docker:/var/www/.env
+        command: php artisan serve --host 0.0.0.0 --port=8030
         environment:
-            - DB_CONNECTION=mysql
-            - DB_HOST=${DB_HOST}
-            - DB_PORT=${DB_PORT}
-            - DB_DATABASE=${DB_DATABASE}
-            - DB_PASSWORD=${DB_PASSWORD}
-            - REDIS_HOST=${REDIS_HOST}
+            DB_HOST: db  # Use the service name as the host
+            DB_PORT: 3306
+            DB_DATABASE: music_app
+            DB_USERNAME: root
+            DB_PASSWORD: root
+        networks:
+            - laravel-net
 
     db:
-        image: mysql
-        ports:
-            - '3307:${DB_PORT}'
+        image: mariadb:10.5
+        container_name: music_app_mysql_db
         environment:
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
-            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: music_app
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
         volumes:
-            - db_data:/var/lib/mysql
-        env_file:
-            - .env
+            - mysql_data:/var/lib/mysql
+        networks:
+            - laravel-net
+
+    node:
+        image: node:16
+        container_name: music_app_node
+        volumes:
+            - .:/var/www
+        working_dir: /var/www
+        command: bash -c "npm install && npm run dev"
+        networks:
+            - laravel-net
 
 volumes:
-    db_data:
+    mysql_data:
+
+networks:
+    laravel-net:
+        driver: bridge

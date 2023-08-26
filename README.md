@@ -21,21 +21,22 @@ This web application allows users to search and view information about music art
 ## Setup and Installation
 
 #### 1. Clone the repository:
-    git clone https://github.com/Cank256/music-app.git
+    `git clone https://github.com/Cank256/music-app.git`
 
 #### 2. Install dependencies:
-    cd music-artist-album-web-app
-    composer install
+    `cd music-app`
+    `composer install`
+    `npm i`
 #### 3. Configure environment variables:
 - Rename the `.env.example` file to `.env`.
 - Open the `.env` file and set the necessary configurations, such as database connection and Last.fm API credentials.
 #### 4. Build and run the application with Docker:
 - Build the Docker containers:
-    docker-compose build
+    `docker-compose build`
 - Start the Docker containers:
-    docker-compose up -d
+    `docker-compose up -d`
 #### 6. Access the application in your browser:
-    http://localhost:8000
+    http://localhost:8030
 
 ## Usage
 - Sign up or log in using your Google account.

@@ -1,39 +1,37 @@
-# Use the official PHP 7.4 image as the base image
-FROM php:8.1-apache
+# Use the official PHP image as the base image
+FROM php:8.1-fpm
 
-# Set the working directory
-WORKDIR /var/www/html
+# Set working directory
+WORKDIR /var/www
 
-# Copy the composer.json and composer.lock files
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zip \
+    unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copy composer files and install dependencies
 COPY composer.json composer.lock ./
+RUN composer install --no-interaction --no-scripts --no-autoloader
 
-# Install PHP extensions and dependencies
-RUN apt-get update && \
-    apt-get install -y \
-        git \
-        unzip \
-        libzip-dev \
-        libonig-dev && \
-    docker-php-ext-install pdo_mysql zip && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install application dependencies
-RUN composer install --no-scripts --no-autoloader
-
-# Copy the application code
+# Copy the rest of the application
 COPY . .
 
-# Generate the optimized autoload file
+# Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
-# Set up Apache configuration
-COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+# Expose port
+EXPOSE 8030
 
-# Enable Apache modules
-RUN a2enmod rewrite
-
-# Expose port 80
-EXPOSE 80
-
-# Start Apache
-CMD ["apache2-foreground"]
+# Start PHP-FPM server
+CMD ["php-fpm"]
