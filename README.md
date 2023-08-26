@@ -27,14 +27,26 @@ This web application allows users to search and view information about music art
     cd music-app
     composer install
     npm i
+
 #### 3. Configure environment variables:
-- Rename the `.env.example` file to `.env`.
-- Open the `.env` file and set the necessary configurations, such as database connection and Last.fm API credentials.
+If you are going to run it locally
+- Rename the `.env.example` file in the root folder  to `.env`.
+- Open the `.env` file and set the necessary configurations, such as app name, database connection, Google Auth Credentials and Last.fm API credentials.
+If you are going to run it in docker
+- Rename the `.env.example` file in the docker folder  to `.env`.
+- Open the `.env` file and set the necessary configurations, such as app name, database connection, Google Auth Credentials and Last.fm API credentials.
+
 #### 4. Build and run the application with Docker:
+If going to run it locally:
+
+    php artisan serve
+
+If going to run it in docker:
 - Build the Docker containers:
     `docker-compose build`
 - Start the Docker containers:
     `docker-compose up -d`
+
 #### 6. Access the application in your browser:
     http://localhost:8030
 
