@@ -30,6 +30,9 @@ COPY . .
 # Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
+# Run DB migrations
+RUN php artisan migrate
+
 # Expose port
 EXPOSE 8000
 
