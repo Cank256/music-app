@@ -42,10 +42,8 @@ If going to run it locally:
     php artisan serve
 
 If going to run it in docker:
-- Build the Docker containers:
-    `docker-compose build`
-- Start the Docker containers:
-    `docker-compose up -d`
+- Build and start the Docker containers:
+    `docker-compose up -d --build`
 
 #### 6. Access the application in your browser:
     http://localhost:8030
