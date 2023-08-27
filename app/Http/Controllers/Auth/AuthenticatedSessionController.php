@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,16 +78,16 @@ class AuthenticatedSessionController extends Controller
      *
      * @return RedirectResponse Redirects to the dashboard after successful authentication or creation of a new user.
      */
-    public function callbackToGoogle()
+    public function googleCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();          // Get user details from Google
+            $user = Socialite::driver('google')->stateless()->user();          // Get user details from Google
 
             $finduser = User::where('gauth_id', $user->id)->first(); // Check if the user already exists in the database
 
             if($finduser){
                 Auth::login($finduser);                            // Login the existing user
-                return redirect('/dashboard');
+                return redirect()->intended(RouteServiceProvider::HOME);
             } else {
                 // Create a new user from the details fetched from Google
                 $newUser = User::create([
@@ -97,13 +98,18 @@ class AuthenticatedSessionController extends Controller
                     'password' => encrypt('admin@123')   // Use a default password (not recommended for production!)
                 ]);
 
-                Auth::login($newUser); // Login the newly created user
+                // Fire a registered event for the newly created user
+                event(new Registered($newUser));
 
-                return redirect('/dashboard');
+                // Log the user in
+                Auth::login($newUser);
+
+                // Redirect to the home page
+                return redirect(RouteServiceProvider::HOME);
             }
         } catch (Exception $e) {
             // Dump and die in case of an error (may need to remove it as it is not recommended for production!)
-            dd($e->getMessage());
+            dd($e);
         }
     }
 }

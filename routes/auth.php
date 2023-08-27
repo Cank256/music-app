@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
     // GOOGLE AUTHENTICATION ROUTES
     // Handles authentication via Google OAuth
     Route::get('auth/google', [AuthenticatedSessionController::class, 'signInwithGoogle'])->name('google.signin');
-    Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'callbackToGoogle']);
+    Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'googleCallback']);
 });
 
 // AUTH MIDDLEWARE ROUTES
