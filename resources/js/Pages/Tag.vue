@@ -2,7 +2,7 @@
 import HomeCard from '@/Components/Cards/HomeCard.vue'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head } from '@inertiajs/vue3';
-import { ref, defineProps, computed } from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps(['tag', 'artists', 'albums']);
 
