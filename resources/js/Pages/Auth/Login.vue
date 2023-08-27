@@ -16,12 +16,16 @@ defineProps({
     status: {
         type: String,
     },
+    referralUrl: {
+        type: String,
+    },
 });
 
 const form = useForm({
     email: '',
     password: '',
     remember: false,
+    previousUrl: '',
 });
 
 const submit = () => {
@@ -52,6 +56,7 @@ const submit = () => {
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
         <form @submit.prevent="submit">
+            <input type="hidden" name="previous_url" :v-model="form.previousUrl" :value="referralUrl" />
             <div>
                 <InputLabel for="email" value="Email" />
 
@@ -107,7 +112,7 @@ const submit = () => {
             </div>
 
             <Link :href="route('signup')" class="flex justify-center mt-8 mb-8 max-sm:mt-3">
-                <PrimaryButton class="block w-full h-11 justify-center text-white dark:text-white bg-green-600 dark:bg-gray-600 text-xl" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="block w-full h-11 justify-center text-white dark:text-white bg-green-600 dark:bg-gray-600 text-xl dark:hover:text-gray-800" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Sign Up
                 </PrimaryButton>
             </Link>

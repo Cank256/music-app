@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Socialite\Facades\Socialite;
@@ -26,6 +27,7 @@ class AuthenticatedSessionController extends Controller
     public function create(): Response
     {
         return Inertia::render('Auth/Login', [
+            'referralUrl' => session('url.intended', url()->previous()),
             'canResetPassword' => Route::has('password.request'),  // Check if password reset route is available
             'status' => session('status'),                         // Get the current session status
         ]);
@@ -43,7 +45,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate(); // Regenerate the session to prevent session fixation attacks
 
-        return redirect()->intended(RouteServiceProvider::HOME); // Redirect to intended route or home page
+        $redirectTo = $request->input('previous_url') ?? RouteServiceProvider::HOME; // Fallback to home if no previous URL is found
+        return redirect()->intended($redirectTo);// Redirect to intended route or home page
     }
 
     /**
@@ -70,6 +73,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function signInwithGoogle()
     {
+        // Store the referral URL in the session
+        $url = session('url.intended', url()->previous());
+        Session::put('referral_url', $url);
+
         return Socialite::driver('google')->redirect();
     }
 
@@ -98,14 +105,20 @@ class AuthenticatedSessionController extends Controller
                     'password' => encrypt('admin@123')   // Use a default password (not recommended for production!)
                 ]);
 
+                // Get the referral URL from the session
+                $referralUrl = Session::get('referral_url');
+
+                // Clear the referral URL from the session
+                Session::forget('referral_url');
+
                 // Fire a registered event for the newly created user
                 event(new Registered($newUser));
 
                 // Log the user in
                 Auth::login($newUser);
 
-                // Redirect to the home page
-                return redirect(RouteServiceProvider::HOME);
+                $redirectTo = $referralUrl ?? RouteServiceProvider::HOME; // Fallback to home if no previous URL is found
+                return redirect()->intended($redirectTo);// Redirect to intended route or home page
             }
         } catch (Exception $e) {
             // Dump and die in case of an error (may need to remove it as it is not recommended for production!)
