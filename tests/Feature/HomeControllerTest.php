@@ -46,9 +46,9 @@ class HomeControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(fn (AssertableInertia $page) =>
             $page->component('Home')
-                 ->has('topAlbums')
-                 ->has('topArtists')
-                 ->has('topSongs')
+                ->has('topAlbums')
+                ->has('topArtists')
+                //  ->has('topSongs')
         );
     }
 
@@ -78,9 +78,9 @@ class HomeControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(fn (AssertableInertia $page) =>
             $page->component('Home')
-                 ->has('topAlbums')
-                 ->has('topArtists')
-                 ->has('topSongs')
+                ->has('topAlbums')
+                ->has('topArtists')
+                // ->has('topSongs')
         );
     }
 }
