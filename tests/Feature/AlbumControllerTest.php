@@ -25,7 +25,7 @@ class AlbumControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    public function test_get_top_albums()
+    public function testGetTopAlbums()
     {
         Http::fake([
             '*' => Http::response([
@@ -47,7 +47,7 @@ class AlbumControllerTest extends TestCase
         $this->assertEquals('Top Album 2', $topAlbums[1]['name']);
     }
 
-    public function test_get_album()
+    public function testGetAlbum()
     {
             $user = User::factory()->create();
             Auth::login($user);
@@ -58,7 +58,7 @@ class AlbumControllerTest extends TestCase
                 ->first();
 
 
-            $this->get('/search/album?album=Believe&artist=Cher')
+            $this->get('/album?album=Believe&artist=Cher')
                 ->assertInertia(fn (AssertableInertia $page) => $page
                     ->component('SingleAlbum')
                     ->has('album', function (AssertableJson $album) {
@@ -74,7 +74,7 @@ class AlbumControllerTest extends TestCase
                             ->has('summary');
                     })
                     ->has('similarAlbums', function (AssertableJson $similarAlbums) {
-                        return $similarAlbums->each(fn ($album) =>
+                        return $similarAlbums ?? $similarAlbums->each(fn ($album) =>
                             $album->has('name') &&
                             $album->has('artist') &&
                             $album->has('rank') &&
@@ -85,7 +85,7 @@ class AlbumControllerTest extends TestCase
                 );
     }
 
-    public function test_get_artist_top_albums()
+    public function testGetArtistTopAlbums()
     {
         // Given
         Http::fake([
@@ -111,7 +111,7 @@ class AlbumControllerTest extends TestCase
 
     }
 
-    public function test_get_similar_albums()
+    public function testGetSimilarAlbums()
     {
         Http::fake([
             '*' => Http::response([

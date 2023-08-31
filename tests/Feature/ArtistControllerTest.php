@@ -49,7 +49,7 @@ class ArtistControllerTest extends TestCase
         $this->assertEquals('Artist 2', $topArtists[1]['name']);
     }
 
-    public function test_get_artist(): void
+    public function testGetArtist(): void
     {
 
         $user = User::factory()->create();
@@ -61,7 +61,7 @@ class ArtistControllerTest extends TestCase
             ->first();
 
 
-        $this->get('/search/artist?artist=Cher')
+        $this->get('/artist?artist=Cher')
             ->assertInertia(fn (AssertableInertia $page) => $page
                 ->component('SingleArtist')
                 ->has('artist', function (AssertableJson $artist) {

@@ -46,7 +46,7 @@ If going to run it in docker:
     `docker-compose up -d --build`
 
 #### 6. Access the application in your browser:
-    http://localhost:8030
+    http://localhost:8000
 
 ## Usage
 - Sign up or log in using your Google account.

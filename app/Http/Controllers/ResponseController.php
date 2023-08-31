@@ -76,7 +76,7 @@ class ResponseController extends Controller
         $extractedData = [
             'name' => $artistData['name'] ?? null,
             'mbid' => $artistData['mbid'] ?? null,
-            'image' => self::extractImage($artistData['image']),
+            'image' => isset($albumData['image']) ? self::extractImage($artistData['image']) : null,
             'listeners' => $artistData['stats']['listeners'] ?? null,
             'summary' => $artistData['bio']['summary'] ?? null,
         ];
@@ -97,7 +97,7 @@ class ResponseController extends Controller
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
                 'artist' => $item['artist']['name'] ?? null,
-                'image' => self::extractImage($item['image']),
+                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
             ];
         });
     }
@@ -114,7 +114,7 @@ class ResponseController extends Controller
             return [
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
-                'image' => self::extractImage($item['image']),
+                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
                 'listeners' => $item['listeners'] ?? null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
@@ -132,7 +132,7 @@ class ResponseController extends Controller
         return collect($similarArtists)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => self::extractImage($item['image']) ?? [],
+                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
             ];
         });
     }
@@ -150,10 +150,10 @@ class ResponseController extends Controller
             'mbid' => $albumData['mbid'] ?? null,
             'url' => $albumData['url'] ?? null,
             'artist' => $albumData['artist'] ?? null,
-            'image' => self::extractImage($albumData['image']) ?? [],
+            'image' => isset($albumData['image']) ? self::extractImage($albumData['image']) : null,
             'listeners' => $albumData['listeners'] ?? null,
-            'tracks' => isset($albumData['tracks']['track']) ? self::extractAlbumTracks($albumData['tracks']['track']) : [],
-            'tags' => isset($albumData['tags']['tag']) ? self::extractAlbumTags($albumData['tags']??['tag']) : [],
+            'tracks' => isset($albumData['tracks']['track']) ? self::extractAlbumTracks($albumData['tracks']['track']) : null,
+            'tags' => isset($albumData['tags']['tag']) ? self::extractAlbumTags($albumData['tags']??['tag']) : null,
             'summary' => $albumData['wiki']['summary'] ?? null,
         ];
 
@@ -171,7 +171,7 @@ class ResponseController extends Controller
         return collect($similarAlbums)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => self::extractImage($item['image']) ?? null,
+                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
                 'artist' => $item['artist']['name'] ?? null,
                 'rank' => $item['@attr']['rank'] ?? null
             ];
@@ -221,7 +221,7 @@ class ResponseController extends Controller
             return [
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
-                'image' => self::extractImage($item['image'])[0] ?? null,
+                'image' => isset($albumData['image']) ? self::extractImage($item['image'])[0] : null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
         });
@@ -238,7 +238,7 @@ class ResponseController extends Controller
         return collect($albumsData)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => self::extractImage($item['image'])[0] ?? null,
+                'image' => isset($albumData['image']) ? self::extractImage($item['image'])[0] : null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
         });
