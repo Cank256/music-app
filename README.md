@@ -12,6 +12,7 @@ This web application allows users to search and view information about music art
 
 ## Technologies Used
 
+- PHP 8.1 >
 - Laravel: Backend framework for building the web application.
 - VueJS: Frontend framework for creating a responsive user interface.
 - Last.fm API: Integration with the Last.fm API to retrieve artist and album information.
@@ -21,36 +22,64 @@ This web application allows users to search and view information about music art
 ## Setup and Installation
 
 ### 1. Clone the repository:
-    git clone https://github.com/Cank256/music-app.git
+    git clone https://github.com/Cank256/music-app.git music-app
 
 ### 2. Install dependencies:
     cd music-app
     composer install
     npm i
 
-### 3. Configure environment variables:
+### 3. Create a database and Configure environment variables:
 
 If you are going to run it locally
 - Rename the `.env.example` file in the root folder  to `.env`.
 - Open the `.env` file and set the necessary configurations, such as app name, database connection, Google Auth Credentials and Last.fm API credentials.
+- Create a new database and update the DB_DATABASE configuration in `.env` to match the name of the created database.
 
 If you are going to run it in docker
 - Rename the `.env.example` file in the docker folder  to `.env`.
 - Open the `.env` file and set the necessary configurations, such as app name, database connection, Google Auth Credentials and Last.fm API credentials.
 
-#### NB: For Google Auth Credentials, follow the instruction here (link below) under Get Google Client ID and Secret.
-- [positroniX.io - Laravel 9 Socialite Login with Google](https://www.positronx.io/laravel-9-socialite-login-with-google-example-tutorial)
+#### NB: 
+i) For Google Auth Credentials, follow the instruction here (link below) under Get Google Client ID and Secret (the redirection url port must be 8000).
+
+[positroniX.io - Laravel 9 Socialite Login with Google](https://www.positronx.io/laravel-9-socialite-login-with-google-example-tutorial)
+
+ii) For GMAIL (you can use any other Mail Server) use the instruction below to setup your account to send emails.
+
+- VIDEO https://www.youtube.com/watch?v=hul-ko5_MT4&t=43s
+
+ii) For LASTFM API credentials, you can visit this link.
+
+- LAST API and DOCS https://www.last.fm/api 
+
+### 4. Generate and encryption key for the app
+
+Use the comand below in the terminal
+
+    php artisan key:generate
 
 ### 4. Build and run the application with Docker:
-If going to run it locally:
+
+Build the Vite resources
+
+    npm run build
+
+If going to run it locally (the commands below should be in different terminals):
 
     php artisan serve
 
-If going to run it in docker:
-- Build and start the Docker containers:
-    `docker-compose up -d --build`
+If going to run it in docker, build and start the Docker containers:
 
-### 5. Access the application in your browser:
+    docker-compose up -d --build
+
+### 5. Migrate the database:
+
+Run the following command to create the necessary tables in the database
+
+    php artisan migrate
+
+### 6. Access the application in your browser:
     http://localhost:8000
 
 ## Usage
