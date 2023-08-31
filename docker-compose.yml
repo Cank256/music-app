@@ -11,15 +11,11 @@ services:
         volumes:
             - .:/var/www
             - ./docker/.env:/var/www/.env
-        command: php artisan serve --host 0.0.0.0
+        command: bash -c "php artisan migrate && php artisan serve --host 0.0.0.0"
         environment:
             DB_HOST: db  # Use the service name as the host
-            DB_PORT: 3306
-            DB_DATABASE: music_app
-            DB_USERNAME: root
-            DB_PASSWORD: root
         networks:
-            - laravel-net
+            - music-app-net
 
     db:
         image: mariadb:10.5
@@ -32,7 +28,7 @@ services:
         volumes:
             - mysql_data:/var/lib/mysql
         networks:
-            - laravel-net
+            - music-app-net
 
     node:
         image: node:16
@@ -42,11 +38,11 @@ services:
         working_dir: /var/www
         command: bash -c "npm install && npm run dev"
         networks:
-            - laravel-net
+            - music-app-net
 
 volumes:
     mysql_data:
 
 networks:
-    laravel-net:
+    music-app-net:
         driver: bridge
