@@ -171,7 +171,7 @@ class ResponseController extends Controller
         return collect($similarAlbums)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
+                'image' => self::extractImage($item['image']) ?? null,
                 'artist' => $item['artist']['name'] ?? null,
                 'rank' => $item['@attr']['rank'] ?? null
             ];
@@ -252,8 +252,15 @@ class ResponseController extends Controller
      */
     private static function extractImage($imageData)
     {
-        $image = collect($imageData)->where('size', 'extralarge')->pluck('#text');
-        return $image ? $image : null;
+        // $image = collect($imageData)->where('size', 'extralarge')->pluck('#text');
+        // return $image ? $image : null;
+
+        foreach ($imageData as $image) {
+            if ($image['size'] === 'extralarge') {
+                $extralargeImageUrl = $image['#text'];
+                return $extralargeImageUrl ? $extralargeImageUrl : null;
+            }
+        }
     }
 
     /**
@@ -281,8 +288,11 @@ class ResponseController extends Controller
      */
     private static function extractAlbumTags($tagData)
     {
-        $tag = collect($tagData)->pluck('name');
-        return $tag ? $tag : null;
+        // $tag = collect($tagData)->pluck('name');
+        // return $tag ? $tag : null;
+        foreach ($tagData as $tag) {
+            return $tag;
+        }
     }
 
 }

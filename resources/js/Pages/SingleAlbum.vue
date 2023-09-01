@@ -98,7 +98,7 @@ const showLessSimilarAlbums = () => {
                                 </Link>
 
                                 <div class="absolute w-full bottom-0">
-                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image[0], listeners: album.listeners })" method="post">
+                                    <Link :href="route(isFavorite ? 'remove-favorite' : 'add-favorite', { type: 'album', artist: album.artist, album: album.name, image: album.image, listeners: album.listeners })" method="post">
                                         <i
                                             :class="{ 'fas': isFavorite, 'fa-regular': !isFavorite }"
                                             class="fa-heart text-[#1BD760] text-3xl"
