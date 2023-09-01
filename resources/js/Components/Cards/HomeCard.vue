@@ -35,7 +35,7 @@ let capitalizedTitle = computed(() => {
 
 <template>
     <Link :href="route(`get-${type}`, type === 'album' ? { artist: subTitle, album: title } : type === 'artist' ? mbid ? { use: 'mbid', mbid } : { use: 'name', artist: title } : { mbid })">
-        <div class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[320px] max-sm:w-[150px] md:max-lg:w-[150px] max-sm:h-[200px] md:max-lg:h-[230px] max-sm:ml-1 max-sm:mr-1 rounded-md hover:bg-gray-600 cursor-pointer overflow-hidden">
+        <div class="bg-gray-800 p-2 rounded-md m-2 w-[220px] h-[320px] max-sm:w-[150px] md:max-lg:w-[150px] max-sm:h-[200px] md:max-lg:h-[230px] max-sm:ml-1 max-sm:mr-1 rounded-md hover:bg-gray-600 cursor-pointer overflow-hidden">
             <div class="">
                 <img class="rounded" :src="image ? image : '/assets/images/album.png'" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl relative bottom-[3rem] left-[10rem] transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>

@@ -8,11 +8,9 @@ const props = defineProps(['topArtists', 'topAlbums']);
 
 const artistsDisplayCount = ref(5);
 const albumsDisplayCount = ref(5);
-// const songsDisplayCount = ref(5);
 
 let artistsState = ref(false);
 let albumsState = ref(false);
-// let songsState = ref(false);
 
 // ref for window width
 const windowWidth = ref(window.innerWidth);
@@ -31,10 +29,6 @@ const showMoreAlbums = () => {
     albumsDisplayCount.value += 5;
     albumsState = ref(true);
 }
-// const showMoreSongs = () => {
-//     songsDisplayCount.value += 5;
-//     songsState = ref(true);
-// }
 
 // Functions to reduce the display counts
 const showLessArtists = () => {
@@ -122,29 +116,6 @@ onBeforeUnmount(() => {
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="pr-8 pl-8 max-sm:pr-3 max-sm:pl-3 pt-6">
-                        <div class="flex justify-between items-center">
-                            <span class="pl-2 text-white text-2xl max-sm:text-lg font-semibold">
-                                Recommended Songs
-                            </span>
-
-                            <button v-if="!songsState" @click="showMoreSongs" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
-                                Show More
-                            </button>
-                            <button v-if="songsState" @click="showLessSongs" class="pr-6 text-white text-l max-sm:text-xs font-semibold">
-                                Show Less
-                            </button>
-                        </div>
-
-                        <div class="py-1.5"></div>
-
-                        <div class="flex flex-wrap items-center gap-1">
-                            <div v-for="song in topSongs.slice(0, songsDisplayCount)">
-                                <HomeCard :image="getImage(song)" :title="song.name" :subTitle="song.artist.name" icon="eye" type="song" :mbid="song.mbid" />
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 

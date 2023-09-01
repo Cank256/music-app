@@ -10,7 +10,7 @@ const props = defineProps(['album', 'similarAlbums', 'releaseDate', 'isFavorite'
 const displayCount = ref(5);
 let showMore = ref(false);
 
-const similarAlbumsDisplayCount = ref(4);
+const similarAlbumsDisplayCount = ref(5);
 let similarAlbumsState = false;
 
 // let isHovered = ref(false);

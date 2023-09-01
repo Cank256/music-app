@@ -10,10 +10,10 @@ const props = defineProps(['artist', 'topTracks', 'topAlbums', 'similarArtists',
 const displayCount = ref(5);
 let showMore = ref(false);
 
-const albumsDisplayCount = ref(4);
+const albumsDisplayCount = ref(5);
 let albumsState = ref(false);
 
-const similarArtistsDisplayCount = ref(4);
+const similarArtistsDisplayCount = ref(5);
 let similarArtistsState = ref(false);
 
 // let isHovered = ref(false);
