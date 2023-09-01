@@ -11,8 +11,10 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     unzip \
+    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
+    && docker-php-ext-install -j$(nproc) gd \
+    && npm install npm@8.19.2 -g
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
@@ -30,13 +32,9 @@ COPY . .
 # Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
-# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-# RUN apt-get install -y nodejs
-RUN apt-get update && apt-get install -y \
-    npm
-RUN npm install npm@latest -g && \
-    npm install n -g && \
-    n latest
+# Install NodeJS dependencies and build vite
+RUN npm i
+RUN npm run build
 
 # Expose port
 EXPOSE 8000
