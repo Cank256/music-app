@@ -55,8 +55,6 @@ class BrowseController extends Controller
         $albums = Http::get(env('LASTFM_HOST')."?method=tag.gettopalbums&tag=".request()->query('tag')."&api_key=".env('LASTFM_API_KEY')."&limit=10&format=json");
         $topAlbums = ResponseController::formatResponse('tag-top-albums', $albums->json('albums.album'));
 
-        // return $tagInfo;
-
         return Inertia::render('Tag', [
             'tag' => $tagInfo,
             'artists' => $topArtists,

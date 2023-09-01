@@ -72,7 +72,7 @@ const showLessSimilarAlbums = () => {
                                     <div class="ml-2 flex max-sm:ml-3">
                                         <div class="circle mt-3 mr-2 max-sm:hidden" />
                                         <span>Released on</span>
-                                        <span class="ml-1 font-bold">{{ releaseDate.original['release_date'] }}</span>
+                                        <span class="ml-1 font-bold">{{ releaseDate ? releaseDate.original['release_date'] : '' }}</span>
                                     </div>
                                 </div>
 
@@ -122,7 +122,7 @@ const showLessSimilarAlbums = () => {
                             <div class="ml-2 flex max-sm:ml-3">
                                 <div class="circle mt-2 mr-2" />
                                 <span>Released</span>
-                                <span class="ml-1 font-bold">{{ releaseDate.original['release_date'] }}</span>
+                                <span class="ml-1 font-bold">{{ releaseDate ? releaseDate.original['release_date'] : '' }}</span>
                             </div>
                         </div>
 

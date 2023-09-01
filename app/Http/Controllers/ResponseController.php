@@ -221,7 +221,7 @@ class ResponseController extends Controller
             return [
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image'])[0] : null,
+                'image' => self::extractImage($item['image']) ?? null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
         });
@@ -238,7 +238,8 @@ class ResponseController extends Controller
         return collect($albumsData)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image'])[0] : null,
+                'artist' => $item['artist']['name'] ?? null,
+                'image' => self::extractImage($item['image']) ?? null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
         });
