@@ -11,9 +11,9 @@ let loading = ref(false); // Initialize loading state
 let typing = ref(false);
 let results = ref([]);
 
-const artistsDisplayCount = ref(4);
+const artistsDisplayCount = ref(5);
 let artistsState = false;
-const albumsDisplayCount = ref(4);
+const albumsDisplayCount = ref(5);
 let albumsState = false;
 
 const showMoreArtists = () => {
