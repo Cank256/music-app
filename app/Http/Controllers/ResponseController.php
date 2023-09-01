@@ -245,16 +245,13 @@ class ResponseController extends Controller
     }
 
     /**
-     * Extracts the extralarge image from an array of image data.
+     * Extracts the URL of an 'extralarge' image from an array of image data.
      *
-     * @param array $imageData The raw image data.
-     * @return string|null The extracted extralarge image or null if not found.
+     * @param array $imageData An array containing image data with 'size' and '#text' keys.
+     * @return string|null The URL of the 'extralarge' image, or null if not found.
      */
     private static function extractImage($imageData)
     {
-        // $image = collect($imageData)->where('size', 'extralarge')->pluck('#text');
-        // return $image ? $image : null;
-
         foreach ($imageData as $image) {
             if ($image['size'] === 'extralarge') {
                 $extralargeImageUrl = $image['#text'];
@@ -281,15 +278,13 @@ class ResponseController extends Controller
     }
 
     /**
-     * Extracts the tags data from an album.
+     * Extracts the first tag from an array of tag data.
      *
-     * @param array $tagData The raw tag data.
-     * @return \Illuminate\Support\Collection|null The formatted tags collection or null if not found.
+     * @param array $tagData An array containing tag data.
+     * @return mixed|null The first tag in the array or null if the array is empty.
      */
     private static function extractAlbumTags($tagData)
     {
-        // $tag = collect($tagData)->pluck('name');
-        // return $tag ? $tag : null;
         foreach ($tagData as $tag) {
             return $tag;
         }

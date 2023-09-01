@@ -99,14 +99,14 @@ class AlbumController extends Controller
      * If the request is successful, the response is formatted using the ResponseController, and the similar albums are returned.
      * If the request fails, null is returned.
      *
-     * @param string $tag The tag (genre) for which the top albums are to be retrieved.
+     * @param object $tag The tag (genre) for which the top albums are to be retrieved.
      * @return mixed The top albums for the specified tag or null if the request fails.
      */
     public function getSimilarAlbums($tag)
     {
         $response = Http::get(env('LASTFM_HOST'), [
             'method' => 'tag.gettopalbums',
-            'tag' => $tag,
+            'tag' => $tag->name,
             'api_key' => env('LASTFM_API_KEY'),
             'limit' => 10,
             'format' => 'json',
