@@ -40,7 +40,7 @@ let capitalizedTitle = computed(() => {
     <Link :href="route(`get-${type}`, type === 'album' ? { artist: subTitle, album: title } : type === 'artist' ? mbid ? { use: 'mbid', mbid } : { use: 'name', artist: title } : { mbid })">
         <div v-if="!isLoading" class="bg-gray-800 p-2 rounded-md m-2 w-[230px] h-[300px] max-sm:w-[150px] md:max-lg:w-[165px] max-sm:h-[200px] md:max-lg:h-[250px] max-sm:ml-1 max-sm:mr-1 rounded-md hover:bg-gray-600 cursor-pointer relative overflow-hidden">
             <div class="relative">
-                <img class="rounded" :src="image ? image : '/images/album.png'" alt="">
+                <img class="rounded" :src="image ? image : '/assets/images/album.png'" alt="">
                 <i :class="`fas fa-${icon} text-green-600 text-4xl absolute bottom-2 right-3 transform translate-x-2 translate-y-2 opacity-0 transition-opacity duration-300`"></i>
             </div>
             <div class="text-white pt-4 font-semibold text-[14px]">{{ capitalizedTitle }}</div>

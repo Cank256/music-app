@@ -106,7 +106,7 @@ class AlbumController extends Controller
     {
         $response = Http::get(env('LASTFM_HOST'), [
             'method' => 'tag.gettopalbums',
-            'tag' => $tag->name,
+            'tag' => $tag->name ?? '',
             'api_key' => env('LASTFM_API_KEY'),
             'limit' => 10,
             'format' => 'json',

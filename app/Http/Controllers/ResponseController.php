@@ -76,7 +76,7 @@ class ResponseController extends Controller
         $extractedData = [
             'name' => $artistData['name'] ?? null,
             'mbid' => $artistData['mbid'] ?? null,
-            'image' => isset($albumData['image']) ? self::extractImage($artistData['image']) : null,
+            'image' => self::extractImage($artistData['image']) ?? null,
             'listeners' => $artistData['stats']['listeners'] ?? null,
             'summary' => $artistData['bio']['summary'] ?? null,
         ];
@@ -97,7 +97,7 @@ class ResponseController extends Controller
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
                 'artist' => $item['artist']['name'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
+                'image' => isset($item['image']) ? self::extractImage($item['image']) : null,
             ];
         });
     }
@@ -114,7 +114,7 @@ class ResponseController extends Controller
             return [
                 'name' => $item['name'] ?? null,
                 'mbid' => $item['mbid'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
+                'image' => isset($item['image']) ? self::extractImage($item['image']) : null,
                 'listeners' => $item['listeners'] ?? null,
                 'rank' => $item['@attr']['rank'] ?? null,
             ];
@@ -132,7 +132,7 @@ class ResponseController extends Controller
         return collect($similarArtists)->map(function ($item) {
             return [
                 'name' => $item['name'] ?? null,
-                'image' => isset($albumData['image']) ? self::extractImage($item['image']) : null,
+                'image' => isset($item['image']) ? self::extractImage($item['image']) : null,
             ];
         });
     }
