@@ -78,10 +78,6 @@ If going to run it locally run:
 
 If going to run it in docker, build and start the Docker containers run:
 
-    docker-compose exec app npm install
-
-    docker-compose exec app npm run build
-
     docker-compose up -d --build
 
 ### 5. Access the application in your browser:
