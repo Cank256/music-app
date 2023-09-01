@@ -32,10 +32,6 @@ COPY . .
 # Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
-# Install NodeJS dependencies and build vite
-RUN npm i
-RUN npm run build
-
 # Expose port
 EXPOSE 8000
 

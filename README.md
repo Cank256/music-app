@@ -80,6 +80,10 @@ If going to run it in docker, build and start the Docker containers run:
 
     docker-compose up -d --build
 
+    docker-compose exec app npm i
+
+    docker-compose exec app npm run build
+
 ### 5. Access the application in your browser:
     http://localhost:8000
 
