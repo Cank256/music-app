@@ -26,8 +26,8 @@ This web application allows users to search and view information about music art
 
 ### 2. Install dependencies:
     cd music-app
+
     composer install
-    npm i
 
 ### 3. Create a database and Configure environment variables:
 
@@ -68,6 +68,8 @@ ii) For LASTFM API credentials, you can visit this link.
 
 If going to run it locally run:
 
+    npm i
+
     npm run build
 
     php artisan migrate
@@ -75,6 +77,10 @@ If going to run it locally run:
     php artisan serve
 
 If going to run it in docker, build and start the Docker containers run:
+
+    docker-compose exec app npm install
+
+    docker-compose exec app npm run build
 
     docker-compose up -d --build
 

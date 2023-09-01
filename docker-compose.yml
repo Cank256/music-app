@@ -11,7 +11,7 @@ services:
         volumes:
             - .:/var/www
             - ./docker/.env:/var/www/.env
-        command: bash -c "npm i && npm run build && php artisan migrate && php artisan serve --host 0.0.0.0"
+        command: bash -c "php artisan migrate && php artisan serve --host 0.0.0.0"
         depends_on:
             - "db"
 
