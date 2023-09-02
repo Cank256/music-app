@@ -106,8 +106,20 @@ class ArtistControllerTest extends TestCase
             '*' => Http::response([
                 'similarartists' => [
                     'artist' => [
-                        ['name' => 'Similar Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
-                        ['name' => 'Similar Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
+                        [
+                            'name' => 'Similar Artist 1',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ],
+                        [
+                            'name' => 'Similar Artist 2',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ],
                         // Add more artist data as needed
                     ],
                 ],
