@@ -53,6 +53,7 @@ class BrowseControllerTest extends TestCase
                     return $albums->each(fn ($album) =>
                         $album->has('name') &&
                         $album->has('image') &&
+                        $album->has('artist') &&
                         $album->has('rank')
                     );
                 })

@@ -19,7 +19,7 @@ class SongControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    public function test_get_top_albums()
+    public function testGetTopAlbums()
     {
         Http::fake([
             '*' => Http::response([
@@ -53,15 +53,29 @@ class SongControllerTest extends TestCase
         $this->assertEquals('Top Song 2', $topSongs[1]['name']);
     }
 
-    public function test_get_artist_top_tracks()
+    public function testGetArtistTopTracks()
     {
         // Given
         Http::fake([
             '*' => Http::response([
                 'toptracks' => [
                     'track' => [
-                        ['name' => 'Track 1', 'artist' => 'Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png', 'listeners' => 1000, 'rank' => 1],
-                        ['name' => 'Track 2', 'artist' => 'Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png', 'listeners' => 1000, 'rank' => 2],
+                        [
+                            'name' => 'Track 1',
+                            'artist' => 'Artist 1',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ],
+                        [
+                            'name' => 'Track 2',
+                            'artist' => 'Artist 2',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ]
                         // Add more artist data as needed
                     ],
                 ],
@@ -79,7 +93,7 @@ class SongControllerTest extends TestCase
 
     }
 
-    public function test_get_track_duration()
+    public function testGetTrackDuration()
     {
         // Mock the HTTP facade
         Http::fake([
