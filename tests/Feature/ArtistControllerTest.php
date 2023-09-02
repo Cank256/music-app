@@ -99,7 +99,7 @@ class ArtistControllerTest extends TestCase
             );
     }
 
-    public function test_search_artist(): void
+    public function testSearchArtist(): void
     {
         // Given
         Http::fake([

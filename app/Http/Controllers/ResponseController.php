@@ -254,7 +254,7 @@ class ResponseController extends Controller
     private static function extractImage($imageData)
     {
         foreach ($imageData as $image) {
-            if ($image['size'] === 'extralarge') {
+            if (is_array($image) && isset($image['size']) && $image['size'] === 'extralarge') {
                 $extralargeImageUrl = $image['#text'];
                 return $extralargeImageUrl ? $extralargeImageUrl : null;
             }

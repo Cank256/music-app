@@ -74,11 +74,11 @@ class AlbumControllerTest extends TestCase
                             ->has('summary');
                     })
                     ->has('similarAlbums', function (AssertableJson $similarAlbums) {
-                        return $similarAlbums ?? $similarAlbums->each(fn ($album) =>
+                        return $similarAlbums->each(fn ($album) =>
                             $album->has('name') &&
+                            $album->has('image') &&
                             $album->has('artist') &&
-                            $album->has('rank') &&
-                            $album->has('image')
+                            $album->has('rank')
                         );
                     })
                     ->where('isFavorite', $favorite ? true : false)
@@ -92,9 +92,22 @@ class AlbumControllerTest extends TestCase
             '*' => Http::response([
                 'topalbums' => [
                     'album' => [
-                        ['name' => 'Top Album 1', 'artist' => 'Artist 1', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
-                        ['name' => 'Top Album 2', 'artist' => 'Artist 2', 'image' => 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'],
-                        // Add more artist data as needed
+                        [
+                            'name' => 'Top Album 1',
+                            'artist' => 'Artist 1',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ],
+                        [
+                            'name' => 'Top Album 2',
+                            'artist' => 'Artist 2',
+                            'image' => [
+                                'size' => 'extralarge',
+                                '#text'=> 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
+                            ]
+                        ]
                     ],
                 ],
             ]),
